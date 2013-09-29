@@ -40,6 +40,8 @@ Class SimpleExtensions
      ' 运行框架
      ''
     Public Function run()
+        ' 运行配置文件
+
         ' 运行路由
 
         ' 运行控制器

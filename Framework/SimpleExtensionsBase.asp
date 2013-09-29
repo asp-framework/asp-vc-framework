@@ -39,7 +39,7 @@ Class SimpleExtensionsBase
      ''
     Private Property Set addModule(ByVal moduleName)
         If VarType(modulesQueue) <> 9 Then Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
-        If IsEmpty(modulesQueue.Item(moduleName)) Then
+        If Not modulesQueue.Exists(moduleName) Then
             Dim modulePath
             modulePath = getSEDir & "/" & moduleName & "/" & moduleName & ".asp"
             Me.include(modulePath)
@@ -49,16 +49,12 @@ Class SimpleExtensionsBase
     '''
      ' 获取模块
      '
-     ' @param string controllerName <控制器名称>
+     ' @param string moduleName <模块名称>
      '
-     ' @return class|false <实例化的控制器>
+     ' @return class|Nothing <实例化的模块>
      ''
     Private Property Get getModule(ByVal moduleName)
-        If IsEmpty(modulesQueue.Item(moduleName)) Then
-            getModule = False
-        Else
-            Set getModule = modulesQueue.Item(moduleName)
-        End If
+        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
     End Property
 
 '###########################'

@@ -18,7 +18,8 @@ Class SimpleExtensionsBaseTest
 		TestCaseNames = Array(_
             "aspIncludeTagTest",_
             "loadFileTest",_
-            "includeTest"_
+            "includeTest",_
+            "loadConfigsTest"_
         )
 	End Function
 
@@ -60,5 +61,16 @@ Class SimpleExtensionsBaseTest
             vActual,_
             "包含文件异常"
     End Sub
+
+    ' 载入配置文件
+    Public Sub loadConfigsTest(oTestResult)
+        SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
+
+		oTestResult.AssertEquals _
+            True,_
+            True,_
+            "载入配置文件异常"
+    End Sub
+
 End Class
 %>

@@ -10,6 +10,19 @@
 <%
 Class SimpleExtensionsBase
 
+    ' @var dictionary configs <配置项>
+    Private configs
+    '''
+     ' 获取配置项
+     ''
+    Public Property Get getConfigs(ByVal configPath)
+        If VarType(configs) <> 9 Then Set configs = Server.CreateObject("Scripting.Dictionary")
+
+        If IsNull(configPath) Then
+            Set getConfigs = configs
+        End If
+    End Property
+
     ' @var boolean aspIncludeTag <是否开启ASP #include 标签>
     Private aspIncludeTag
     '''
@@ -196,6 +209,64 @@ Class SimpleExtensionsBase
         Loop
 
         aspIncludeTagProcess = content
+    End Function
+
+    '''
+     ' 载入配置文件
+     '
+     ' @param string filePath <配置文件路径>
+     ''
+    Public Function loadConfigs(ByVal configFilePath)
+        configFilePath = Server.MapPath(configFilePath)
+
+        Dim seConfigsDoc : Set seConfigsDoc = Server.CreateObject("Microsoft.XMLDOM")
+        seConfigsDoc.Async = False
+        seConfigsDoc.Load(configFilePath)
+        Set seConfigsDoc = seConfigsDoc.getElementsByTagName("seConfigs")(0)
+        Call processConfigs(seConfigsDoc, getConfigs(Null))
+        Set seConfigsDoc = Nothing
+
+        Dim i,key
+        key = configs.Item("system").Keys
+        for i=0 to UBound(key)
+          Response.Write(key(i))
+          Response.Write("<br />")
+          Response.Write(VarType(configs.Item("system").Item(key(i))))
+          Response.Write("<br />")
+        next
+        ' Response.Write(configs.Item("system"))
+    End Function
+
+    '''
+     ' 处理载入的配置
+     '
+     ' @param object xmlDoc <XML数据>
+     ' @param dictionary nowConfigs <配置项>
+     ''
+    Private Function processConfigs(ByRef xmlDoc, ByRef nowConfigs)
+        If VarType(xmlDoc) <> 9 Then Exit Function
+
+        Dim config, nowDoc
+        For Each nowDoc In xmlDoc.childNodes
+            Select Case nowDoc.nodeType
+                ' 元素
+                Case 1
+                    nowConfigs.Add nowDoc.NodeName, Server.CreateObject("Scripting.Dictionary")
+                    Call processConfigs(nowDoc, nowConfigs.Item(nowDoc.NodeName))
+                ' 文本
+                Case 3
+                    nowConfigs = nowDoc.Text
+            End Select
+        Next
+    End Function
+
+    '''
+     ' 调用模块
+     '
+     ' @param string moduleName <模块名称>
+     ''
+    Public Function module(ByVal moduleName)
+
     End Function
 
 End Class

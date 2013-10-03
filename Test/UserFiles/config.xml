@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<seConfigs>
+    <system>
+        <development>True</development>
+        <language>zh-cn</language>
+        <seDir>Libs/SE</seDir>
+        <appsDir>Apps</appsDir>
+    </system>
+    <router>
+        <defaultAppName>HelloWorld</defaultAppName>
+        <defaultControllerName>Index</defaultControllerName>
+        <defaultActionName>index</defaultActionName>
+    </router>
+</seConfigs>

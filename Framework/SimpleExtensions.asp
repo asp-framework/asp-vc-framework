@@ -47,6 +47,7 @@ Class SimpleExtensions
         ' 运行控制器
 
         ' 渲染视图
+
     End Function
 
 '###########################'

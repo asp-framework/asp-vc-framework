@@ -231,10 +231,10 @@ Class SimpleExtensionsBase
         for i=0 to UBound(key)
           Response.Write(key(i))
           Response.Write("<br />")
-          Response.Write(VarType(configs.Item("system").Item(key(i))))
+          Response.Write(VarType(configs.Item("system").Item(key(i)).Item("SimpleExtensionsConfigText")))
           Response.Write("<br />")
         next
-        ' Response.Write(configs.Item("system"))
+        Response.Write(configs.Item("system").Item("development").Item("SimpleExtensionsConfigAttributes").Item("a"))
     End Function
 
     '''
@@ -246,16 +246,24 @@ Class SimpleExtensionsBase
     Private Function processConfigs(ByRef xmlDoc, ByRef nowConfigs)
         If VarType(xmlDoc) <> 9 Then Exit Function
 
-        Dim config, nowDoc
-        For Each nowDoc In xmlDoc.childNodes
-            Select Case nowDoc.nodeType
+        Dim config, nowNode, attributes
+        For Each nowNode In xmlDoc.childNodes
+            Select Case nowNode.nodeType
                 ' 元素
                 Case 1
-                    nowConfigs.Add nowDoc.NodeName, Server.CreateObject("Scripting.Dictionary")
-                    Call processConfigs(nowDoc, nowConfigs.Item(nowDoc.NodeName))
+                    nowConfigs.Add nowNode.NodeName, Server.CreateObject("Scripting.Dictionary")
+
+                    ' 节点属性
+                    nowConfigs.Item(nowNode.NodeName).Add "SimpleExtensionsConfigAttributes", Server.CreateObject("Scripting.Dictionary")
+                    For Each attributes In nowNode.Attributes
+                        nowConfigs.Item(nowNode.NodeName).Item("SimpleExtensionsConfigAttributes").Add attributes.NodeName, Server.CreateObject("Scripting.Dictionary")
+                        nowConfigs.Item(nowNode.NodeName).Item("SimpleExtensionsConfigAttributes").Item(attributes.NodeName) = attributes.NodeValue
+                    Next
+
+                    Call processConfigs(nowNode, nowConfigs.Item(nowNode.NodeName))
                 ' 文本
                 Case 3
-                    nowConfigs = nowDoc.Text
+                    nowConfigs.Add "SimpleExtensionsConfigText", nowNode.Text
             End Select
         Next
     End Function

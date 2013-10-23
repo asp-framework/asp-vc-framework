@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBase.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.9.26
+ ' @version 2013.10.23
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -11,64 +11,18 @@
 Class SimpleExtensionsBase
 
     ' @var dictionary configs <配置项>
+    ' 获取函数: getConfigs
     Private configs
-    '''
-     ' 获取配置项
-     ''
-    Public Property Get getConfigs(ByVal configPath)
-        If VarType(configs) <> 9 Then Set configs = Server.CreateObject("Scripting.Dictionary")
-
-        If IsNull(configPath) Then
-            Set getConfigs = configs
-        End If
-    End Property
 
     ' @var boolean aspIncludeTag <是否开启ASP #include 标签>
+    ' 设置函数: setAspIncludeTag
+    ' 判断函数: isAspIncludeTag
     Private aspIncludeTag
-    '''
-     ' 设置ASP #include 标签是否开启
-     '
-     ' @param boolean isAspincludeTag <标签是否开启>
-     ''
-    Public Property Let setAspIncludeTag(ByVal isAspincludeTag)
-        If VarType(isAspincludeTag) = 11 Then aspIncludeTag = isAspincludeTag
-    End Property
-    '''
-     ' 获取ASP #include 标签是否开启
-     '
-     ' @return boolean <标签是否开启>
-     ''
-    Public Property Get isAspIncludeTag()
-        If IsEmpty(aspIncludeTag) Then aspIncludeTag = True
-        isAspIncludeTag = aspIncludeTag
-    End Property
 
     ' @var dictionary modulesQueue <模块队列>
+    ' 设置函数: addModule
+    ' 获取函数: getModule
     Private modulesQueue
-    '''
-     ' 向队列增加模块
-     '
-     ' @param string moduleName <模块名称>
-     ''
-    Private Property Set addModule(ByVal moduleName)
-        If VarType(modulesQueue) <> 9 Then Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
-        If Not modulesQueue.Exists(moduleName) Then
-            Dim modulePath
-            modulePath = getSEDir & "/" & moduleName & "/" & moduleName & ".asp"
-            Me.include(modulePath)
-            Set modulesQueue.Item(moduleName) = Eval("New " & moduleName)
-        End If
-    End Property
-    '''
-     ' 获取模块
-     '
-     ' @param string moduleName <模块名称>
-     '
-     ' @return class|Nothing <实例化的模块>
-     ''
-    Private Property Get getModule(ByVal moduleName)
-        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
-    End Property
 
 '###########################'
 '###########################'
@@ -170,6 +124,25 @@ Class SimpleExtensionsBase
     End Function
 
     '''
+     ' 设置ASP #include 标签是否开启
+     '
+     ' @param boolean isAspincludeTag <标签是否开启>
+     ''
+    Public Property Let setAspIncludeTag(ByVal isAspincludeTag)
+        If VarType(isAspincludeTag) = 11 Then aspIncludeTag = isAspincludeTag
+    End Property
+
+    '''
+     ' 获取ASP #include 标签是否开启
+     '
+     ' @return boolean <标签是否开启>
+     ''
+    Public Property Get isAspIncludeTag()
+        If IsEmpty(aspIncludeTag) Then aspIncludeTag = True
+        isAspIncludeTag = aspIncludeTag
+    End Property
+
+    '''
      ' ASP #include 的实现
      '
      ' @param string filePath <文件路径>
@@ -225,17 +198,18 @@ Class SimpleExtensionsBase
         Set seConfigsDoc = seConfigsDoc.getElementsByTagName("seConfigs")(0)
         Call processConfigs(seConfigsDoc, getConfigs(Null))
         Set seConfigsDoc = Nothing
-
-        Dim i,key
-        key = configs.Item("system").Keys
-        for i=0 to UBound(key)
-          Response.Write(key(i))
-          Response.Write("<br />")
-          Response.Write(VarType(configs.Item("system").Item(key(i)).Item("SimpleExtensionsConfigText")))
-          Response.Write("<br />")
-        next
-        Response.Write(configs.Item("system").Item("development").Item("SimpleExtensionsConfigAttributes").Item("a"))
     End Function
+
+    '''
+     ' 获取配置项
+     ''
+    Public Property Get getConfigs(ByVal configPath)
+        If VarType(configs) <> 9 Then Set configs = Server.CreateObject("Scripting.Dictionary")
+
+        If IsNull(configPath) Then
+            Set getConfigs = configs
+        End If
+    End Property
 
     '''
      ' 处理载入的配置
@@ -276,6 +250,32 @@ Class SimpleExtensionsBase
     Public Function module(ByVal moduleName)
 
     End Function
+
+    '''
+     ' 向队列增加模块
+     '
+     ' @param string moduleName <模块名称>
+     ''
+    Private Property Set addModule(ByVal moduleName)
+        If VarType(modulesQueue) <> 9 Then Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
+        If Not modulesQueue.Exists(moduleName) Then
+            Dim modulePath
+            modulePath = getSEDir & "/" & moduleName & "/" & moduleName & ".asp"
+            Me.include(modulePath)
+            Set modulesQueue.Item(moduleName) = Eval("New " & moduleName)
+        End If
+    End Property
+
+    '''
+     ' 获取模块
+     '
+     ' @param string moduleName <模块名称>
+     '
+     ' @return class|Nothing <实例化的模块>
+     ''
+    Private Property Get getModule(ByVal moduleName)
+        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
+    End Property
 
 End Class
 %>

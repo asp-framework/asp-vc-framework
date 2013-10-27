@@ -47,9 +47,9 @@ Class SimpleExtensionsBaseTest
 	End Sub
 
     ' 包含并运行文件测试
-    Public Sub includeTest(oTestResult)
+    Public Sub pressModeIncludeTest(oTestResult)
         Response.Flush
-        vActual = SimpleExtensionsBaseClass.include("./UserFiles/includeTest/includeTest1.asp")
+        vActual = SimpleExtensionsBaseClass.pressModeInclude("./UserFiles/includeTest/includeTest1.asp")
         Response.Clear
 
 		oTestResult.AssertEquals _

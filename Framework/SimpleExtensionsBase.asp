@@ -66,13 +66,41 @@ Class SimpleExtensionsBase
     End Function
 
     '''
-     ' 包含并运行文件
+     ' 包含并执行文件
      '
      ' @param string filePath <文件路径>
+     ''
+    Public Function include(ByVal filePath)
+        pressModeInclude(filePath, 1)
+    End Function
+
+    '''
+     ' 包含文件获取可执行代码,但不执行
+     '
+     ' @param string filePath <文件路径>
+     ''
+    Public Function getIncludeCodeString(ByVal filePath)
+        pressModeInclude(filePath, 2)
+    End Function
+
+    '''
+     ' 包含文件获取执行后的内容,但不输出内容
+     '
+     ' @param string filePath <文件路径>
+     ''
+    Public Function getIncludeString(ByVal filePath)
+        pressModeInclude(filePath, 3)
+    End Function
+
+    '''
+     ' 按模式包含
+     '
+     ' @param string filePath <文件路径>
+     ' @param int mode <模式>
      '
      ' @return string <可执行代码>
      ''
-    Public Function include(ByVal filePath)
+    Private Function pressModeInclude(ByRef filePath, ByVal mode)
         Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
         ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
 
@@ -120,7 +148,7 @@ Class SimpleExtensionsBase
             codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
         Loop
 
-        include = code : simpleExtensionsIncludeCodeExecute(code)
+        pressModeInclude = code : simpleExtensionsIncludeCodeExecute(code)
     End Function
 
     '''

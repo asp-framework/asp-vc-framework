@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensions.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.9.26
+ ' @version 2013.10.28
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -13,18 +13,19 @@
 <%
 Class SimpleExtensions
 
-    ' @var class simpleExtensionsBaseClass <SimpleExtensionsBase类>
+    ' @var class simpleExtensionsBaseClass <SE框架基类>
     Private simpleExtensionsBaseClass
+
+'###########################'
+'###########################'
+
     '''
-     ' 获取 SimpleExtensionsBase 类
+     ' 获取SE框架基类
      ''
     Private Property Get getSimpleExtensionsBaseClass()
         If VarType(simpleExtensionsBaseClass) <> 9 Then Set simpleExtensionsBaseClass = New SimpleExtensionsBase
         Set getSimpleExtensionsBaseClass = simpleExtensionsBaseClass
     End Property
-
-'###########################'
-'###########################'
 
     '''
      ' 构造函数
@@ -38,10 +39,12 @@ Class SimpleExtensions
 
     '''
      ' 运行框架
+     '
+     ' @param string configFilePath <配置文件路径>
      ''
-    Public Function run()
+    Public Function run(ByVal configFilePath)
         ' 运行配置文件
-
+        If Not IsNull(configFilePath) Then getSimpleExtensionsBaseClass.loadConfigs(configFilePath)
         ' 运行路由
 
         ' 运行控制器
@@ -49,6 +52,23 @@ Class SimpleExtensions
         ' 渲染视图
 
     End Function
+
+'###########################'
+'###########################'
+
+    '''
+     ' 获取配置项
+     ''
+    Public Property Get getConfigs(ByVal configPath)
+        Set getConfigs = getSimpleExtensionsBaseClass.getConfigs
+    End Property
+
+    '''
+     ' 获取框架根目录
+     ''
+    Public Property Get getSEDir()
+        getSEDir = getSimpleExtensionsBaseClass.getSEDir
+    End Property
 
 '###########################'
 '###########################'
@@ -65,6 +85,15 @@ Class SimpleExtensions
     End Function
 
     '''
+     ' 包含并执行文件
+     '
+     ' @param string filePath <文件路径>
+     ''
+    Public Function include(ByVal filePath)
+        getSimpleExtensionsBaseClass.include(filePath)
+    End Function
+
+    '''
      ' 包含并运行文件
      '
      ' @param string filePath <文件路径>
@@ -73,6 +102,17 @@ Class SimpleExtensions
      ''
     Public Function getIncludeCode(ByVal filePath)
         getIncludeCode = getSimpleExtensionsBaseClass.getIncludeCode(filePath)
+    End Function
+
+    '''
+     ' 包含文件获取执行后的内容,但不输出内容
+     '
+     ' @param string filePath <文件路径>
+     '
+     ' @return string <执行后的内容>
+     ''
+    Public Function getIncludeHtml(ByVal filePath)
+        getIncludeHtml = getSimpleExtensionsBaseClass.getIncludeHtml(filePath)
     End Function
 
 End Class

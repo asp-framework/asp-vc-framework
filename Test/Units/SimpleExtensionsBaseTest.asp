@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBaseTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.9.26
+ ' @version 2013.10.28
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -15,12 +15,12 @@ Class SimpleExtensionsBaseTest
     Private vActual
 
 	Public Function TestCaseNames()
-		TestCaseNames = Array(_
-            "aspIncludeTagTest",_
-            "loadFileTest",_
-            "getIncludeCodeTest",_
-            "getIncludeHtmlTest",_
-            "loadConfigsTest"_
+		TestCaseNames = Array( _
+            "loadFileTest", _
+            "getIncludeCodeTest", _
+            "getIncludeHtmlTest", _
+            "loadConfigsTest", _
+            "moduleTest" _
         )
 	End Function
 
@@ -31,14 +31,6 @@ Class SimpleExtensionsBaseTest
 	Public Sub TearDown()
 		'Response.Write("TearDown<br>")
 	End Sub
-
-    ' ASP #include 标签是否开启测试
-    Public Sub aspIncludeTagTest(oTestResult)
-        SimpleExtensionsBaseClass.setAspIncludeTag = False
-        vActual = SimpleExtensionsBaseClass.isAspIncludeTag
-
-        oTestResult.AssertEquals False, vActual, "ASP #include 标签关闭失败"
-    End Sub
 
     ' 读取文件测试
 	Public Sub loadFileTest(oTestResult)
@@ -56,8 +48,8 @@ Class SimpleExtensionsBaseTest
             & "Dim output : output = ""成功输出内容""" & vbCrLf _
             & "Response.Write("""" & vbCrLf & """")" & vbCrLf _
             & "Response.Write(""output:""&output)" & vbCrLf _
-            & "Response.Write("""")" & vbCrLf,_
-            vActual,_
+            & "Response.Write("""")" & vbCrLf, _
+            vActual, _
             "包含文件异常"
     End Sub
 
@@ -66,19 +58,40 @@ Class SimpleExtensionsBaseTest
         vActual = SimpleExtensionsBaseClass.getIncludeHtml("./UserFiles/includeTest/includeTest1.asp")
 
         oTestResult.AssertEquals _
-            "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容",_
-            vActual,_
+            "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _
+            vActual, _
             "载入配置文件异常"
     End Sub
 
-    ' 载入配置文件
+    ' 载入配置文件测试
     Public Sub loadConfigsTest(oTestResult)
         SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
 
-		oTestResult.AssertEquals _
-            True,_
-            True,_
+        oTestResult.AssertEquals _
+            "../Framework", _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("system").Item("seDir").Item("Value"), _
             "载入配置文件异常"
+
+		oTestResult.AssertEquals _
+            "HelloWorld", _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("defaultAppName").Item("Value"), _
+            "载入配置文件异常"
+
+        oTestResult.AssertEquals _
+            "get", _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("Attributes").Item("type"), _
+            "载入配置文件异常"
+    End Sub
+
+    ' 导入模块测试
+    Public Sub moduleTest(oTestResult)
+        SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
+        vActual = SimpleExtensionsBaseClass.module("String").md5("SE")
+
+        oTestResult.AssertEquals _
+            "f003c44deab679aa2edfaff864c77402", _
+            vActual, _
+            "导入模块异常"
     End Sub
 
 End Class

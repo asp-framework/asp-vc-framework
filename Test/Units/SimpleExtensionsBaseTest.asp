@@ -18,7 +18,8 @@ Class SimpleExtensionsBaseTest
 		TestCaseNames = Array(_
             "aspIncludeTagTest",_
             "loadFileTest",_
-            "includeTest",_
+            "getIncludeCodeTest",_
+            "getIncludeHtmlTest",_
             "loadConfigsTest"_
         )
 	End Function
@@ -46,11 +47,9 @@ Class SimpleExtensionsBaseTest
 		oTestResult.AssertEquals "读取文件测试", vActual, "读取文件信息异常"
 	End Sub
 
-    ' 包含并运行文件测试
-    Public Sub pressModeIncludeTest(oTestResult)
-        Response.Flush
-        vActual = SimpleExtensionsBaseClass.pressModeInclude("./UserFiles/includeTest/includeTest1.asp")
-        Response.Clear
+    ' 包含文件获取可执行代码测试
+    Public Sub getIncludeCodeTest(oTestResult)
+        vActual = SimpleExtensionsBaseClass.getIncludeCode("./UserFiles/includeTest/includeTest1.asp")
 
 		oTestResult.AssertEquals _
             "Response.Write(""开始文件导入测试<br/>"" & vbCrLf & """")" & vbCrLf _
@@ -60,6 +59,16 @@ Class SimpleExtensionsBaseTest
             & "Response.Write("""")" & vbCrLf,_
             vActual,_
             "包含文件异常"
+    End Sub
+
+    ' 包含文件获取执行后的内容测试
+    Public Sub getIncludeHtmlTest(oTestResult)
+        vActual = SimpleExtensionsBaseClass.getIncludeHtml("./UserFiles/includeTest/includeTest1.asp")
+
+        oTestResult.AssertEquals _
+            "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容",_
+            vActual,_
+            "载入配置文件异常"
     End Sub
 
     ' 载入配置文件

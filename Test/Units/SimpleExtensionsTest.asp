@@ -17,7 +17,7 @@ Class SimpleExtensionsTest
 	Public Function TestCaseNames()
 		TestCaseNames = Array(_
             "loadFileTest",_
-            "includeTest"_
+            "getIncludeCodeTest"_
         )
 	End Function
 
@@ -37,9 +37,9 @@ Class SimpleExtensionsTest
 	End Sub
 
     ' 包含并运行文件测试
-    Public Sub includeTest(oTestResult)
+    Public Sub getIncludeCodeTest(oTestResult)
         Response.Flush
-        vActual = SE.include("./UserFiles/includeTest/includeTest1.asp")
+        vActual = SE.getIncludeCode("./UserFiles/includeTest/includeTest1.asp")
         Response.Clear
 
 		oTestResult.AssertEquals _

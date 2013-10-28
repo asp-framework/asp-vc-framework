@@ -1,1 +1,1 @@
-<%Dim output : output = "成功输出内容"%>
+<% Dim output : output = "成功输出内容" %>

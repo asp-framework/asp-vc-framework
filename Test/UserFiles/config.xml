@@ -3,6 +3,7 @@
 <seConfigs>
     <system>
         <development>True</development>
+        <aspIncludeTag>True</aspIncludeTag>
         <language>zh-cn</language>
         <seDir>Libs/SE</seDir>
         <appsDir>Apps</appsDir>

@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBase.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.23
+ ' @version 2013.10.28
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -71,52 +71,76 @@ Class SimpleExtensionsBase
      ' @param string filePath <文件路径>
      ''
     Public Function include(ByVal filePath)
-        pressModeInclude(filePath, 1)
+        Call pressModeInclude(filePath, 1)
     End Function
 
     '''
      ' 包含文件获取可执行代码,但不执行
      '
      ' @param string filePath <文件路径>
+     '
+     ' @return string <可执行代码>
      ''
-    Public Function getIncludeCodeString(ByVal filePath)
-        pressModeInclude(filePath, 2)
+    Public Function getIncludeCode(ByVal filePath)
+        getIncludeCode = pressModeInclude(filePath, 2)
     End Function
 
     '''
      ' 包含文件获取执行后的内容,但不输出内容
      '
      ' @param string filePath <文件路径>
+     '
+     ' @return string <执行后的内容>
      ''
-    Public Function getIncludeString(ByVal filePath)
-        pressModeInclude(filePath, 3)
+    Public Function getIncludeHtml(ByVal filePath)
+        getIncludeHtml = pressModeInclude(filePath, 3)
     End Function
 
     '''
      ' 按模式包含
      '
      ' @param string filePath <文件路径>
-     ' @param int mode <模式>
-     '
-     ' @return string <可执行代码>
+     ' @param int mode <模式,
+     '     1:包含并执行;
+     '     2:包含文件获取可执行代码,但不执行;
+     '     3:包含文件获取执行后的内容,但不输出内容;
+     ' >
      ''
     Private Function pressModeInclude(ByRef filePath, ByVal mode)
-        Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
-        ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
+        Dim code, html, content
 
-        ' code: 存放包含文件转译后的可运行代码
-        ' codeCache: 代码处理时的临时缓存
-        ' content: 文件内容
-        ' codeEnd: 标签内容结束位置
-        ' codeStart: 标签内容开始位置
-        Dim code, codeCache, content, codeEnd, codeStart
-
-        ' 包含模式
+        ' 是否支持ASP原生包含模式
         If isAspIncludeTag Then
             content = aspIncludeTagProcess(filePath)
         Else
             content = Me.loadFile(filePath)
         End If
+
+        ' 处理包含的内容
+        Call processIncludeContent(code, html, content, mode)
+
+        Select Case mode
+            Case 1 : Call simpleExtensionsIncludeCodeExecute(code, Null)
+            Case 2 : pressModeInclude = code
+            Case 3 : Call simpleExtensionsIncludeCodeExecute(code, html) : pressModeInclude = html
+        End Select
+    End Function
+
+    '''
+     ' 处理包含的内容
+     '
+     ' @param code string <存放包含文件转译后的可运行代码>
+     ' @param html string <存放包含文件执行后的HTML代码>
+     ' @param content string <文件内容>
+     ' @param int mode <详见"pressModeInclude"方法的"mode"参数>
+     ''
+    Private Function processIncludeContent(ByRef code, ByRef html, ByRef content, ByVal mode)
+        Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
+        ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
+        ' codeCache: 代码处理时的临时缓存
+        ' codeEnd: 标签内容结束位置
+        ' codeStart: 标签内容开始位置
+        Dim codeCache, codeEnd, codeStart
 
         codeEnd = 1 : codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
         Do While True
@@ -138,17 +162,15 @@ Class SimpleExtensionsBase
 
             ' 判断特殊标签
             Select Case Left(codeCache, 1)
-                Case "@"
-                    codeCache = Null
-                Case "="
-                    codeCache = "Response.Write(" & Mid(codeCache, 2) & ")"
+                Case "@" : codeCache = Null
+                Case "=" : codeCache = "Response.Write(" & Mid(codeCache, 2) & ")"
             End Select
 
             code = code & codeCache & vbCrLf : codeCache = Null
             codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
         Loop
 
-        pressModeInclude = code : simpleExtensionsIncludeCodeExecute(code)
+        If mode = 3 Then code = Replace(code, "Response.Write", "html=html&", 1, -1, 0)
     End Function
 
     '''
@@ -313,8 +335,9 @@ End Class
  ' 执行代码
  '
  ' @param string code <可执行代码>
+ ' @param string html <详见"processIncludeContent"方法的"html"参数>
  ''
-Function simpleExtensionsIncludeCodeExecute(ByRef simpleExtensionsIncludeCode)
+Function simpleExtensionsIncludeCodeExecute(ByRef simpleExtensionsIncludeCode, ByRef html)
     simpleExtensionsIncludeCode = "simpleExtensionsIncludeCode = Empty" & vbCrLf & simpleExtensionsIncludeCode
     Execute(simpleExtensionsIncludeCode)
 End Function

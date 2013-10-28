@@ -30,7 +30,7 @@ Class SimpleExtensions
      ' 构造函数
      ''
     Private Sub Class_Initialize
-        
+
     End Sub
 
 '###########################'
@@ -71,8 +71,8 @@ Class SimpleExtensions
      '
      ' @return string <可执行代码>
      ''
-    Public Function include(ByVal filePath)
-        include = getSimpleExtensionsBaseClass.include(filePath)
+    Public Function getIncludeCode(ByVal filePath)
+        getIncludeCode = getSimpleExtensionsBaseClass.getIncludeCode(filePath)
     End Function
 
 End Class

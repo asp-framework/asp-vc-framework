@@ -14,11 +14,6 @@ Class SimpleExtensionsBase
     ' 获取函数: getConfigs
     Private configs
 
-    ' @var boolean aspIncludeTag <是否开启ASP #include 标签>
-    ' 设置函数: setAspIncludeTag
-    ' 判断函数: isAspIncludeTag
-    Private aspIncludeTag
-
     ' @var dictionary modulesQueue <模块队列>
     ' 设置函数: addModule
     ' 获取函数: getModule
@@ -109,20 +104,15 @@ Class SimpleExtensionsBase
     Private Function pressModeInclude(ByRef filePath, ByVal mode)
         Dim code, html, content
 
-        ' 是否支持ASP原生包含模式
-        If isAspIncludeTag Then
-            content = aspIncludeTagProcess(filePath)
-        Else
-            content = Me.loadFile(filePath)
-        End If
+        content = aspIncludeTagProcess(filePath)
 
         ' 处理包含的内容
         Call processIncludeContent(code, html, content, mode)
 
         Select Case mode
-            Case 1 : Call simpleExtensionsIncludeCodeExecute(code, Null)
+            Case 1 : ExecuteGlobal(code)
             Case 2 : pressModeInclude = code
-            Case 3 : Call simpleExtensionsIncludeCodeExecute(code, html) : pressModeInclude = html
+            Case 3 : Execute(code) : pressModeInclude = html
         End Select
     End Function
 
@@ -174,25 +164,6 @@ Class SimpleExtensionsBase
     End Function
 
     '''
-     ' 设置ASP #include 标签是否开启
-     '
-     ' @param boolean isAspincludeTag <标签是否开启>
-     ''
-    Public Property Let setAspIncludeTag(ByVal isAspincludeTag)
-        If VarType(isAspincludeTag) = 11 Then aspIncludeTag = isAspincludeTag
-    End Property
-
-    '''
-     ' 获取ASP #include 标签是否开启
-     '
-     ' @return boolean <标签是否开启>
-     ''
-    Public Property Get isAspIncludeTag()
-        If IsEmpty(aspIncludeTag) Then aspIncludeTag = True
-        isAspIncludeTag = aspIncludeTag
-    End Property
-
-    '''
      ' ASP #include 的实现
      '
      ' @param string filePath <文件路径>
@@ -228,6 +199,8 @@ Class SimpleExtensionsBase
                 contentCache = Empty
 
                 content = Mid(content, 1, codeStart - 5) & aspIncludeTagProcess(filePath) & Mid(content, codeEnd)
+            Else
+                content = Mid(content, 1, codeStart - 5) & Mid(content, codeEnd)
             End If
         Loop
 
@@ -275,22 +248,28 @@ Class SimpleExtensionsBase
             Select Case nowNode.nodeType
                 ' 元素
                 Case 1
-                    nowConfigs.Add nowNode.NodeName, Server.CreateObject("Scripting.Dictionary")
+                    Call nowConfigs.Add(nowNode.NodeName, Server.CreateObject("Scripting.Dictionary"))
 
                     ' 节点属性
-                    nowConfigs.Item(nowNode.NodeName).Add "SimpleExtensionsConfigAttributes", Server.CreateObject("Scripting.Dictionary")
+                    Call nowConfigs.Item(nowNode.NodeName).Add("Attributes", Server.CreateObject("Scripting.Dictionary"))
                     For Each attributes In nowNode.Attributes
-                        nowConfigs.Item(nowNode.NodeName).Item("SimpleExtensionsConfigAttributes").Add attributes.NodeName, Server.CreateObject("Scripting.Dictionary")
-                        nowConfigs.Item(nowNode.NodeName).Item("SimpleExtensionsConfigAttributes").Item(attributes.NodeName) = attributes.NodeValue
+                        Call nowConfigs.Item(nowNode.NodeName).Item("Attributes").Add(attributes.NodeName, attributes.NodeValue)
                     Next
 
                     Call processConfigs(nowNode, nowConfigs.Item(nowNode.NodeName))
                 ' 文本
                 Case 3
-                    nowConfigs.Add "SimpleExtensionsConfigText", nowNode.Text
+                    Call nowConfigs.Add("Value", nowNode.Text)
             End Select
         Next
     End Function
+
+    '''
+     ' 获取框架根目录
+     ''
+    Public Property Get getSEDir()
+        getSEDir = getConfigs(Null).Item("system").Item("seDir").Item("Value")
+    End Property
 
     '''
      ' 调用模块
@@ -298,7 +277,8 @@ Class SimpleExtensionsBase
      ' @param string moduleName <模块名称>
      ''
     Public Function module(ByVal moduleName)
-
+        addModule(moduleName)
+        Set module = getModule(moduleName)
     End Function
 
     '''
@@ -306,15 +286,15 @@ Class SimpleExtensionsBase
      '
      ' @param string moduleName <模块名称>
      ''
-    Private Property Set addModule(ByVal moduleName)
+    Private Function addModule(ByVal moduleName)
         If VarType(modulesQueue) <> 9 Then Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
         If Not modulesQueue.Exists(moduleName) Then
             Dim modulePath
-            modulePath = getSEDir & "/" & moduleName & "/" & moduleName & ".asp"
+            modulePath = getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
             Me.include(modulePath)
-            Set modulesQueue.Item(moduleName) = Eval("New " & moduleName)
+            Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
         End If
-    End Property
+    End Function
 
     '''
      ' 获取模块
@@ -324,21 +304,8 @@ Class SimpleExtensionsBase
      ' @return class|Nothing <实例化的模块>
      ''
     Private Property Get getModule(ByVal moduleName)
-        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
+        Set getModule = modulesQueue.Item(moduleName)
     End Property
 
 End Class
-%>
-
-<%
-'''
- ' 执行代码
- '
- ' @param string code <可执行代码>
- ' @param string html <详见"processIncludeContent"方法的"html"参数>
- ''
-Function simpleExtensionsIncludeCodeExecute(ByRef simpleExtensionsIncludeCode, ByRef html)
-    simpleExtensionsIncludeCode = "simpleExtensionsIncludeCode = Empty" & vbCrLf & simpleExtensionsIncludeCode
-    Execute(simpleExtensionsIncludeCode)
-End Function
 %>

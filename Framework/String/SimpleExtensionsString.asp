@@ -14,8 +14,18 @@
 <%
 Class SimpleExtensionsString
 
+    ' @var class <MD5类>
+    Private md5Class
+
+    '''
+     ' MD5加密
+     '
+     ' @param string stringToMD5 <需要处理成MD5的字符串>
+     '
+     ' @return string <MD5字符串>
+     ''
     Public Function md5(ByVal stringToMD5)
-        Set md5Class = New SimpleExtensionsStringMD5
+        If VarType(md5Class) <> 9 Then Set md5Class = New SimpleExtensionsStringMD5
         md5 = md5Class.md5(stringToMD5)
     End Function
 

@@ -51,7 +51,7 @@ Class SimpleExtensionsBase
             .LoadFromFile(Server.MapPath(filePath))
             If Err.Number <> 0 Then
                 Err.Clear
-                Response.Write("[FUNCTION] LoadFile Error - 找不到檔案：" & filePath)
+                Response.Write("[FUNCTION] loadFile Error - 找不到檔案：" & filePath)
                 Response.End
             End If
             loadFile = .ReadText
@@ -164,7 +164,7 @@ Class SimpleExtensionsBase
     End Function
 
     '''
-     ' ASP #include 的实现
+     ' ASP #include 标签处理
      '
      ' @param string filePath <文件路径>
      '
@@ -179,9 +179,10 @@ Class SimpleExtensionsBase
         ' codeEnd: 标签内容结束位置
         ' codeStart: 标签内容开始位置
         Dim content, contentCache, codeEnd, codeStart
+        codeEnd = 1
         content = Me.loadFile(filePath)
         Do While True
-            codeStart = InStr(1, content, ASP_INCLUDE_TAG_LEFT) + 4
+            codeStart = InStr(codeEnd, content, ASP_INCLUDE_TAG_LEFT) + 4
             codeEnd = InStr(codeStart, content, ASP_INCLUDE_TAG_RIGHT) + 3
 
             ' 跳出解析
@@ -198,9 +199,10 @@ Class SimpleExtensionsBase
                 End If
                 contentCache = Empty
 
+                ' 替换标签为文件内容
                 content = Mid(content, 1, codeStart - 5) & aspIncludeTagProcess(filePath) & Mid(content, codeEnd)
-            Else
-                content = Mid(content, 1, codeStart - 5) & Mid(content, codeEnd)
+
+                codeEnd = 1
             End If
         Loop
 
@@ -246,7 +248,7 @@ Class SimpleExtensionsBase
         Dim config, nowNode, attributes
         For Each nowNode In xmlDoc.childNodes
             Select Case nowNode.nodeType
-                ' 元素
+                ' 元素节点
                 Case 1
                     Call nowConfigs.Add(nowNode.NodeName, Server.CreateObject("Scripting.Dictionary"))
 

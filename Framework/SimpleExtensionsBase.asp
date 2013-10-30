@@ -227,12 +227,25 @@ Class SimpleExtensionsBase
 
     '''
      ' 获取配置项
+     '
+     ' @param string configPath <配置路径,例:"system/seDir/Value">
+     '
+     ' @return dictionary|string <所有配置数据|配置项字符串>
      ''
     Public Property Get getConfigs(ByVal configPath)
         If VarType(configs) <> 9 Then Set configs = Server.CreateObject("Scripting.Dictionary")
 
         If IsNull(configPath) Then
             Set getConfigs = configs
+        Else
+            configPath = Replace(configPath, "\", "/")
+            Dim pathArray, nowPath, evalString
+            pathArray = Split(configPath, "/")
+            evalString = "configs"
+            For Each nowPath In pathArray
+                If Len(nowPath) > 0 Then evalString = evalString & ".Item(""" & nowPath & """)"
+            Next
+            getConfigs = Eval(evalString)
         End If
     End Property
 

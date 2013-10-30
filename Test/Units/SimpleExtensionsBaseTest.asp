@@ -36,7 +36,10 @@ Class SimpleExtensionsBaseTest
 	Public Sub loadFileTest(oTestResult)
         vActual = SimpleExtensionsBaseClass.loadFile("./UserFiles/loadFileTest.asp")
 
-		oTestResult.AssertEquals "读取文件测试", vActual, "读取文件信息异常"
+		oTestResult.AssertEquals _
+            "读取文件测试", _
+            vActual, _
+            "读取文件信息异常"
 	End Sub
 
     ' 包含文件获取可执行代码测试
@@ -72,14 +75,29 @@ Class SimpleExtensionsBaseTest
             SimpleExtensionsBaseClass.getConfigs(Null).Item("system").Item("seDir").Item("Value"), _
             "载入配置文件异常"
 
+        oTestResult.AssertEquals _
+            "../Framework", _
+            SimpleExtensionsBaseClass.getConfigs("system/seDir/Value"), _
+            "载入配置文件异常"
+
 		oTestResult.AssertEquals _
             "HelloWorld", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("defaultAppName").Item("Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
+            "HelloWorld", _
+            SimpleExtensionsBaseClass.getConfigs("router/defaultAppName/Value"), _
+            "载入配置文件异常"
+
+        oTestResult.AssertEquals _
             "get", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("Attributes").Item("type"), _
+            "载入配置文件异常"
+
+        oTestResult.AssertEquals _
+            "get", _
+            SimpleExtensionsBaseClass.getConfigs("router/Attributes/type"), _
             "载入配置文件异常"
     End Sub
 

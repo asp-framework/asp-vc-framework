@@ -51,5 +51,6 @@ Class SimpleExtensionsTest
             vActual,_
             "包含文件异常"
     End Sub
+
 End Class
 %>

@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.9.26
+ ' @version 2013.10.30
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -15,9 +15,10 @@ Class SimpleExtensionsTest
     Private vActual
 
 	Public Function TestCaseNames()
-		TestCaseNames = Array(_
-            "loadFileTest",_
-            "getIncludeCodeTest"_
+		TestCaseNames = Array( _
+            "loadFileTest", _
+            "getIncludeCodeTest", _
+            "getIncludeHtmlTest" _
         )
 	End Function
 
@@ -47,9 +48,19 @@ Class SimpleExtensionsTest
             & "Dim output : output = ""成功输出内容""" & vbCrLf _
             & "Response.Write("""" & vbCrLf & """")" & vbCrLf _
             & "Response.Write(""output:""&output)" & vbCrLf _
-            & "Response.Write("""")" & vbCrLf,_
+            & "Response.Write("""")" & vbCrLf, _
             vActual,_
             "包含文件异常"
+    End Sub
+
+    ' 包含文件获取执行后的内容测试
+    Public Sub getIncludeHtmlTest(oTestResult)
+        vActual = SE.getIncludeHtml("./UserFiles/includeTest/includeTest1.asp")
+
+        oTestResult.AssertEquals _
+            "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _
+            vActual, _
+            "载入配置文件异常"
     End Sub
 
 End Class

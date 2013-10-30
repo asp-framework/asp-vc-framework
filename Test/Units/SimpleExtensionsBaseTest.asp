@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBaseTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.28
+ ' @version 2013.10.30
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -26,6 +26,7 @@ Class SimpleExtensionsBaseTest
 
 	Public Sub SetUp()
 		Set SimpleExtensionsBaseClass = New SimpleExtensionsBase
+        SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
 	End Sub
 
 	Public Sub TearDown()
@@ -68,8 +69,6 @@ Class SimpleExtensionsBaseTest
 
     ' 载入配置文件测试
     Public Sub loadConfigsTest(oTestResult)
-        SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
-
         oTestResult.AssertEquals _
             "../Framework", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("system").Item("seDir").Item("Value"), _
@@ -103,7 +102,6 @@ Class SimpleExtensionsBaseTest
 
     ' 导入模块测试
     Public Sub moduleTest(oTestResult)
-        SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
         vActual = SimpleExtensionsBaseClass.module("String").md5("SE")
 
         oTestResult.AssertEquals _

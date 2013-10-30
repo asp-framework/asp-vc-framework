@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBase.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.28
+ ' @version 2013.10.30
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -228,7 +228,7 @@ Class SimpleExtensionsBase
     '''
      ' 获取配置项
      '
-     ' @param string configPath <配置路径,例:"system/seDir/Value">
+     ' @param null|string configPath <配置路径,例:"system/seDir/Value">
      '
      ' @return dictionary|string <所有配置数据|配置项字符串>
      ''

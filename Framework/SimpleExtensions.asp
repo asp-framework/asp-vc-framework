@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensions.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.28
+ ' @version 2013.10.30
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -44,7 +44,7 @@ Class SimpleExtensions
      ''
     Public Function run(ByVal configFilePath)
         ' 运行配置文件
-        If Not IsNull(configFilePath) Then getSimpleExtensionsBaseClass.loadConfigs(configFilePath)
+        getSimpleExtensionsBaseClass.loadConfigs(configFilePath)
         ' 运行路由
 
         ' 运行控制器

@@ -45,7 +45,9 @@ Class SimpleExtensions
     Public Function run(ByVal configFilePath)
         ' 运行配置文件
         getSimpleExtensionsBaseClass.loadConfigs(configFilePath)
+
         ' 运行路由
+        Me.module("Router").run()
 
         ' 运行控制器
 

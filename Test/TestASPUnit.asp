@@ -18,6 +18,7 @@ Option Explicit
 <!-- 导入测试文件 -->
 <!-- #include file = "Units/SimpleExtensionsBaseTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsTest.asp" -->
+
 <%
 	Dim oRunner
 	Set oRunner = New UnitRunner
@@ -25,6 +26,7 @@ Option Explicit
     ' 实例化需要测试的类
 	oRunner.AddTestContainer New SimpleExtensionsBaseTest
     oRunner.AddTestContainer New SimpleExtensionsTest
+    ' oRunner.AddTestContainer New SimpleExtensionsRouterTest
 
 	oRunner.Display()
 %>

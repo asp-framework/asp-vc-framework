@@ -18,12 +18,14 @@ Class SimpleExtensionsTest
 		TestCaseNames = Array( _
             "loadFileTest", _
             "getIncludeCodeTest", _
-            "getIncludeHtmlTest" _
+            "getIncludeHtmlTest", _
+            "moduleTest" _
         )
 	End Function
 
 	Public Sub SetUp()
-        ' Response.Write("SetUp<br>")
+        Set SE = New SimpleExtensions
+        SE.getSimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
 	End Sub
 
 	Public Sub TearDown()
@@ -39,9 +41,7 @@ Class SimpleExtensionsTest
 
     ' 包含并运行文件测试
     Public Sub getIncludeCodeTest(oTestResult)
-        Response.Flush
         vActual = SE.getIncludeCode("./UserFiles/includeTest/includeTest1.asp")
-        Response.Clear
 
 		oTestResult.AssertEquals _
             "Response.Write(""开始文件导入测试<br/>"" & vbCrLf & """")" & vbCrLf _
@@ -61,6 +61,16 @@ Class SimpleExtensionsTest
             "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _
             vActual, _
             "载入配置文件异常"
+    End Sub
+
+    ' 导入模块测试
+    Public Sub moduleTest(oTestResult)
+        vActual = SE.module("String").md5("SE")
+
+        oTestResult.AssertEquals _
+            "f003c44deab679aa2edfaff864c77402", _
+            vActual, _
+            "导入模块异常"
     End Sub
 
 End Class

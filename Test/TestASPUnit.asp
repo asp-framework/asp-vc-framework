@@ -1,4 +1,4 @@
-<%@ 
+<%@
     Language = "VBScript"
     CodePage = "65001"
 %>
@@ -25,7 +25,6 @@ Option Explicit
     ' 实例化需要测试的类
 	oRunner.AddTestContainer New SimpleExtensionsBaseTest
     oRunner.AddTestContainer New SimpleExtensionsTest
-	
-	
+
 	oRunner.Display()
 %>

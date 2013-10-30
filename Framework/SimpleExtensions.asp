@@ -22,7 +22,7 @@ Class SimpleExtensions
     '''
      ' 获取SE框架基类
      ''
-    Private Property Get getSimpleExtensionsBaseClass()
+    Public Property Get getSimpleExtensionsBaseClass()
         If VarType(simpleExtensionsBaseClass) <> 9 Then Set simpleExtensionsBaseClass = New SimpleExtensionsBase
         Set getSimpleExtensionsBaseClass = simpleExtensionsBaseClass
     End Property

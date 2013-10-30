@@ -60,7 +60,7 @@ Class SimpleExtensions
      ' 获取配置项
      ''
     Public Property Get getConfigs(ByVal configPath)
-        Set getConfigs = getSimpleExtensionsBaseClass.getConfigs
+        Set getConfigs = getSimpleExtensionsBaseClass.getConfigs(configPath)
     End Property
 
     '''
@@ -113,6 +113,15 @@ Class SimpleExtensions
      ''
     Public Function getIncludeHtml(ByVal filePath)
         getIncludeHtml = getSimpleExtensionsBaseClass.getIncludeHtml(filePath)
+    End Function
+
+    '''
+     ' 调用模块
+     '
+     ' @param string moduleName <模块名称>
+     ''
+    Public Function module(ByVal moduleName)
+        Set module = getSimpleExtensionsBaseClass.module(moduleName)
     End Function
 
 End Class

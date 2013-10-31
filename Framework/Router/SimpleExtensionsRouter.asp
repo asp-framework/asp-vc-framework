@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRouter.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.30
+ ' @version 2013.10.31
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -29,15 +29,30 @@ Class SimpleExtensionsRouter
         appName = getRequestValue("App")
         controllerName = getRequestValue("C")
         actionName = getRequestValue("A")
+        loadDefaultConfigs()
     End Function
 
     '''
      '  获取传入参数
      ''
     Private Function getRequestValue(ByVal variable)
-        getRequestValue = Request.QueryString(variable)
-        If Len(Request.Form(variable)) > 0 Then getRequestValue = Request.Form(variable)
+        If Len(Request.QueryString(variable)) > 0 Then
+            getRequestValue = Request.QueryString(variable)
+        ElseIf Len(Request.Form(variable)) > 0 Then
+            getRequestValue = Request.Form(variable)
+        Else
+            Exit Function
+        End If
         getRequestValue = requestValueToSafe(getRequestValue)
+    End Function
+
+    '''
+     '  载入默认配置
+     ''
+    Private Function loadDefaultConfigs()
+        If IsEmpty(appName) Then appName = Se.getConfigs("router/appName/Value")
+        If IsEmpty(controllerName) Then controllerName = Se.getConfigs("router/controllerName/Value")
+        If IsEmpty(actionName) Then actionName = Se.getConfigs("router/actionName/Value")
     End Function
 
     '''

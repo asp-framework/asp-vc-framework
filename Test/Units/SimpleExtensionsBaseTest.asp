@@ -81,12 +81,12 @@ Class SimpleExtensionsBaseTest
 
 		oTestResult.AssertEquals _
             "HelloWorld", _
-            SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("defaultAppName").Item("Value"), _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("appName").Item("Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
             "HelloWorld", _
-            SimpleExtensionsBaseClass.getConfigs("router/defaultAppName/Value"), _
+            SimpleExtensionsBaseClass.getConfigs("router/appName/Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _

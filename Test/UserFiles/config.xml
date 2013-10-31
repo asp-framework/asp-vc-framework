@@ -8,8 +8,8 @@
         <appsDir>Apps</appsDir>
     </system>
     <router type="get">
-        <defaultAppName>HelloWorld</defaultAppName>
-        <defaultControllerName>Index</defaultControllerName>
-        <defaultActionName>index</defaultActionName>
+        <appName>HelloWorld</appName>
+        <controllerName>Index</controllerName>
+        <actionName>index</actionName>
     </router>
 </seConfigs>

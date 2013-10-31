@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensions.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.30
+ ' @version 2013.10.31
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -66,7 +66,11 @@ Class SimpleExtensions
      ' @return dictionary|string <所有配置数据|配置项字符串>
      ''
     Public Property Get getConfigs(ByVal configPath)
-        Set getConfigs = getSimpleExtensionsBaseClass.getConfigs(configPath)
+        If IsNull(configPath) Then
+            Set getConfigs = getSimpleExtensionsBaseClass.getConfigs(configPath)
+        Else
+            getConfigs = getSimpleExtensionsBaseClass.getConfigs(configPath)
+        End If
     End Property
 
     '''

@@ -36,7 +36,10 @@ Class SimpleExtensionsTest
 	Public Sub loadFileTest(oTestResult)
         vActual = SE.loadFile("./UserFiles/loadFileTest.asp")
 
-		oTestResult.AssertEquals "读取文件测试", vActual, "读取文件信息异常"
+		oTestResult.AssertEquals _
+            "读取文件测试", _
+            vActual, _
+            "读取文件信息异常"
 	End Sub
 
     ' 包含并运行文件测试

@@ -54,7 +54,7 @@ Class UnitRunner
 <TITLE>ASPUnit Test Runner</TITLE>
 </HEAD>
 <FRAMESET ROWS="30, *" BORDER=0 FRAMEBORDER=0 FRAMESPACING=0>
-	<FRAME NAME="<% = FRAME_SELECTOR %>" src="<% = GetSelectorFrameSrc %>" marginwidth="0" marginheight="0" scrolling="auto" border=0 frameborder=0 noresize>
+	<FRAME NAME="<% = FRAME_SELECTOR %>" src="<% = GetSelectorFrameSrc & "&" & Request.QueryString %>" marginwidth="0" marginheight="0" scrolling="auto" border=0 frameborder=0 noresize>
 	<FRAME NAME="<% = FRAME_RESULTS %>" src="<% = GetResultsFrameSrc %>" marginwidth="0" marginheight="0" scrolling="auto" border=0 frameborder=0 noresize>
 </FRAMESET>
 <%
@@ -86,7 +86,7 @@ function ComboBoxUpdate(strSelectorFrameSrc, strSelectorFrameName)
 </SCRIPT>
 </HEAD>
 <BODY>
-		<FORM NAME="frmSelector" ACTION="<% = GetResultsFrameSrc %>" TARGET="<% = FRAME_RESULTS %>" METHOD=POST>
+		<FORM NAME="frmSelector" ACTION="<% = GetResultsFrameSrc & "&" & Mid(Request.QueryString, Len(FRAME_PARAMETER) + Len(FRAME_SELECTOR) + 3) %>" TARGET="<% = FRAME_RESULTS %>" METHOD=POST>
 			<TABLE WIDTH="80%">
 				<TR>
 					<TD ALIGN="right">测试:</TD>

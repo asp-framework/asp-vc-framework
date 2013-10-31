@@ -10,6 +10,15 @@
 <%
 Class SimpleExtensionsController
 
+    ' @var string <当前应用目录>
+    Private appDir
+
+    ' @var string <当前应用控制器目录>
+    Private controllersDir
+
+    ' @var string <当前控制器视图目录>
+    Private viewsDir
+
     ' @var string <控制器路径>
     Private controllerPath
 
@@ -30,9 +39,7 @@ Class SimpleExtensionsController
      ''
     Private Function setControllerPath()
         controllerPath = _
-            SE.getConfigs("system/appsDir/Value") _
-            & "/" & SE.module("Router").getAppName _
-            & "/" & "Controllers" _
+            getControllersDir _
             & "/" & SE.module("Router").getControllerName & "Controller" & ".asp"
     End Function
 
@@ -44,6 +51,34 @@ Class SimpleExtensionsController
         Set controller = Eval("New " & SE.module("Router").getControllerName & "Controller")
         Execute("controller." & SE.module("Router").getActionName & "Action()")
     End Function
+
+'###########################'
+'###########################'
+
+    '''
+     '  获取当前应用控制器目录
+     ''
+    Public Property Get getControllersDir()
+        If IsEmpty(controllersDir) Then controllersDir = getAppDir & "/" & "Controllers"
+        getControllersDir = controllersDir
+    End Property
+
+    '''
+     '  获取当前控制器视图目录
+     ''
+    Public Property Get getViewsDir()
+        If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/" & "Views"
+        getViewsDir = viewsDir
+    End Property
+
+    '''
+     '  获取当前应用目录
+     ''
+    Public Property Get getAppDir()
+        If IsEmpty(appDir) Then _
+            appDir = SE.getConfigs("system/appsDir/Value") & "/" & SE.module("Router").getAppName
+        getAppDir = appDir
+    End Property
 
 End Class
 %>

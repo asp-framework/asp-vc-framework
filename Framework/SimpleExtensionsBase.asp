@@ -306,7 +306,9 @@ Class SimpleExtensionsBase
         If Not modulesQueue.Exists(moduleName) Then
             Dim modulePath
             modulePath = getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
+            On Error Resume Next
             Me.include(modulePath)
+            If Err.Number = 1041 Then Err.Clear
             Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
         End If
     End Function

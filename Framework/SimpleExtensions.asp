@@ -50,9 +50,7 @@ Class SimpleExtensions
         Me.module("Router").run()
 
         ' 运行控制器
-
-        ' 渲染视图
-
+        Me.module("Controller").run()
     End Function
 
 '###########################'

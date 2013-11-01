@@ -22,6 +22,9 @@ Class SimpleExtensionsController
     ' @var string <控制器路径>
     Private controllerPath
 
+    ' @var string <当前控制器名称>
+    Private controllerName
+
 '###########################'
 '###########################'
 
@@ -48,7 +51,7 @@ Class SimpleExtensionsController
      ''
     Private Function runAction()
         Dim controller
-        Set controller = Eval("New " & SE.module("Router").getControllerName & "Controller")
+        Set controller = Eval("New " & getControllerName & "Controller")
         Execute("controller." & SE.module("Router").getActionName & "Action()")
     End Function
 
@@ -67,7 +70,7 @@ Class SimpleExtensionsController
      '  获取当前控制器视图目录
      ''
     Public Property Get getViewsDir()
-        If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/" & "Views"
+        If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/" & "Views" & "/" & getControllerName
         getViewsDir = viewsDir
     End Property
 
@@ -78,6 +81,15 @@ Class SimpleExtensionsController
         If IsEmpty(appDir) Then _
             appDir = SE.getConfigs("system/appsDir/Value") & "/" & SE.module("Router").getAppName
         getAppDir = appDir
+    End Property
+
+    '''
+     '  获取当前控制器名称
+     ''
+    Public Property Get getControllerName()
+        If IsEmpty(controllerName) Then _
+            controllerName = SE.module("Router").getControllerName
+        getControllerName = controllerName
     End Property
 
 End Class

@@ -59,6 +59,15 @@ Class SimpleExtensionsController
 '###########################'
 
     '''
+     '  获取视图路径
+     '
+     ' @param string viewName <视图名称>
+     ''
+    Public Property Get getViewPath(ByVal viewName)
+        getViewPath = getViewsDir & "/" & viewName & ".asp"
+    End Property
+
+    '''
      '  获取当前应用控制器目录
      ''
     Public Property Get getControllersDir()

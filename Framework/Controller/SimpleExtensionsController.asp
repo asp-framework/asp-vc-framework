@@ -59,6 +59,15 @@ Class SimpleExtensionsController
 '###########################'
 
     '''
+     '  获取布局路径
+     '
+     ' @param string layoutName <布局名称>
+     ''
+    Public Property Get getLayoutPath(ByVal layoutName)
+        getLayoutPath = getAppDir & "/Views/Layouts/" & layoutName & ".asp"
+    End Property
+
+    '''
      '  获取视图路径
      '
      ' @param string viewName <视图名称>
@@ -71,7 +80,7 @@ Class SimpleExtensionsController
      '  获取当前应用控制器目录
      ''
     Public Property Get getControllersDir()
-        If IsEmpty(controllersDir) Then controllersDir = getAppDir & "/" & "Controllers"
+        If IsEmpty(controllersDir) Then controllersDir = getAppDir & "/Controllers"
         getControllersDir = controllersDir
     End Property
 
@@ -79,7 +88,7 @@ Class SimpleExtensionsController
      '  获取当前控制器视图目录
      ''
     Public Property Get getViewsDir()
-        If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/" & "Views" & "/" & getControllerName
+        If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/Views/" & getControllerName
         getViewsDir = viewsDir
     End Property
 

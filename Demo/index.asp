@@ -14,6 +14,4 @@
 
 <!-- #include file = "../Framework/SimpleExtensions.asp" -->
 
-<%
-    SE.run("Configs/config.xml")
-%>
+<% SE.run("Configs/config.xml") %>

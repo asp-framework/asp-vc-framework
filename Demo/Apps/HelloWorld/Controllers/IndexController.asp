@@ -8,7 +8,11 @@
 Class IndexController
 
     Public Sub indexAction()
-        Response.Write("Hello World")
+        Call SE.module("Render").rendering( _
+            "index", _
+            "layout", _
+            Null _
+        )
     End Sub
 
 End Class

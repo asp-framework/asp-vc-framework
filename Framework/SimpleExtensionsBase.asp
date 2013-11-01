@@ -87,8 +87,8 @@ Class SimpleExtensionsBase
      '
      ' @return string <执行后的内容>
      ''
-    Public Function getIncludeHtml(ByVal filePath)
-        getIncludeHtml = pressModeInclude(filePath, 3)
+    Public Function getIncludeResult(ByVal filePath)
+        getIncludeResult = pressModeInclude(filePath, 3)
     End Function
 
     '''

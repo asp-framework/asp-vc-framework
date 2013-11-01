@@ -18,7 +18,7 @@ Class SimpleExtensionsTest
 		TestCaseNames = Array( _
             "loadFileTest", _
             "getIncludeCodeTest", _
-            "getIncludeHtmlTest", _
+            "getIncludeResultTest", _
             "moduleTest" _
         )
 	End Function
@@ -57,8 +57,8 @@ Class SimpleExtensionsTest
     End Sub
 
     ' 包含文件获取执行后的内容测试
-    Public Sub getIncludeHtmlTest(oTestResult)
-        vActual = SE.getIncludeHtml("./UserFiles/includeTest/includeTest1.asp")
+    Public Sub getIncludeResultTest(oTestResult)
+        vActual = SE.getIncludeResult("./UserFiles/includeTest/includeTest1.asp")
 
         oTestResult.AssertEquals _
             "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _

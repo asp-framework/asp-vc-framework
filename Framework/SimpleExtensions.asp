@@ -119,8 +119,8 @@ Class SimpleExtensions
      '
      ' @return string <执行后的内容>
      ''
-    Public Function getIncludeHtml(ByVal filePath)
-        getIncludeHtml = getSimpleExtensionsBaseClass.getIncludeHtml(filePath)
+    Public Function getIncludeResult(ByVal filePath)
+        getIncludeResult = getSimpleExtensionsBaseClass.getIncludeResult(filePath)
     End Function
 
     '''

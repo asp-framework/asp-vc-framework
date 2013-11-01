@@ -102,17 +102,17 @@ Class SimpleExtensionsBase
      ' >
      ''
     Private Function pressModeInclude(ByRef filePath, ByVal mode)
-        Dim code, html, content
+        Dim code, result, content
 
         content = aspIncludeTagProcess(filePath)
 
         ' 处理包含的内容
-        Call processIncludeContent(code, html, content, mode)
+        Call processIncludeContent(code, result, content, mode)
 
         Select Case mode
             Case 1 : ExecuteGlobal(code)
             Case 2 : pressModeInclude = code
-            Case 3 : Execute(code) : pressModeInclude = html
+            Case 3 : Execute(code) : pressModeInclude = result
         End Select
     End Function
 
@@ -120,11 +120,11 @@ Class SimpleExtensionsBase
      ' 处理包含的内容
      '
      ' @param code string <存放包含文件转译后的可运行代码>
-     ' @param html string <存放包含文件执行后的HTML代码>
+     ' @param result string <存放包含文件执行后的内容>
      ' @param content string <文件内容>
      ' @param int mode <详见"pressModeInclude"方法的"mode"参数>
      ''
-    Private Function processIncludeContent(ByRef code, ByRef html, ByRef content, ByVal mode)
+    Private Function processIncludeContent(ByRef code, ByRef result, ByRef content, ByVal mode)
         Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
         ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
         ' codeCache: 代码处理时的临时缓存
@@ -160,7 +160,7 @@ Class SimpleExtensionsBase
             codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
         Loop
 
-        If mode = 3 Then code = Replace(code, "Response.Write", "html=html&", 1, -1, 0)
+        If mode = 3 Then code = Replace(code, "Response.Write", "result=result&", 1, -1, 0)
     End Function
 
     '''

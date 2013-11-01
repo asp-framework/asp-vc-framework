@@ -189,7 +189,7 @@ Class SimpleExtensionsBase
             If codeStart = 4 Then Exit Do
 
             contentCache = Trim(Mid(content, codeStart, codeEnd - codeStart - 3))
-            If InStr(1,contentCache, "#include", 1) = 1 Then
+            If InStr(1, contentCache, "#include", 1) = 1 Then
                 contentCache = Trim(Mid(contentCache, 9))
                 filePath = Replace(filePath, "\", "/")
                 If InStr(1,contentCache, "file", 1) = 1 Then

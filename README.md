@@ -7,6 +7,6 @@ SE For ASP
 ----
 
     Demo/                   实例目录
-    Doc/                    文档目录
+    Docs/                   文档目录
     Framework/              核心框架目录
     Test/                   框架测试目录

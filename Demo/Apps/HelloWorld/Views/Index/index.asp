@@ -1,1 +1,1 @@
-<% Response.Write("Hello World") %>
+<%= content %>

@@ -34,15 +34,16 @@ Class SimpleExtensionsRender
             Next
         End If
 
+        ' 渲染视图
         If IsNull(layoutName) Then
             Execute(contentCode)
-        Else
-            Execute( _
-                replaceLayoutContentTag( _
-                    SE.getIncludeCode(SE.module("Controller").getLayoutPath(layoutName)) _
-                ) _
-            )
+            Exit Function
         End If
+
+        ' 渲染布局
+        Execute(replaceLayoutContentTag( _
+            SE.getIncludeCode(SE.module("Controller").getLayoutPath(layoutName)) _
+        ))
     End Function
 
     '''
@@ -55,12 +56,8 @@ Class SimpleExtensionsRender
         Dim tagStart, tagEnd
         tagStart = InStr(1, layoutCode, CONTENT_TAG_LEFT) + 5
         tagEnd = InStr(tagStart, layoutCode, CONTENT_TAG_RIGHT) + 4
-        If InStr(1, Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4)), "#content", 1) = 1 Then
-            layoutCode = _
-                Mid(layoutCode, 1, tagStart - 6) _
-                & vbCrLf & contentCode & vbCrLf _
-                & Mid(layoutCode, tagEnd)
-        End If
+        If InStr(1, Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4)), "#content", 1) = 1 Then _
+            layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentCode & Mid(layoutCode, tagEnd)
 
         replaceLayoutContentTag = layoutCode
     End Function

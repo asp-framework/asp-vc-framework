@@ -8,7 +8,7 @@
 %>
 
 <%
-Class SimpleExtensionsRender
+Class SimpleExtensionsView
 
     ' @var string <内容可执行代码>
     Private contentCode

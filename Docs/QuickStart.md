@@ -15,7 +15,7 @@
                 Layouts/                            布局目录
                     layout.asp                      "layout"布局
         Configs/                                    配置文件目录
-            configs.xml                             框架配置文件
+            config.xml                              框架配置文件
         index.asp                                   入口文件
     Framework/                                      核心框架目录
         Controller/                                 控制器模块
@@ -31,6 +31,8 @@
         SimpleExtensionsBase.asp                    SE框架基类
 
 ### 入口文件
+
+`Demo/index.asp`
 
 站点入口文件。导入 `SimpleExtensions` 类文件，然后调用 `run()` 函数启动框架。
 
@@ -57,6 +59,8 @@
 ~~~
 
 ### 配置文件
+
+`Demo/Comfigs/config.xml`
 
 配置文件为XML文件，配置项都包含在 `SEConfigs` 标签内。
 

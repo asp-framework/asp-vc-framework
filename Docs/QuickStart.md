@@ -146,3 +146,11 @@ End Class
 </body>
 </html>
 ~~~
+
+### 视图
+
+`Demo/Apps/HelloWorld/Views/Index/index.asp`
+
+~~~
+<%= content %>
+~~~

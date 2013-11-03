@@ -126,3 +126,23 @@ Class IndexController
 End Class
 %>
 ~~~
+
+### 布局
+
+`Demo/Apps/HelloWorld/Views/Layouts/layout.asp`
+
+布局文件中使用 `<% '<!-- #content -->' %>` 标签即可调用对应的视图内容。
+
+~~~
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+</head>
+<body>
+
+<% '<!-- #content -->' %>
+
+</body>
+</html>
+~~~

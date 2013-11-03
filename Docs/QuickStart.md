@@ -55,3 +55,31 @@
 
 <% SE.run("Configs/config.xml") %>
 ~~~
+
+### 配置文件
+
+配置文件为XML文件，配置项都包含在 `SEConfigs` 标签内。
+
+`SEConfigs` 标签为系统模块，`seDir`(框架目录) 、 `appsDir`(应用目录) 为必须配置项。
+
+`Router` 标签为路由器模块，`appName`(应用) 、 `controllerName`(控制器) 、 `actionName`(动作) 为必须设置的默认值。
+
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SEConfigs>
+    <System>
+        <development>True</development>
+        <seDir>../Framework</seDir>
+        <appsDir>Apps</appsDir>
+    </System>
+    <Router>
+        <appName>HelloWorld</appName>
+        <controllerName>Index</controllerName>
+        <actionName>index</actionName>
+    </Router>
+    <I18N>
+        <language>zh-cn</language>
+    </I18N>
+</SEConfigs>
+~~~

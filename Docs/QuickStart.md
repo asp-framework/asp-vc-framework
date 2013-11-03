@@ -87,3 +87,42 @@
     </I18N>
 </SEConfigs>
 ~~~
+
+### 控制器
+
+`Demo/Apps/HelloWorld/Controllers/IndexController.asp`
+
+控制器类以大驼峰方式命名，命名规则为 `控制器名` + `Controller` 后缀。
+
+控制器文件名与类名保持一致。
+
+下面的控制器调用 `Render`(视图渲染) 模块，调用了 `layout` 布局 和 `index` 视图，同时传入 `parameters` 参数。
+
+**(`Render`(视图渲染) 模块 `rendering` 方法 传入的 `parameters` 变量必须为 `Dictionary` 类型)**
+
+~~~
+<%
+'''
+ ' 首页
+ ''
+%>
+
+<%
+Class IndexController
+
+    Public Sub indexAction()
+        Dim parameters
+        Set parameters = Server.CreateObject("Scripting.Dictionary")
+        Call parameters.Add("title", "SE")
+        Call parameters.Add("content", "Hello World")
+
+        Call SE.module("Render").rendering( _
+            "index", _
+            "layout", _
+            parameters _
+        )
+    End Sub
+
+End Class
+%>
+~~~

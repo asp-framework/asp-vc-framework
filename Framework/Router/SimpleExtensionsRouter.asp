@@ -50,9 +50,9 @@ Class SimpleExtensionsRouter
      '  载入默认配置
      ''
     Private Function loadDefaultConfigs()
-        If IsEmpty(appName) Then appName = Se.getConfigs("router/appName/Value")
-        If IsEmpty(controllerName) Then controllerName = Se.getConfigs("router/controllerName/Value")
-        If IsEmpty(actionName) Then actionName = Se.getConfigs("router/actionName/Value")
+        If IsEmpty(appName) Then appName = Se.getConfigs("Router/appName/Value")
+        If IsEmpty(controllerName) Then controllerName = Se.getConfigs("Router/controllerName/Value")
+        If IsEmpty(actionName) Then actionName = Se.getConfigs("Router/actionName/Value")
     End Function
 
     '''

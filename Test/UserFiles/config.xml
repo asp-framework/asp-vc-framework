@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<seConfigs>
-    <system>
+<SEConfigs>
+    <System>
         <development>True</development>
-        <language>zh-cn</language>
         <seDir>../Framework</seDir>
         <appsDir>Apps</appsDir>
-    </system>
-    <router type="get">
+    </System>
+    <Router type="get">
         <appName>HelloWorld</appName>
         <controllerName>Index</controllerName>
         <actionName>index</actionName>
-    </router>
-</seConfigs>
+    </Router>
+    <I18N>
+        <language>zh-cn</language>
+    </I18N>
+</SEConfigs>

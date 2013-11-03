@@ -71,32 +71,32 @@ Class SimpleExtensionsBaseTest
     Public Sub loadConfigsTest(oTestResult)
         oTestResult.AssertEquals _
             "../Framework", _
-            SimpleExtensionsBaseClass.getConfigs(Null).Item("system").Item("seDir").Item("Value"), _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("System").Item("seDir").Item("Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
             "../Framework", _
-            SimpleExtensionsBaseClass.getConfigs("system/seDir/Value"), _
+            SimpleExtensionsBaseClass.getConfigs("System/seDir/Value"), _
             "载入配置文件异常"
 
 		oTestResult.AssertEquals _
             "HelloWorld", _
-            SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("appName").Item("Value"), _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("Router").Item("appName").Item("Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
             "HelloWorld", _
-            SimpleExtensionsBaseClass.getConfigs("router/appName/Value"), _
+            SimpleExtensionsBaseClass.getConfigs("Router/appName/Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
             "get", _
-            SimpleExtensionsBaseClass.getConfigs(Null).Item("router").Item("Attributes").Item("type"), _
+            SimpleExtensionsBaseClass.getConfigs(Null).Item("Router").Item("Attributes").Item("type"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
             "get", _
-            SimpleExtensionsBaseClass.getConfigs("router/Attributes/type"), _
+            SimpleExtensionsBaseClass.getConfigs("Router/Attributes/type"), _
             "载入配置文件异常"
     End Sub
 

@@ -97,7 +97,7 @@ Class SimpleExtensionsController
      ''
     Public Property Get getAppDir()
         If IsEmpty(appDir) Then _
-            appDir = SE.getConfigs("system/appsDir/Value") & "/" & SE.module("Router").getAppName
+            appDir = SE.getConfigs("System/appsDir/Value") & "/" & SE.module("Router").getAppName
         getAppDir = appDir
     End Property
 

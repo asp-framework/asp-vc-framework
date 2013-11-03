@@ -220,7 +220,7 @@ Class SimpleExtensionsBase
         Dim seConfigsDoc : Set seConfigsDoc = Server.CreateObject("Microsoft.XMLDOM")
         seConfigsDoc.Async = False
         seConfigsDoc.Load(configFilePath)
-        Set seConfigsDoc = seConfigsDoc.getElementsByTagName("seConfigs")(0)
+        Set seConfigsDoc = seConfigsDoc.getElementsByTagName("SEConfigs")(0)
         Call processConfigs(seConfigsDoc, getConfigs(Null))
         Set seConfigsDoc = Nothing
     End Function
@@ -283,7 +283,7 @@ Class SimpleExtensionsBase
      ' 获取框架根目录
      ''
     Public Property Get getSEDir()
-        getSEDir = getConfigs(Null).Item("system").Item("seDir").Item("Value")
+        getSEDir = getConfigs(Null).Item("System").Item("seDir").Item("Value")
     End Property
 
     '''

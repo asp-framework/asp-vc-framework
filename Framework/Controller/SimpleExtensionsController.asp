@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsController.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.31
+ ' @version 2013.11.1
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>

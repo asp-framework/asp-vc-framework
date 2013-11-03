@@ -116,7 +116,7 @@ Class IndexController
         Call parameters.Add("title", "SE")
         Call parameters.Add("content", "Hello World")
 
-        Call SE.module("Render").rendering( _
+        Call SE.module("Render").render( _
             "index", _
             "layout", _
             parameters _

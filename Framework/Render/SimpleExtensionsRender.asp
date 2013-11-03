@@ -23,7 +23,7 @@ Class SimpleExtensionsRender
      ' @param string|null layoutName <布局名称>
      ' @param dictionary|null &parameters <参数>
      ''
-    Public Function rendering(ByVal viewName, ByVal layoutName, ByRef parameters)
+    Public Function render(ByVal viewName, ByVal layoutName, ByRef parameters)
         contentCode = SE.getIncludeCode(SE.module("Controller").getViewPath(viewName))
 
         ' 定义传入变量

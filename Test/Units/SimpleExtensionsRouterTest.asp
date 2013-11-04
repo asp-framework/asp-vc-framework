@@ -26,7 +26,6 @@ Class SimpleExtensionsRouterTest
 
     Public Sub SetUp()
         Set SimpleExtensionsRouterClass = New SimpleExtensionsRouter
-        Set SE = New SimpleExtensions
         SE.getSimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
     End Sub
 

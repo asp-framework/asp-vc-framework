@@ -207,11 +207,9 @@ Class SimpleExtensionsBase
      ' @param string filePath <配置文件路径>
      ''
     Public Function loadConfigs(ByVal configFilePath)
-        configFilePath = Server.MapPath(configFilePath)
-
         Dim seConfigsDoc : Set seConfigsDoc = Server.CreateObject("Microsoft.XMLDOM")
         seConfigsDoc.Async = False
-        seConfigsDoc.Load(configFilePath)
+        seConfigsDoc.Load(Server.MapPath(configFilePath))
         Set seConfigsDoc = seConfigsDoc.getElementsByTagName("SEConfigs")(0)
 
         Set configs = Server.CreateObject("Scripting.Dictionary")
@@ -229,7 +227,7 @@ Class SimpleExtensionsBase
     Private Function processConfigs(ByRef xmlDoc, ByRef nowConfigs)
         If VarType(xmlDoc) <> 9 Then Exit Function
 
-        Dim config, nowNode, attributes
+        Dim nowNode, attributes
         For Each nowNode In xmlDoc.childNodes
             Select Case nowNode.nodeType
                 ' 元素节点

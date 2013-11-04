@@ -10,6 +10,9 @@
 <%
 Class SimpleExtensionsI18N
 
+    ' @var string <国际化目录>
+    Private i18nDir
+
     ' @var string <当前语言>
     Private localLanguage
 
@@ -23,6 +26,7 @@ Class SimpleExtensionsI18N
      ' 构造函数
      ''
     Private Sub Class_Initialize
+        i18nDir = SE.module("Controller").getAppDir & "/I18N"
         setLocalLanguage(SE.getConfigs("I18N/language/Value"))
     End Sub
 
@@ -30,7 +34,18 @@ Class SimpleExtensionsI18N
      '  翻译指定信息到当前语言
      ''
     Public Function t(ByVal keyPath)
-
+        If IsNull(keyPath) Then
+            Set t = tContent
+        Else
+            keyPath = Replace(keyPath, "\", "/")
+            Dim pathArray, nowPath, evalString
+            pathArray = Split(keyPath, "/")
+            evalString = "configs"
+            For Each nowPath In pathArray
+                If Len(nowPath) > 0 Then evalString = evalString & ".Item(""" & nowPath & """)"
+            Next
+            t = Eval(evalString)
+        End If
     End Function
 
 '###########################'
@@ -39,17 +54,55 @@ Class SimpleExtensionsI18N
     '''
      '  设置当前语言
      ''
-     Public Function setLocalLanguage(ByVal languageString)
-        loadTContent(languageString)
+     Public Function setLocalLanguage(ByVal language)
+        loadTContent(language)
         localLanguage = languageString
      End Function
 
     '''
      '  读取翻译内容
      ''
-     Private Function loadTContent(ByVal languageString)
+     Private Function loadTContent(ByVal language)
+        Dim i18nDoc : Set i18nDoc = Server.CreateObject("Microsoft.XMLDOM")
+        i18nDoc.Async = False
+        i18nDoc.Load(Server.MapPath(i18nDir & "/" & language & ".xml"))
+        Set i18nDoc = i18nDoc.getElementsByTagName("SEI18N")(0)
 
+        Set tContent = Server.CreateObject("Scripting.Dictionary")
+        Call processTContent(i18nDoc, tContent)
+
+        Set i18nDoc = Nothing
      End Function
+
+    '''
+     ' 处理载入的配置
+     '
+     ' @param object xmlDoc <XML数据>
+     ' @param dictionary nowTContent <配置项>
+     ''
+    Private Function processTContent(ByRef xmlDoc, ByRef nowTContent)
+        If VarType(xmlDoc) <> 9 Then Exit Function
+
+        Dim nowNode, attributes
+        For Each nowNode In xmlDoc.childNodes
+            Select Case nowNode.nodeType
+                ' 元素节点
+                Case 1
+                    Call nowTContent.Add(nowNode.NodeName, Server.CreateObject("Scripting.Dictionary"))
+
+                    ' 节点属性
+                    Call nowTContent.Item(nowNode.NodeName).Add("Attributes", Server.CreateObject("Scripting.Dictionary"))
+                    For Each attributes In nowNode.Attributes
+                        Call nowTContent.Item(nowNode.NodeName).Item("Attributes").Add(attributes.NodeName, attributes.NodeValue)
+                    Next
+
+                    Call processConfigs(nowNode, nowTContent.Item(nowNode.NodeName))
+                ' 文本
+                Case 3
+                    Call nowTContent.Add("Value", nowNode.Text)
+            End Select
+        Next
+    End Function
 
     '''
      '  获取当前语言

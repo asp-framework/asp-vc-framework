@@ -24,7 +24,6 @@ Class SimpleExtensionsTest
 	End Function
 
 	Public Sub SetUp()
-        Set SE = New SimpleExtensions
         SE.getSimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
 	End Sub
 

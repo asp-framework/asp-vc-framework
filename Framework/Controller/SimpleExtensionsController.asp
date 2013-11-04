@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsController.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.1
+ ' @version 2013.11.4
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -29,7 +29,7 @@ Class SimpleExtensionsController
 '###########################'
 
     '''
-     '  运行控制器
+     ' 运行控制器
      ''
     Public Function run()
         setControllerPath()
@@ -38,7 +38,7 @@ Class SimpleExtensionsController
     End Function
 
     '''
-     '  设置控制器路径
+     ' 设置控制器路径
      ''
     Private Function setControllerPath()
         controllerPath = _
@@ -47,7 +47,7 @@ Class SimpleExtensionsController
     End Function
 
     '''
-     '  运行动作
+     ' 运行动作
      ''
     Private Function runAction()
         Dim controller
@@ -59,25 +59,31 @@ Class SimpleExtensionsController
 '###########################'
 
     '''
-     '  获取布局路径
+     ' 获取布局路径
      '
      ' @param string layoutName <布局名称>
+     '
+     ' @return string <布局路径>
      ''
     Public Property Get getLayoutPath(ByVal layoutName)
         getLayoutPath = getAppDir & "/Views/Layouts/" & layoutName & ".asp"
     End Property
 
     '''
-     '  获取视图路径
+     ' 获取视图路径
      '
      ' @param string viewName <视图名称>
+     '
+     ' @return string <视图路径>
      ''
     Public Property Get getViewPath(ByVal viewName)
         getViewPath = getViewsDir & "/" & viewName & ".asp"
     End Property
 
     '''
-     '  获取当前应用控制器目录
+     ' 获取当前应用的控制器目录
+     '
+     ' @return string <当前应用的控制器目录>
      ''
     Public Property Get getControllersDir()
         If IsEmpty(controllersDir) Then controllersDir = getAppDir & "/Controllers"
@@ -85,7 +91,9 @@ Class SimpleExtensionsController
     End Property
 
     '''
-     '  获取当前控制器视图目录
+     ' 获取当前控制器的视图目录
+     '
+     ' @return string <当前控制器的视图目录>
      ''
     Public Property Get getViewsDir()
         If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/Views/" & getControllerName
@@ -93,7 +101,9 @@ Class SimpleExtensionsController
     End Property
 
     '''
-     '  获取当前应用目录
+     ' 获取当前应用目录
+     '
+     ' @return string <当前应用目录>
      ''
     Public Property Get getAppDir()
         If IsEmpty(appDir) Then _
@@ -102,7 +112,9 @@ Class SimpleExtensionsController
     End Property
 
     '''
-     '  获取当前控制器名称
+     ' 获取当前控制器名称
+     '
+     ' @return string <当前控制器名称>
      ''
     Public Property Get getControllerName()
         If IsEmpty(controllerName) Then _

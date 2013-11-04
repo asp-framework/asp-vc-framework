@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsI18N.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.3
+ ' @version 2013.11.4
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -31,7 +31,7 @@ Class SimpleExtensionsI18N
     End Sub
 
     '''
-     '  翻译指定信息到当前语言
+     ' 翻译指定信息到当前语言
      ''
     Public Function t(ByVal keyPath)
         If IsNull(keyPath) Then
@@ -52,7 +52,7 @@ Class SimpleExtensionsI18N
 '###########################'
 
     '''
-     '  设置当前语言
+     ' 设置当前语言
      ''
      Public Function setLocalLanguage(ByVal language)
         loadTContent(language)
@@ -60,7 +60,7 @@ Class SimpleExtensionsI18N
      End Function
 
     '''
-     '  读取翻译内容
+     ' 读取翻译内容
      ''
      Private Function loadTContent(ByVal language)
         Dim i18nDoc : Set i18nDoc = Server.CreateObject("Microsoft.XMLDOM")
@@ -105,7 +105,9 @@ Class SimpleExtensionsI18N
     End Function
 
     '''
-     '  获取当前语言
+     ' 获取当前语言
+     '
+     ' @return string <当前语言>
      ''
     Public Property Get getLocalLanguage()
         getLocalLanguage = localLanguage

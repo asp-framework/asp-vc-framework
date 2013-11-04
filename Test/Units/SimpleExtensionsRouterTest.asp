@@ -12,8 +12,6 @@
 <%
 Class SimpleExtensionsRouterTest
 
-    Private SimpleExtensionsRouterClass
-
     Private vActual
 
     Public Function TestCaseNames()
@@ -25,9 +23,8 @@ Class SimpleExtensionsRouterTest
     End Function
 
     Public Sub SetUp()
-        Set SimpleExtensionsRouterClass = New SimpleExtensionsRouter
         SE.getSimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
-        SimpleExtensionsRouterClass.run()
+        SE.module("Router").run()
     End Sub
 
     Public Sub TearDown()
@@ -36,7 +33,7 @@ Class SimpleExtensionsRouterTest
 
     ' 获取应用名称测试
     Public Sub getAppNameTest(oTestResult)
-        vActual = SimpleExtensionsRouterClass.getAppName
+        vActual = SE.module("Router").getAppName
 
         oTestResult.AssertEquals _
             "Test", _
@@ -46,7 +43,7 @@ Class SimpleExtensionsRouterTest
 
     ' 获取应用名称测试
     Public Sub getControllerNameTest(oTestResult)
-        vActual = SimpleExtensionsRouterClass.getControllerName
+        vActual = SE.module("Router").getControllerName
 
         oTestResult.AssertEquals _
             "Index", _
@@ -56,7 +53,7 @@ Class SimpleExtensionsRouterTest
 
     ' 获取应用名称测试
     Public Sub getActionNameTest(oTestResult)
-        vActual = SimpleExtensionsRouterClass.getActionName
+        vActual = SE.module("Router").getActionName
 
         oTestResult.AssertEquals _
             "index", _

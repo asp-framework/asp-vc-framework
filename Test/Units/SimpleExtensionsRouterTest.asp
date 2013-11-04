@@ -26,7 +26,8 @@ Class SimpleExtensionsRouterTest
 
     Public Sub SetUp()
         Set SimpleExtensionsRouterClass = New SimpleExtensionsRouter
-        SE.getSimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
+        SE.getSimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
+        SimpleExtensionsRouterClass.run()
     End Sub
 
     Public Sub TearDown()
@@ -35,18 +36,16 @@ Class SimpleExtensionsRouterTest
 
     ' 获取应用名称测试
     Public Sub getAppNameTest(oTestResult)
-        SimpleExtensionsRouterClass.run()
         vActual = SimpleExtensionsRouterClass.getAppName
 
         oTestResult.AssertEquals _
-            "HelloWorld", _
+            "AppTest", _
             vActual, _
             "读取文件信息异常"
     End Sub
 
     ' 获取应用名称测试
     Public Sub getControllerNameTest(oTestResult)
-        SimpleExtensionsRouterClass.run()
         vActual = SimpleExtensionsRouterClass.getControllerName
 
         oTestResult.AssertEquals _
@@ -57,7 +56,6 @@ Class SimpleExtensionsRouterTest
 
     ' 获取应用名称测试
     Public Sub getActionNameTest(oTestResult)
-        SimpleExtensionsRouterClass.run()
         vActual = SimpleExtensionsRouterClass.getActionName
 
         oTestResult.AssertEquals _

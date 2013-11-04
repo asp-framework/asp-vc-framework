@@ -24,7 +24,7 @@ Class SimpleExtensionsTest
 	End Function
 
 	Public Sub SetUp()
-        SE.getSimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
+        SE.getSimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
 	End Sub
 
 	Public Sub TearDown()
@@ -33,7 +33,7 @@ Class SimpleExtensionsTest
 
     ' 读取文件测试
 	Public Sub loadFileTest(oTestResult)
-        vActual = SE.loadFile("./UserFiles/loadFileTest.asp")
+        vActual = SE.loadFile("./ProjectTest/IncludeTest/loadFileTest.asp")
 
 		oTestResult.AssertEquals _
             "读取文件测试", _
@@ -43,7 +43,7 @@ Class SimpleExtensionsTest
 
     ' 包含并运行文件测试
     Public Sub getIncludeCodeTest(oTestResult)
-        vActual = SE.getIncludeCode("./UserFiles/includeTest/includeTest1.asp")
+        vActual = SE.getIncludeCode("./ProjectTest/includeTest/IncludeTest/includeTest1.asp")
 
 		oTestResult.AssertEquals _
             "Response.Write(""开始文件导入测试<br/>"" & vbCrLf & """")" & vbCrLf _
@@ -57,7 +57,7 @@ Class SimpleExtensionsTest
 
     ' 包含文件获取执行后的内容测试
     Public Sub getIncludeResultTest(oTestResult)
-        vActual = SE.getIncludeResult("./UserFiles/includeTest/includeTest1.asp")
+        vActual = SE.getIncludeResult("./ProjectTest/IncludeTest/IncludeTest/includeTest1.asp")
 
         oTestResult.AssertEquals _
             "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _

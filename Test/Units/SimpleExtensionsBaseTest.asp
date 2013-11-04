@@ -26,7 +26,7 @@ Class SimpleExtensionsBaseTest
 
 	Public Sub SetUp()
 		Set SimpleExtensionsBaseClass = New SimpleExtensionsBase
-        SimpleExtensionsBaseClass.loadConfigs("./UserFiles/config.xml")
+        SimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
 	End Sub
 
 	Public Sub TearDown()
@@ -35,7 +35,7 @@ Class SimpleExtensionsBaseTest
 
     ' 读取文件测试
 	Public Sub loadFileTest(oTestResult)
-        vActual = SimpleExtensionsBaseClass.loadFile("./UserFiles/loadFileTest.asp")
+        vActual = SimpleExtensionsBaseClass.loadFile("./ProjectTest/IncludeTest/loadFileTest.asp")
 
 		oTestResult.AssertEquals _
             "读取文件测试", _
@@ -45,7 +45,7 @@ Class SimpleExtensionsBaseTest
 
     ' 包含文件获取可执行代码测试
     Public Sub getIncludeCodeTest(oTestResult)
-        vActual = SimpleExtensionsBaseClass.getIncludeCode("./UserFiles/includeTest/includeTest1.asp")
+        vActual = SimpleExtensionsBaseClass.getIncludeCode("./ProjectTest/IncludeTest/IncludeTest/includeTest1.asp")
 
 		oTestResult.AssertEquals _
             "Response.Write(""开始文件导入测试<br/>"" & vbCrLf & """")" & vbCrLf _
@@ -59,7 +59,7 @@ Class SimpleExtensionsBaseTest
 
     ' 包含文件获取执行后的内容测试
     Public Sub getIncludeResultTest(oTestResult)
-        vActual = SimpleExtensionsBaseClass.getIncludeResult("./UserFiles/includeTest/includeTest1.asp")
+        vActual = SimpleExtensionsBaseClass.getIncludeResult("./ProjectTest/IncludeTest/IncludeTest/includeTest1.asp")
 
         oTestResult.AssertEquals _
             "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _
@@ -80,12 +80,12 @@ Class SimpleExtensionsBaseTest
             "载入配置文件异常"
 
 		oTestResult.AssertEquals _
-            "HelloWorld", _
+            "AppTest", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("Router").Item("appName").Item("Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
-            "HelloWorld", _
+            "AppTest", _
             SimpleExtensionsBaseClass.getConfigs("Router/appName/Value"), _
             "载入配置文件异常"
 

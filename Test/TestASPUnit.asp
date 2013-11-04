@@ -25,7 +25,7 @@ Option Explicit
 	Set oRunner = New UnitRunner
 
     ' 实例化需要测试的类
-	oRunner.AddTestContainer New SimpleExtensionsBaseTest
+    oRunner.AddTestContainer New SimpleExtensionsBaseTest
     oRunner.AddTestContainer New SimpleExtensionsTest
     oRunner.AddTestContainer New SimpleExtensionsRouterTest
 

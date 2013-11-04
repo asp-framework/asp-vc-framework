@@ -35,7 +35,7 @@ Class SimpleExtensionsI18NTest
         oTestResult.AssertEquals _
             "zh-cn", _
             vActual, _
-            "读取文件信息异常"
+            "本地语言设置获取异常"
 
         SE.module("I18N").setLocalLanguage("en-us")
         vActual = SE.module("I18N").getLocalLanguage
@@ -43,7 +43,7 @@ Class SimpleExtensionsI18NTest
         oTestResult.AssertEquals _
             "en-us", _
             vActual, _
-            "读取文件信息异常"
+            "本地语言设置获取异常"
     End Sub
 
     ' 翻译测试
@@ -54,7 +54,7 @@ Class SimpleExtensionsI18NTest
         oTestResult.AssertEquals _
             "你好～！", _
             vActual, _
-            "读取文件信息异常"
+            "翻译异常"
 
         SE.module("I18N").setLocalLanguage("en-us")
         vActual = SE.module("I18N").t("Body/content/Value")
@@ -62,7 +62,7 @@ Class SimpleExtensionsI18NTest
         oTestResult.AssertEquals _
             "Hello World~!", _
             vActual, _
-            "读取文件信息异常"
+            "翻译异常"
     End Sub
 
 End Class

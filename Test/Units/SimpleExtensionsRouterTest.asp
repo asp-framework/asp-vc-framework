@@ -38,27 +38,27 @@ Class SimpleExtensionsRouterTest
         oTestResult.AssertEquals _
             "Test", _
             vActual, _
-            "读取文件信息异常"
+            "获取应用名称异常"
     End Sub
 
-    ' 获取应用名称测试
+    ' 获取控制器名称测试
     Public Sub getControllerNameTest(oTestResult)
         vActual = SE.module("Router").getControllerName
 
         oTestResult.AssertEquals _
             "Index", _
             vActual, _
-            "读取文件信息异常"
+            "获取控制器名称异常"
     End Sub
 
-    ' 获取应用名称测试
+    ' 获取动作名称测试
     Public Sub getActionNameTest(oTestResult)
         vActual = SE.module("Router").getActionName
 
         oTestResult.AssertEquals _
             "index", _
             vActual, _
-            "读取文件信息异常"
+            "获取动作名称异常"
     End Sub
 
 End Class

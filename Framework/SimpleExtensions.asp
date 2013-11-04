@@ -21,18 +21,13 @@ Class SimpleExtensions
 
     '''
      ' 获取SE框架基类
+     '
+     ' @return class <SE基类>
      ''
     Public Property Get getSimpleExtensionsBaseClass()
         If VarType(simpleExtensionsBaseClass) <> 9 Then Set simpleExtensionsBaseClass = New SimpleExtensionsBase
         Set getSimpleExtensionsBaseClass = simpleExtensionsBaseClass
     End Property
-
-    '''
-     ' 构造函数
-     ''
-    Private Sub Class_Initialize
-
-    End Sub
 
 '###########################'
 '###########################'
@@ -73,6 +68,8 @@ Class SimpleExtensions
 
     '''
      ' 获取框架根目录
+     '
+     ' @return string <框架根目录>
      ''
     Public Property Get getSEDir()
         getSEDir = getSimpleExtensionsBaseClass.getSEDir
@@ -127,6 +124,8 @@ Class SimpleExtensions
      ' 调用模块
      '
      ' @param string moduleName <模块名称>
+     '
+     ' @return class <模块类>
      ''
     Public Function module(ByVal moduleName)
         Set module = getSimpleExtensionsBaseClass.module(moduleName)

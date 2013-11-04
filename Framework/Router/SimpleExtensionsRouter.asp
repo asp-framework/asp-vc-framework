@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRouter.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.31
+ ' @version 2013.11.4
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -23,7 +23,7 @@ Class SimpleExtensionsRouter
 '###########################'
 
     '''
-     '  运行路由
+     ' 运行路由
      ''
     Public Function run()
         appName = getRequestValue("App")
@@ -33,7 +33,11 @@ Class SimpleExtensionsRouter
     End Function
 
     '''
-     '  获取传入参数
+     ' 获取传入参数
+     '
+     ' @param string variable <传入参数>
+     '
+     ' @return string <传入参数>
      ''
     Private Function getRequestValue(ByVal variable)
         If Len(Request.QueryString(variable)) > 0 Then
@@ -47,16 +51,11 @@ Class SimpleExtensionsRouter
     End Function
 
     '''
-     '  载入默认配置
-     ''
-    Private Function loadDefaultConfigs()
-        If IsEmpty(appName) Then appName = Se.getConfigs("Router/appName/Value")
-        If IsEmpty(controllerName) Then controllerName = Se.getConfigs("Router/controllerName/Value")
-        If IsEmpty(actionName) Then actionName = Se.getConfigs("Router/actionName/Value")
-    End Function
-
-    '''
-     '  传入参数安全处理
+     ' 传入参数安全处理
+     '
+     ' @param string toSafeValue <传入参数>
+     '
+     ' @return string <处理后的安全参数>
      ''
     Private Function requestValueToSafe(ByVal toSafeValue)
         toSafeValue = Replace(toSafeValue, Space(1), Space(0))
@@ -68,11 +67,22 @@ Class SimpleExtensionsRouter
         requestValueToSafe = toSafeValue
     End Function
 
+    '''
+     ' 载入默认配置
+     ''
+    Private Function loadDefaultConfigs()
+        If IsEmpty(appName) Then appName = Se.getConfigs("Router/appName/Value")
+        If IsEmpty(controllerName) Then controllerName = Se.getConfigs("Router/controllerName/Value")
+        If IsEmpty(actionName) Then actionName = Se.getConfigs("Router/actionName/Value")
+    End Function
+
 '###########################'
 '###########################'
 
     '''
      ' 获取应用名称
+     '
+     ' @return string <应用名称>
      ''
     Public Property Get getAppName()
         getAppName = appName
@@ -80,6 +90,8 @@ Class SimpleExtensionsRouter
 
     '''
      ' 获取控制器名称
+     '
+     ' @return string <控制器名称>
      ''
     Public Property Get getControllerName()
         getControllerName = controllerName
@@ -87,6 +99,8 @@ Class SimpleExtensionsRouter
 
     '''
      ' 获取动作名称
+     '
+     ' @return string <动作名称>
      ''
     Public Property Get getActionName()
         getActionName = actionName

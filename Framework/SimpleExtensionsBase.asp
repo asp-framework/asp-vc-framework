@@ -222,7 +222,10 @@ Class SimpleExtensionsBase
         seConfigsDoc.Async = False
         seConfigsDoc.Load(configFilePath)
         Set seConfigsDoc = seConfigsDoc.getElementsByTagName("SEConfigs")(0)
-        Call processConfigs(seConfigsDoc, getConfigs(Null))
+
+        Set configs = Server.CreateObject("Scripting.Dictionary")
+        Call processConfigs(seConfigsDoc, configs)
+
         Set seConfigsDoc = Nothing
     End Function
 
@@ -234,8 +237,6 @@ Class SimpleExtensionsBase
      ' @return dictionary|string <所有配置数据|配置项字符串>
      ''
     Public Property Get getConfigs(ByVal configPath)
-        If VarType(configs) <> 9 Then Set configs = Server.CreateObject("Scripting.Dictionary")
-
         If IsNull(configPath) Then
             Set getConfigs = configs
         Else

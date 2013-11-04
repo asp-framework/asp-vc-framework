@@ -11,7 +11,7 @@
 Class SimpleExtensionsI18N
 
     ' @var string <当前语言>
-    Private language
+    Private localLanguage
 
     ' @var dictionary <翻译的内容>
     Private tContent
@@ -20,12 +20,18 @@ Class SimpleExtensionsI18N
 '###########################'
 
     '''
+     ' 构造函数
+     ''
+    Private Sub Class_Initialize
+        setLocalLanguage(SE.getConfigs("I18N/language/Value"))
+    End Sub
+
+    '''
      '  翻译指定信息到当前语言
      ''
     Public Function t(ByVal keyPath)
 
     End Function
-
 
 '###########################'
 '###########################'
@@ -33,9 +39,9 @@ Class SimpleExtensionsI18N
     '''
      '  设置当前语言
      ''
-     Public Function setLanguage(ByVal languageString)
+     Public Function setLocalLanguage(ByVal languageString)
         loadTContent(languageString)
-        language = languageString
+        localLanguage = languageString
      End Function
 
     '''
@@ -48,7 +54,7 @@ Class SimpleExtensionsI18N
     '''
      '  获取当前语言
      ''
-    Public Property Get getLanguage()
+    Public Property Get getLocalLanguage()
         getLanguage = language
     End Property
 

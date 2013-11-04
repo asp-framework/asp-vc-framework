@@ -23,16 +23,6 @@ Class SimpleExtensionsBase
 '###########################'
 
     '''
-     ' 构造函数
-     ''
-    Private Sub Class_Initialize
-
-    End Sub
-
-'###########################'
-'###########################'
-
-    '''
      ' 读取文件
      '
      ' @param string filePath <文件路径>
@@ -130,6 +120,7 @@ Class SimpleExtensionsBase
     Private Function processIncludeContent(ByRef code, ByRef result, ByRef content)
         Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
         ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
+
         ' codeCache: 代码处理时的临时缓存
         ' codeEnd: 标签内容结束位置
         ' codeStart: 标签内容开始位置
@@ -230,28 +221,6 @@ Class SimpleExtensionsBase
     End Function
 
     '''
-     ' 获取配置项
-     '
-     ' @param null|string configPath <配置路径,例:"system/seDir/Value">
-     '
-     ' @return dictionary|string <所有配置数据|配置项字符串>
-     ''
-    Public Property Get getConfigs(ByVal configPath)
-        If IsNull(configPath) Then
-            Set getConfigs = configs
-        Else
-            configPath = Replace(configPath, "\", "/")
-            Dim pathArray, nowPath, evalString
-            pathArray = Split(configPath, "/")
-            evalString = "configs"
-            For Each nowPath In pathArray
-                If Len(nowPath) > 0 Then evalString = evalString & ".Item(""" & nowPath & """)"
-            Next
-            getConfigs = Eval(evalString)
-        End If
-    End Property
-
-    '''
      ' 处理载入的配置
      '
      ' @param object xmlDoc <XML数据>
@@ -280,6 +249,28 @@ Class SimpleExtensionsBase
             End Select
         Next
     End Function
+
+    '''
+     ' 获取配置项
+     '
+     ' @param null|string configPath <配置路径,例:"system/seDir/Value">
+     '
+     ' @return dictionary|string <所有配置数据|配置项字符串>
+     ''
+    Public Property Get getConfigs(ByVal configPath)
+        If IsNull(configPath) Then
+            Set getConfigs = configs
+        Else
+            configPath = Replace(configPath, "\", "/")
+            Dim pathArray, nowPath, evalString
+            pathArray = Split(configPath, "/")
+            evalString = "configs"
+            For Each nowPath In pathArray
+                If Len(nowPath) > 0 Then evalString = evalString & ".Item(""" & nowPath & """)"
+            Next
+            getConfigs = Eval(evalString)
+        End If
+    End Property
 
     '''
      ' 获取框架根目录

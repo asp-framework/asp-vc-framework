@@ -39,7 +39,7 @@ Class SimpleExtensionsRouterTest
         vActual = SimpleExtensionsRouterClass.getAppName
 
         oTestResult.AssertEquals _
-            "AppTest", _
+            "Test", _
             vActual, _
             "读取文件信息异常"
     End Sub

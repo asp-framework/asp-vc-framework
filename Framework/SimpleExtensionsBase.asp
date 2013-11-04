@@ -210,7 +210,7 @@ Class SimpleExtensionsBase
         Dim seConfigsDoc : Set seConfigsDoc = Server.CreateObject("Microsoft.XMLDOM")
         seConfigsDoc.Async = False
         seConfigsDoc.Load(Server.MapPath(configFilePath))
-        Set seConfigsDoc = seConfigsDoc.getElementsByTagName("SEConfigs")(0)
+        Set seConfigsDoc = seConfigsDoc.GetElementsByTagName("SEConfigs")(0)
 
         Set configs = Server.CreateObject("Scripting.Dictionary")
         Call processConfigs(seConfigsDoc, configs)
@@ -228,7 +228,7 @@ Class SimpleExtensionsBase
         If VarType(xmlDoc) <> 9 Then Exit Function
 
         Dim nowNode, attributes
-        For Each nowNode In xmlDoc.childNodes
+        For Each nowNode In xmlDoc.ChildNodes
             Select Case nowNode.nodeType
                 ' 元素节点
                 Case 1

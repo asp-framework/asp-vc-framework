@@ -4,10 +4,10 @@
     <System>
         <development>True</development>
         <seDir>../Framework</seDir>
-        <appsDir>TestProject/AppTest</appsDir>
+        <appsDir>ProjectTest/AppTest</appsDir>
     </System>
     <Router type="get">
-        <appName>AppTest</appName>
+        <appName>Test</appName>
         <controllerName>Index</controllerName>
         <actionName>index</actionName>
     </Router>

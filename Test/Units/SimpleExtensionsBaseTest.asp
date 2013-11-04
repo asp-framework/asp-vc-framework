@@ -80,12 +80,12 @@ Class SimpleExtensionsBaseTest
             "载入配置文件异常"
 
 		oTestResult.AssertEquals _
-            "AppTest", _
+            "Test", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("Router").Item("appName").Item("Value"), _
             "载入配置文件异常"
 
         oTestResult.AssertEquals _
-            "AppTest", _
+            "Test", _
             SimpleExtensionsBaseClass.getConfigs("Router/appName/Value"), _
             "载入配置文件异常"
 

@@ -13,7 +13,7 @@ Class SimpleExtensionsI18N
     ' @var string <国际化目录>
     Private i18nDir
 
-    ' @var string <当前语言>
+    ' @var string <本地语言>
     Private localLanguage
 
     ' @var dictionary <翻译的内容>
@@ -40,7 +40,7 @@ Class SimpleExtensionsI18N
             keyPath = Replace(keyPath, "\", "/")
             Dim pathArray, nowPath, evalString
             pathArray = Split(keyPath, "/")
-            evalString = "configs"
+            evalString = "tContent"
             For Each nowPath In pathArray
                 If Len(nowPath) > 0 Then evalString = evalString & ".Item(""" & nowPath & """)"
             Next
@@ -56,7 +56,7 @@ Class SimpleExtensionsI18N
      ''
      Public Function setLocalLanguage(ByVal language)
         loadTContent(language)
-        localLanguage = languageString
+        localLanguage = language
      End Function
 
     '''
@@ -66,7 +66,7 @@ Class SimpleExtensionsI18N
         Dim i18nDoc : Set i18nDoc = Server.CreateObject("Microsoft.XMLDOM")
         i18nDoc.Async = False
         i18nDoc.Load(Server.MapPath(i18nDir & "/" & language & ".xml"))
-        Set i18nDoc = i18nDoc.getElementsByTagName("SEI18N")(0)
+        Set i18nDoc = i18nDoc.GetElementsByTagName("SEI18N")(0)
 
         Set tContent = Server.CreateObject("Scripting.Dictionary")
         Call processTContent(i18nDoc, tContent)
@@ -84,7 +84,7 @@ Class SimpleExtensionsI18N
         If VarType(xmlDoc) <> 9 Then Exit Function
 
         Dim nowNode, attributes
-        For Each nowNode In xmlDoc.childNodes
+        For Each nowNode In xmlDoc.ChildNodes
             Select Case nowNode.nodeType
                 ' 元素节点
                 Case 1
@@ -96,7 +96,7 @@ Class SimpleExtensionsI18N
                         Call nowTContent.Item(nowNode.NodeName).Item("Attributes").Add(attributes.NodeName, attributes.NodeValue)
                     Next
 
-                    Call processConfigs(nowNode, nowTContent.Item(nowNode.NodeName))
+                    Call processTContent(nowNode, nowTContent.Item(nowNode.NodeName))
                 ' 文本
                 Case 3
                     Call nowTContent.Add("Value", nowNode.Text)
@@ -108,7 +108,7 @@ Class SimpleExtensionsI18N
      '  获取当前语言
      ''
     Public Property Get getLocalLanguage()
-        getLanguage = language
+        getLocalLanguage = localLanguage
     End Property
 
 End Class

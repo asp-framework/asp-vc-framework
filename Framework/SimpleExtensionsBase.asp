@@ -312,10 +312,11 @@ Class SimpleExtensionsBase
      '
      ' @param string moduleName <模块名称>
      '
-     ' @return class|Nothing <实例化的模块>
+     ' @return class|empty <实例化的模块>
      ''
     Private Property Get getModule(ByVal moduleName)
-        Set getModule = modulesQueue.Item(moduleName)
+        getModule = Empty
+        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
     End Property
 
 End Class

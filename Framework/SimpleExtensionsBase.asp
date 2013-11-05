@@ -296,15 +296,17 @@ Class SimpleExtensionsBase
      ''
     Private Function addModule(ByVal moduleName)
         If VarType(modulesQueue) <> 9 Then Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
-        If Not modulesQueue.Exists(moduleName) Then
-            Dim modulePath
-            modulePath = getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
-            On Error Resume Next
-            Me.include(modulePath)
-            ' 类重命名时的处理
-            If Err.Number = 1041 Then Err.Clear
-            Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
-        End If
+
+        If modulesQueue.Exists(moduleName) Then Exit Function
+
+        Dim modulePath
+        modulePath = getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
+        On Error Resume Next
+        Me.include(modulePath)
+        ' 类重命名时的处理
+        If Err.Number = 1041 Then Err.Clear
+        Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
+
     End Function
 
     '''
@@ -312,10 +314,11 @@ Class SimpleExtensionsBase
      '
      ' @param string moduleName <模块名称>
      '
-     ' @return class|Nothing <实例化的模块>
+     ' @return class|nothing <实例化的模块>
      ''
     Private Property Get getModule(ByVal moduleName)
-        Set getModule = modulesQueue.Item(moduleName)
+        Set getModule = Nothing
+        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
     End Property
 
 End Class

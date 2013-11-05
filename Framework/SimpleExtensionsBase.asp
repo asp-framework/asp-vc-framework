@@ -283,6 +283,8 @@ Class SimpleExtensionsBase
      ' 调用模块
      '
      ' @param string moduleName <模块名称>
+     '
+     ' @return class|nothing <实例化的模块>
      ''
     Public Function module(ByVal moduleName)
         addModule(moduleName)
@@ -306,7 +308,6 @@ Class SimpleExtensionsBase
         ' 类重命名时的处理
         If Err.Number = 1041 Then Err.Clear
         Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
-
     End Function
 
     '''

@@ -253,7 +253,7 @@ Class SimpleExtensionsBase
      '
      ' @param null|string configPath <配置路径,例:"system/seDir/Value">
      '
-     ' @return dictionary|string|null <所有配置数据|配置项字符串|无数据>
+     ' @return dictionary|string|empty <所有配置数据|配置项字符串|无数据>
      ''
     Public Property Get getConfigs(ByVal configPath)
         If IsNull(configPath) Then
@@ -268,7 +268,7 @@ Class SimpleExtensionsBase
             Next
             On Error Resume Next
             getConfigs = Eval(evalString)
-            If Err.Number = 424 Then Err.Clear : getConfigs = Null
+            If Err.Number = 424 Then Err.Clear : getConfigs = Empty
         End If
     End Property
 

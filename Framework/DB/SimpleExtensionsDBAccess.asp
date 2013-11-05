@@ -60,13 +60,13 @@ Class SimpleExtensionsDBAccess
     '''
      ' 执行SQL操作
      ''
-    Public Function sqlExecute(ByVal sqlString)
+    Public Function executeSql(ByVal sqlString)
         If SE.module("DB").getDBConnection.State <> objectStateEnum.Item("adStateOpen") Then
-            Set sqlExecute = Nothing
+            Set executeSql = Nothing
             Exit Function
         End If
 
-        Set sqlExecute = SE.module("DB").getDBConnection.Execute(sqlString)
+        Set executeSql = SE.module("DB").getDBConnection.Execute(sqlString)
     End Function
 
 End Class

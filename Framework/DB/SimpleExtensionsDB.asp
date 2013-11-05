@@ -35,6 +35,9 @@ Class SimpleExtensionsDB
     ' @var class <数据库解析类>
     Private dbParseClassByType
 
+    ' @var dictionary <命令信息>
+    Private command
+
 '###########################'
 '###########################'
 
@@ -66,10 +69,31 @@ Class SimpleExtensionsDB
     End Function
 
     '''
+     ' 创建命令
+     ''
+    Public Function createCommand(ByVal sqlString)
+
+    End Function
+
+    '''
+     ' 绑定参数
+     ''
+    Public Function bindParam(ByVal name, ByVal value, ByVal dataType)
+
+    End Function
+
+    '''
+     ' 执行命令
+     ''
+    Public Function executeCommand()
+
+    End Function
+
+    '''
      ' 执行SQL操作
      ''
-    Public Function sqlExecute(ByVal sqlString)
-        Set sqlExecute = Eval("dbParseClassByType." & "sqlExecute(sqlString)" )
+    Public Function executeSql(ByVal sqlString)
+        Set executeSql = Eval("dbParseClassByType." & "executeSql(sqlString)" )
     End Function
 
 '###########################'

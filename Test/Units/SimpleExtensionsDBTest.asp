@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsDBTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.1
+ ' @version 2013.11.5
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -53,7 +53,7 @@ Class SimpleExtensionsDBTest
     ' 执行SQL操作测试
     Public Sub sqlExecuteTest(oTestResult)
         SE.module("DB").open()
-        Set vActual = SE.module("DB").sqlExecute("SELECT userName FROM UserLists")
+        Set vActual = SE.module("DB").executeSql("SELECT userName FROM UserLists")
 
         oTestResult.AssertEquals _
             "Admin", _

@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsDBAccess.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.5
+ ' @version 2013.11.6
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -44,8 +44,8 @@ Class SimpleExtensionsDBAccess
         Call SE.module("DB").getDBConnection.Open( _
             "Provider=Microsoft.Jet.OLEDB.4.0;" & _
             "Data Source=" & SE.module("DB").getDBSource & ";" & _
-            "User Id=;" & _
-            "Password=;" _
+            "User Id=" & SE.module("DB").getDBUserName & ";" & _
+            "Password=" & SE.module("DB").getDBPassword & ";" _
         )
     End Function
 
@@ -59,6 +59,8 @@ Class SimpleExtensionsDBAccess
 
     '''
      ' 执行SQL操作
+     '
+     ' @return recordset <数据集>
      ''
     Public Function executeSql(ByVal sqlString)
         If SE.module("DB").getDBConnection.State <> objectStateEnum.Item("adStateOpen") Then

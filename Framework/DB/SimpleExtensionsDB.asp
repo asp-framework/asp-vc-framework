@@ -2,12 +2,13 @@
 '''
  ' SimpleExtensionsDB.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.5
+ ' @version 2013.11.6
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
 
 <!-- 导入支持文件 -->
+    <!-- #include file = "SimpleExtensionsDBCommand.asp" -->
     <!-- #include file = "SimpleExtensionsDBAccess.asp" -->
 <!-- /导入支持文件 -->
 
@@ -35,23 +36,30 @@ Class SimpleExtensionsDB
     ' @var class <数据库解析类>
     Private dbParseClassByType
 
-    ' @var dictionary <命令信息>
-    Private command
+    ' @var class <命令类>
+    Private commandClass
 
 '###########################'
 '###########################'
 
     Private Sub Class_Initialize
-        ' 读取数据库配置项
+        initConfigs()
+
+        ' 初始化数据库连接
+        Set dbConnection = Server.CreateObject("ADODB.Connection")
+        ' 初始化当前数据库类型处理类
+        Execute("Set dbParseClassByType = " & "New SimpleExtensionsDB" & dbType)
+    End Sub
+
+    '''
+     ' 初始化配置项
+     ''
+    Private Sub initConfigs()
         dbType = SE.getConfigs("DB/type/Value")
         dbSource = SE.getConfigs("DB/source/Value")
         dbName = SE.getConfigs("DB/dbName/Value")
         dbUserName = SE.getConfigs("DB/userName/Value")
         dbPassword = SE.getConfigs("DB/password/Value")
-
-        ' 初始化数据库连接
-        Set dbConnection = Server.CreateObject("ADODB.Connection")
-        Execute("Set dbParseClassByType = " & "New SimpleExtensionsDB" & dbType)
     End Sub
 
     '''
@@ -69,32 +77,24 @@ Class SimpleExtensionsDB
     End Function
 
     '''
-     ' 创建命令
-     ''
-    Public Function createCommand(ByVal sqlString)
-
-    End Function
-
-    '''
-     ' 绑定参数
-     ''
-    Public Function bindParam(ByVal name, ByVal value, ByVal dataType)
-
-    End Function
-
-    '''
-     ' 执行命令
-     ''
-    Public Function executeCommand()
-
-    End Function
-
-    '''
      ' 执行SQL操作
+     '
+     ' @return recordset <数据集>
      ''
     Public Function executeSql(ByVal sqlString)
         Set executeSql = Eval("dbParseClassByType." & "executeSql(sqlString)" )
     End Function
+
+    '''
+     ' 命令对象
+     '
+     ' @return class <命令类>
+     ''
+    Public Property Get command()
+        If VarType(commandClass) <> 9 Then _
+            Set commandClass = New SimpleExtensionsDBCommand
+        Set command = commandClass
+    End Property
 
 '###########################'
 '###########################'
@@ -118,6 +118,13 @@ Class SimpleExtensionsDB
      ''
     Public Property Get getDBName()
         getDBName = dbName
+    End Property
+
+    '''
+     ' 获取数据库用户名
+     ''
+    Public Property Get getDBUserName()
+        getDBUserName = dbUserName
     End Property
 
     '''

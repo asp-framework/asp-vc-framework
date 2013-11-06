@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsDBTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.5
+ ' @version 2013.11.6
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -16,7 +16,8 @@ Class SimpleExtensionsDBTest
         TestCaseNames = Array( _
             "openTest", _
             "closeTest", _
-            "sqlExecuteTest" _
+            "executeSqlTest", _
+            "commandTest" _
         )
     End Function
 
@@ -51,14 +52,30 @@ Class SimpleExtensionsDBTest
     End Sub
 
     ' 执行SQL操作测试
-    Public Sub sqlExecuteTest(oTestResult)
+    Public Sub executeSqlTest(oTestResult)
         SE.module("DB").open()
         Set vActual = SE.module("DB").executeSql("SELECT userName FROM UserLists")
 
         oTestResult.AssertEquals _
             "Admin", _
-            vActual.Fields("username"), _
+            vActual.Fields("userName"), _
             "打开数据库异常"
+
+        SE.module("DB").close()
+    End Sub
+
+    ' 命令测试
+    Public Sub commandTest(oTestResult)
+        SE.module("DB").open()
+
+        SE.module("DB").command.createCommand("SELECT userName FROM UserLists WHERE userName = :userName")
+        Call SE.module("DB").command.bindParameter(":userName", "Admin", "dbString")
+        Set vActual = SE.module("DB").command.executeCommand()
+
+        oTestResult.AssertEquals _
+            "Admin", _
+            vActual.Fields("userName"), _
+            "命令异常"
 
         SE.module("DB").close()
     End Sub

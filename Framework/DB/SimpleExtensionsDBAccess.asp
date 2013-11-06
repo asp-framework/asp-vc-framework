@@ -40,21 +40,31 @@ Class SimpleExtensionsDBAccess
      ' 打开数据库
      ''
     Public Function open()
-        If SE.module("DB").getDBConnection.State = objectStateEnum.Item("adStateClosed") Then _
+        If SE.module("DB").getDBConnection.State <> objectStateEnum.Item("adStateClosed") Then _
+            Exit Function
+
+        open = 0
         Call SE.module("DB").getDBConnection.Open( _
             "Provider=Microsoft.Jet.OLEDB.4.0;" & _
             "Data Source=" & SE.module("DB").getDBSource & ";" & _
             "User Id=" & SE.module("DB").getDBUserName & ";" & _
             "Password=" & SE.module("DB").getDBPassword & ";" _
         )
+        If SE.module("DB").getDBConnection.State = objectStateEnum.Item("adStateOpen") Then _
+            open = 1
     End Function
 
     '''
      ' 关闭数据库
      ''
     Public Function close()
-        If SE.module("DB").getDBConnection.State <> objectStateEnum.Item("adStateClosed") Then _
+        If SE.module("DB").getDBConnection.State = objectStateEnum.Item("adStateClosed") Then _
+            Exit Function
+
+        close = 1
         Call SE.module("DB").getDBConnection.Close()
+        If SE.module("DB").getDBConnection.State = objectStateEnum.Item("adStateClosed") Then _
+            close = 0
     End Function
 
     '''

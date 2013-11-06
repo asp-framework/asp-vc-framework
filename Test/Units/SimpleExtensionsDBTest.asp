@@ -68,8 +68,9 @@ Class SimpleExtensionsDBTest
     Public Sub commandTest(oTestResult)
         SE.module("DB").open()
 
-        SE.module("DB").command.createCommand("SELECT userName FROM UserLists WHERE userName = :userName")
+        SE.module("DB").command.createCommand("SELECT userName FROM UserLists WHERE userName = :userName AND id = :id")
         Call SE.module("DB").command.bindParameter(":userName", "Admin", "dbString")
+        Call SE.module("DB").command.bindParameter(":id", 1, "dbInteger")
         Set vActual = SE.module("DB").command.executeCommand()
 
         oTestResult.AssertEquals _

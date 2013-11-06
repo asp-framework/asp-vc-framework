@@ -33,6 +33,12 @@ Class SimpleExtensionsDB
     ' @var object <数据库连接>
     Private dbConnection
 
+    ' @var object <数据库连接状态,
+    '   0:关闭
+    '   1:开启
+    ' >
+    Private dbConnectionStatus
+
     ' @var class <数据库解析类>
     Private dbParseClassByType
 
@@ -47,8 +53,9 @@ Class SimpleExtensionsDB
 
         ' 初始化数据库连接
         Set dbConnection = Server.CreateObject("ADODB.Connection")
+        dbConnectionStatus = 0
         ' 初始化当前数据库类型处理类
-        Execute("Set dbParseClassByType = " & "New SimpleExtensionsDB" & dbType)
+        Set dbParseClassByType = Eval("New SimpleExtensionsDB" & dbType)
     End Sub
 
     '''
@@ -66,14 +73,14 @@ Class SimpleExtensionsDB
      ' 打开数据库
      ''
     Public Function open()
-        open = Execute("dbParseClassByType." & "open()" )
+        dbConnectionStatus = Eval("dbParseClassByType." & "open()" )
     End Function
 
     '''
      ' 关闭数据库
      ''
     Public Function close()
-       close = Eval("dbParseClassByType." & "close()" )
+       dbConnectionStatus = Eval("dbParseClassByType." & "close()" )
     End Function
 
     '''
@@ -101,6 +108,8 @@ Class SimpleExtensionsDB
 
     '''
      ' 获取数据库类型
+     '
+     ' @return string <数据库类型>
      ''
     Public Property Get getDBType()
         getDBType = dbType
@@ -108,6 +117,8 @@ Class SimpleExtensionsDB
 
     '''
      ' 获取数据库源
+     '
+     ' @return string <数据库源>
      ''
     Public Property Get getDBSource()
         getDBSource = dbSource
@@ -115,6 +126,8 @@ Class SimpleExtensionsDB
 
     '''
      ' 获取数据库名称
+     '
+     ' @return string <数据库名称>
      ''
     Public Property Get getDBName()
         getDBName = dbName
@@ -122,6 +135,8 @@ Class SimpleExtensionsDB
 
     '''
      ' 获取数据库用户名
+     '
+     ' @return string <数据库用户名>
      ''
     Public Property Get getDBUserName()
         getDBUserName = dbUserName
@@ -129,6 +144,8 @@ Class SimpleExtensionsDB
 
     '''
      ' 获取数据库密码
+     '
+     ' @return string <数据库密码>
      ''
     Public Property Get getDBPassword()
         getDBPassword = dbPassword
@@ -136,9 +153,23 @@ Class SimpleExtensionsDB
 
     '''
      ' 获取数据库连接
+     '
+     ' @return object <数据库连接>
      ''
     Public Property Get getDBConnection()
         Set getDBConnection = dbConnection
+    End Property
+
+    '''
+     ' 获取数据库连接状态
+     '
+     ' @return integer <数据库连接状态,
+     '   0:关闭
+     '   1:开启
+     ' >
+     ''
+    Public Property Get getDBConnectionStatus()
+        getDBConnectionStatus = dbConnectionStatus
     End Property
 
 End Class

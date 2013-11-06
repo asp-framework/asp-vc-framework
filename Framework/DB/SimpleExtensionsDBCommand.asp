@@ -80,8 +80,7 @@ Class SimpleExtensionsDBCommand
             processParameterToSafe = False
             Exit Function
         End If
-
-        dataType = dataTypeList.Item("dataType")
+        dataType = dataTypeList.Item(dataType)
         Select Case dataType
             ' dbString
             Case 0

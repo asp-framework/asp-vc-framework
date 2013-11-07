@@ -41,8 +41,7 @@ Class SimpleExtensionsBase
             .LoadFromFile(Server.MapPath(filePath))
             If Err.Number <> 0 Then
                 Err.Clear
-                Response.Write("[FUNCTION] loadFile Error - 找不到檔案：" & filePath)
-                Response.End
+                Call module("Error").throwError(2, "导入文件【" & filePath & "】失败")
             End If
             loadFile = .ReadText
             .Close

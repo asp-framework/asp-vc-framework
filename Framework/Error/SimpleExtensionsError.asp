@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsError.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.6
+ ' @version 2013.11.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -34,6 +34,8 @@ Class SimpleExtensionsError
     '''
      ' 抛出错误异常
      '
+     ' @param integer throwErrorNumber <错误编号>
+     ' @param sting message <错误信息>
      ''
     Public Function throwError(ByVal throwErrorNumber, ByVal message)
         errorNumber = throwErrorNumber

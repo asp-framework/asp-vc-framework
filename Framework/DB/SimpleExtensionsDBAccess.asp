@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsDBAccess.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.6
+ ' @version 2013.11.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -14,9 +14,26 @@
 <%
 Class SimpleExtensionsDBAccess
 
-    Private Sub Class_Initialize
+    ' @var boolean <是否已验证配置项>
+    Private isCheckConfigs
 
-    End Sub
+'###########################'
+'###########################'
+
+    '''
+     ' 配置项验证
+     ''
+    Public Function checkConfigs()
+        If IsEmpty(isCheckConfigs) Then isCheckConfigs = False
+        If isCheckConfigs Then Exit Function
+
+        If IsEmpty(SE.module("DB").getDBSource) Or _
+        Not SE.module("File").fileExists(SE.module("DB").getDBSource) Then _
+            Call SE.module("Error").throwError( _
+                2, _
+                "请设置正确的数据源" _
+            )
+    End Function
 
     '''
      ' 获取数据库连接驱动
@@ -37,7 +54,7 @@ Class SimpleExtensionsDBAccess
         open = 0
         Call SE.module("DB").getDBConnection.Open( _
             "Provider=Microsoft.Jet.OLEDB.4.0;" & _
-            "Data Source=" & SE.module("DB").getDBSource & ";" & _
+            "Data Source=" & Server.MapPath(SE.module("DB").getDBSource) & ";" & _
             "User Id=" & SE.module("DB").getDBUserName & ";" & _
             "Password=" & SE.module("DB").getDBPassword & ";" _
         )

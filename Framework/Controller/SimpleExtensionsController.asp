@@ -81,6 +81,7 @@ Class SimpleExtensionsController
             )
             Err.Clear
         End If
+        On Error GoTo 0
     End Function
 
 '###########################'

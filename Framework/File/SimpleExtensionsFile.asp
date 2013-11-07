@@ -19,7 +19,13 @@ Class SimpleExtensionsFile
      ''
     Public Function fileExists(ByVal filePath)
         fileExists = False
+        On Error Resume Next
         filePath = Server.MapPath(filePath)
+        If Err.Number = -2147467259 Then
+            Err.Clear
+            On Error GoTo 0
+            Exit Function
+        End If
 
         Dim fileSystem : Set fileSystem = Server.CreateObject("Scripting.FileSystemObject")
         If fileSystem.FileExists(filePath) Then fileExists = True
@@ -35,7 +41,13 @@ Class SimpleExtensionsFile
      ''
     Public Function dirExists(ByVal directory)
         dirExists = False
+        On Error Resume Next
         directory = Server.MapPath(directory)
+        If Err.Number = -2147467259 Then
+            Err.Clear
+            On Error GoTo 0
+            Exit Function
+        End If
 
         Dim fileSystem : Set fileSystem = Server.CreateObject("Scripting.FileSystemObject")
         If fileSystem.FolderExists(directory) Then dirExists = True

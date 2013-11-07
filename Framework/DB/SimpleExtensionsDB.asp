@@ -85,7 +85,9 @@ Class SimpleExtensionsDB
      ' 打开数据库
      ''
     Public Function open()
-        dbConnectionStatus = Eval("dbParseClassByType." & "open()" )
+        dbParseClassByType.checkConfigs()
+
+        dbConnectionStatus = dbParseClassByType.open()
         If dbConnectionStatus <> 1 Then _
             Call SE.module("Error").throwError( _
                 2, _
@@ -97,7 +99,7 @@ Class SimpleExtensionsDB
      ' 关闭数据库
      ''
     Public Function close()
-       dbConnectionStatus = Eval("dbParseClassByType." & "close()" )
+       dbConnectionStatus = dbParseClassByType.close()
     End Function
 
     '''
@@ -106,7 +108,7 @@ Class SimpleExtensionsDB
      ' @return recordset <数据集>
      ''
     Public Function executeSql(ByVal sqlString)
-        Set executeSql = Eval("dbParseClassByType." & "executeSql(sqlString)" )
+        Set executeSql = dbParseClassByType.executeSql(sqlString)
     End Function
 
     '''

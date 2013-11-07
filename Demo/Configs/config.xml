@@ -16,6 +16,6 @@
     </I18N>
     <DB>
         <type>access</type>
-        <source>E:\SEForASP\Test\ProjectTest\Data\DataBase\# Data.asp</source>
+        <source>../Test/ProjectTest/Data/DataBase/# Data.asp</source>
     </DB>
 </SEConfigs>

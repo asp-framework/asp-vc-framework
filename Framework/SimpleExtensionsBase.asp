@@ -46,6 +46,7 @@ Class SimpleExtensionsBase
                 )
                 Err.Clear
             End If
+            On Error GoTo 0
             loadFile = .ReadText
             .Close
         End With
@@ -288,6 +289,7 @@ Class SimpleExtensionsBase
                 getConfigs = Empty
                 Err.Clear
             End If
+            On Error GoTo 0
         End If
     End Property
 
@@ -326,6 +328,7 @@ Class SimpleExtensionsBase
         Me.include(modulePath)
         ' 类重命名时的处理
         If Err.Number = 1041 Then Err.Clear
+        On Error GoTo 0
         Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
     End Function
 
@@ -334,11 +337,10 @@ Class SimpleExtensionsBase
      '
      ' @param string moduleName <模块名称>
      '
-     ' @return class|nothing <实例化的模块>
+     ' @return class <实例化的模块>
      ''
     Private Property Get getModule(ByVal moduleName)
-        Set getModule = Nothing
-        If modulesQueue.Exists(moduleName) Then Set getModule = modulesQueue.Item(moduleName)
+        Set getModule = modulesQueue.Item(moduleName)
     End Property
 
 End Class

@@ -314,6 +314,8 @@ Class SimpleExtensionsBase
             isDevelopment = True
         ElseIf StrComp(isDevelopment, "False", 1) = 0 Then
             isDevelopment = False
+        Else
+            isDevelopment = False
         End If
     End Property
 

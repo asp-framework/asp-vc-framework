@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.30
+ ' @version 2013.11.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -16,6 +16,7 @@ Class SimpleExtensionsTest
 
 	Public Function TestCaseNames()
 		TestCaseNames = Array( _
+            "getConfigsTest", _
             "loadFileTest", _
             "getIncludeCodeTest", _
             "getIncludeResultTest", _
@@ -30,6 +31,39 @@ Class SimpleExtensionsTest
 	Public Sub TearDown()
 		'Response.Write("TearDown<br>")
 	End Sub
+
+    ' 获取配置项测试
+    Public Sub getConfigsTest(oTestResult)
+        oTestResult.AssertEquals _
+            "../Framework", _
+            SE.getConfigs(Null).Item("System").Item("seDir").Item("Value"), _
+            "获取配置项异常"
+
+        oTestResult.AssertEquals _
+            "../Framework", _
+            SE.getConfigs("System/seDir/Value"), _
+            "获取配置项异常"
+
+        oTestResult.AssertEquals _
+            "Test", _
+            SE.getConfigs(Null).Item("Router").Item("appName").Item("Value"), _
+            "获取配置项异常"
+
+        oTestResult.AssertEquals _
+            "Test", _
+            SE.getConfigs("Router/appName/Value"), _
+            "获取配置项异常"
+
+        oTestResult.AssertEquals _
+            "get", _
+            SE.getConfigs(Null).Item("Router").Item("Attributes").Item("type"), _
+            "获取配置项异常"
+
+        oTestResult.AssertEquals _
+            "get", _
+            SE.getConfigs("Router/Attributes/type"), _
+            "获取配置项异常"
+    End Sub
 
     ' 读取文件测试
 	Public Sub loadFileTest(oTestResult)

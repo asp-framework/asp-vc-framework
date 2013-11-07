@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBaseTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.30
+ ' @version 2013.11.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -19,7 +19,7 @@ Class SimpleExtensionsBaseTest
             "loadFileTest", _
             "getIncludeCodeTest", _
             "getIncludeResultTest", _
-            "loadConfigsTest", _
+            "getConfigsTest", _
             "getSEDirTest", _
             "isDevelopmentTest", _
             "moduleTest" _
@@ -69,37 +69,37 @@ Class SimpleExtensionsBaseTest
             "载入配置文件异常"
     End Sub
 
-    ' 载入配置文件测试
-    Public Sub loadConfigsTest(oTestResult)
+    ' 获取配置项测试
+    Public Sub getConfigsTest(oTestResult)
         oTestResult.AssertEquals _
             "../Framework", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("System").Item("seDir").Item("Value"), _
-            "载入配置文件异常"
+            "获取配置项异常"
 
         oTestResult.AssertEquals _
             "../Framework", _
             SimpleExtensionsBaseClass.getConfigs("System/seDir/Value"), _
-            "载入配置文件异常"
+            "获取配置项异常"
 
 		oTestResult.AssertEquals _
             "Test", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("Router").Item("appName").Item("Value"), _
-            "载入配置文件异常"
+            "获取配置项异常"
 
         oTestResult.AssertEquals _
             "Test", _
             SimpleExtensionsBaseClass.getConfigs("Router/appName/Value"), _
-            "载入配置文件异常"
+            "获取配置项异常"
 
         oTestResult.AssertEquals _
             "get", _
             SimpleExtensionsBaseClass.getConfigs(Null).Item("Router").Item("Attributes").Item("type"), _
-            "载入配置文件异常"
+            "获取配置项异常"
 
         oTestResult.AssertEquals _
             "get", _
             SimpleExtensionsBaseClass.getConfigs("Router/Attributes/type"), _
-            "载入配置文件异常"
+            "获取配置项异常"
     End Sub
 
     ' 获取框架根目录测试

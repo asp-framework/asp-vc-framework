@@ -20,6 +20,7 @@ Class SimpleExtensionsBaseTest
             "getIncludeCodeTest", _
             "getIncludeResultTest", _
             "loadConfigsTest", _
+            "getSEDirTest", _
             "moduleTest" _
         )
 	End Function
@@ -98,6 +99,16 @@ Class SimpleExtensionsBaseTest
             "get", _
             SimpleExtensionsBaseClass.getConfigs("Router/Attributes/type"), _
             "载入配置文件异常"
+    End Sub
+
+    ' 获取框架根目录测试
+    Public Sub getSEDirTest(oTestResult)
+        vActual = SimpleExtensionsBaseClass.getSEDir
+
+        oTestResult.AssertEquals _
+            "../Framework", _
+            vActual, _
+            "导入模块异常"
     End Sub
 
     ' 导入模块测试

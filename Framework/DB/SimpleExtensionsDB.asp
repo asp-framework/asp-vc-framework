@@ -50,12 +50,13 @@ Class SimpleExtensionsDB
 
     Private Sub Class_Initialize
         initConfigs()
+        checkConfigs()
 
-        ' 初始化数据库连接
-        Set dbConnection = Server.CreateObject("ADODB.Connection")
-        dbConnectionStatus = 0
         ' 初始化当前数据库类型处理类
         Set dbParseClassByType = Eval("New SimpleExtensionsDB" & dbType)
+        ' 初始化数据库连接驱动
+        Set dbConnection = dbParseClassByType.getConnectionDrive
+        dbConnectionStatus = 0
     End Sub
 
     '''
@@ -70,10 +71,26 @@ Class SimpleExtensionsDB
     End Sub
 
     '''
+     ' 验证基本配置项
+     ''
+    Private Function checkConfigs()
+        If IsEmpty(dbType) Then _
+            Call SE.module("Error").throwError( _
+                2, _
+                "请设置访问的数据库类型。" _
+            )
+    End Function
+
+    '''
      ' 打开数据库
      ''
     Public Function open()
         dbConnectionStatus = Eval("dbParseClassByType." & "open()" )
+        If dbConnectionStatus <> 1 Then _
+            Call SE.module("Error").throwError( _
+                2, _
+                "数据库打开失败。" _
+            )
     End Function
 
     '''

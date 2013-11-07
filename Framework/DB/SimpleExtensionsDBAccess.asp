@@ -14,6 +14,19 @@
 <%
 Class SimpleExtensionsDBAccess
 
+    Private Sub Class_Initialize
+
+    End Sub
+
+    '''
+     ' 获取数据库连接驱动
+     '
+     ' @return object <数据库连接驱动>
+     ''
+    Public Property Get getConnectionDrive()
+        Set getConnectionDrive = Server.CreateObject("ADODB.Connection")
+    End Property
+
     '''
      ' 打开数据库
      ''

@@ -17,6 +17,7 @@ Class SimpleExtensionsTest
 	Public Function TestCaseNames()
 		TestCaseNames = Array( _
             "getConfigsTest", _
+            "getSEDirTest", _
             "loadFileTest", _
             "getIncludeCodeTest", _
             "getIncludeResultTest", _
@@ -63,6 +64,16 @@ Class SimpleExtensionsTest
             "get", _
             SE.getConfigs("Router/Attributes/type"), _
             "获取配置项异常"
+    End Sub
+
+    ' 获取框架根目录测试
+    Public Sub getSEDirTest(oTestResult)
+        vActual = SE.getSEDir
+
+        oTestResult.AssertEquals _
+            "../Framework", _
+            vActual, _
+            "获取框架根目录异常"
     End Sub
 
     ' 读取文件测试

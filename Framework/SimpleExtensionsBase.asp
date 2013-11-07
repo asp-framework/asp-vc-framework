@@ -40,8 +40,8 @@ Class SimpleExtensionsBase
             .Open
             .LoadFromFile(Server.MapPath(filePath))
             If Err.Number <> 0 Then
+                Call Me.module("Error").throwError(2, "导入文件【" & filePath & "】失败")
                 Err.Clear
-                Call module("Error").throwError(2, "导入文件【" & filePath & "】失败")
             End If
             loadFile = .ReadText
             .Close
@@ -216,6 +216,8 @@ Class SimpleExtensionsBase
         Call processConfigs(seConfigsDoc, configs)
 
         Set seConfigsDoc = Nothing
+
+        checkConfigs()
     End Function
 
     '''
@@ -249,6 +251,16 @@ Class SimpleExtensionsBase
     End Function
 
     '''
+     ' 检查基本配置是否设置
+     ''
+    Private Function checkConfigs()
+        If IsEmpty(getConfigs("System/seDir/Value")) Then
+            Response.Write("框架目录没有设置。")
+            Response.End()
+        End If
+    End Function
+
+    '''
      ' 获取配置项
      '
      ' @param null|string configPath <配置路径,例:"system/seDir/Value">
@@ -269,7 +281,7 @@ Class SimpleExtensionsBase
             On Error Resume Next
             getConfigs = Eval(evalString)
             ' 配置项不存在的错误处理
-            If Err.Number = 424 Then
+            If Err.Number = 424 Or Len(getConfigs) = 0 Then
                 getConfigs = Empty
                 Err.Clear
             End If
@@ -280,7 +292,7 @@ Class SimpleExtensionsBase
      ' 获取框架根目录
      ''
     Public Property Get getSEDir()
-        getSEDir = getConfigs(Null).Item("System").Item("seDir").Item("Value")
+        getSEDir = getConfigs("System/seDir/Value")
     End Property
 
     '''
@@ -306,7 +318,7 @@ Class SimpleExtensionsBase
         If modulesQueue.Exists(moduleName) Then Exit Function
 
         Dim modulePath
-        modulePath = getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
+        modulePath = Me.getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
         On Error Resume Next
         Me.include(modulePath)
         ' 类重命名时的处理

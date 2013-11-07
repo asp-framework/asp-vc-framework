@@ -14,7 +14,8 @@ Class SimpleExtensionsFileTest
 
     Public Function TestCaseNames()
         TestCaseNames = Array( _
-            "fileExistsTest" _
+            "fileExistsTest", _
+            "dirExistsTest" _
         )
     End Function
 
@@ -29,6 +30,16 @@ Class SimpleExtensionsFileTest
     ' 判断文件是否存在测试
     Public Sub fileExistsTest(oTestResult)
         vActual = SE.module("File").fileExists("./ProjectTest/IncludeTest/loadFileTest.asp")
+
+        oTestResult.AssertEquals _
+            True, _
+            vActual, _
+            "文件判断异常"
+    End Sub
+
+    ' 判断文件是否存在测试
+    Public Sub dirExistsTest(oTestResult)
+        vActual = SE.module("File").dirExists("./ProjectTest/IncludeTest")
 
         oTestResult.AssertEquals _
             True, _

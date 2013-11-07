@@ -26,5 +26,21 @@ Class SimpleExtensionsFile
         Set fileSystem = Nothing
     End Function
 
+    '''
+     ' 判断文件是否存在
+     '
+     ' @param string directory <目录>
+     '
+     ' @return boolean <目录是否存在>
+     ''
+    Public Function dirExists(ByVal directory)
+        dirExists = False
+        directory = Server.MapPath(directory)
+
+        Dim fileSystem : Set fileSystem = Server.CreateObject("Scripting.FileSystemObject")
+        If fileSystem.FolderExists(directory) Then dirExists = True
+        Set fileSystem = Nothing
+    End Function
+
 End Class
 %>

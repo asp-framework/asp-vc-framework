@@ -1,0 +1,40 @@
+<%
+'''
+ ' Error.html 文件
+ ' @author 高翔 <263027768@qq.com>
+ ' @version 2013.11.7
+ ' @copyright Copyright (c) 2013-2014 SE
+ ''
+%>
+
+<div style="
+    position: fixed;
+    padding: 5px;
+    background: #FFF;
+    width: 500px;
+    height: auto;
+    top: 25%;
+    left: 25%;
+    border: 1px solid red;
+    z-index: 99999;
+">
+    <div style="
+        padding: 5px;
+        background: #87CEFA
+    ">
+        <span>错误编号：<%= errorNumber %></span>
+        &nbsp;&nbsp;
+        <span>错误定义：<%= getErrorDefine(throwErrorNumber) %></span>
+    </div>
+    <div style="
+        position: relative;
+        margin-top: 5px;
+        padding: 5px;
+        background: #FFD700;
+    ">
+        <span>错误信息：</span>
+        <div style="padding: 5px;">
+            <%= message %>
+        </div>
+    </div>
+</div>

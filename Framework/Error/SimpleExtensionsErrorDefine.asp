@@ -11,13 +11,15 @@
 Class SimpleExtensionsErrorDefine
 
     ' @var array <错误定义数组>
-    Private errorDefine(0)
+    Private errorDefine(3)
 
 '###########################'
 '###########################'
 
     Private Sub Class_Initialize
-        errorDefine(0) = "无错误"
+        errorDefine(0) = "系统正常"
+        errorDefine(1) = "用户自定义错误"
+        errorDefine(2) = "系统错误"
     End Sub
 
     '''

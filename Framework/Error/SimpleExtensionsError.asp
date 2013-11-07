@@ -35,14 +35,9 @@ Class SimpleExtensionsError
      ' 抛出错误异常
      '
      ''
-    Public Function throwError(ByVal throwErrorNumber)
+    Public Function throwError(ByVal throwErrorNumber, ByVal message)
         errorNumber = throwErrorNumber
-        Response.Write( _
-            "<div style=""position:fixed;background:#FFF;top:40%;left:40%;border:1px solid red;z-index:99999;"">" & _
-            "错误编号：" & errorNumber & "<br />" & _
-            "错误定义：" & getErrorDefine(throwErrorNumber) & "<br />" & _
-            "</div>" _
-        )
+        Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
     End Function
 
     '''

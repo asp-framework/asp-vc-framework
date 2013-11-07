@@ -29,9 +29,9 @@ Class SimpleExtensionsErrorTest
     ' 错误测试
     Public Sub errorTest(oTestResult)
         vActual = SE.module("Error").getErrorDefine(0)
-SE.module("Error").throwError(0)
+
         oTestResult.AssertEquals _
-            "读取文件测试", _
+            "系统正常", _
             vActual, _
             "错误异常"
     End Sub

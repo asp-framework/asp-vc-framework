@@ -23,6 +23,7 @@ Option Explicit
 <!-- #include file = "Units/SimpleExtensionsI18NTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsDBTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsErrorTest.asp" -->
+<!-- #include file = "Units/SimpleExtensionsFileTest.asp" -->
 
 <%
 	Dim oRunner
@@ -36,6 +37,7 @@ Option Explicit
     oRunner.AddTestContainer New SimpleExtensionsI18NTest
     oRunner.AddTestContainer New SimpleExtensionsDBTest
     oRunner.AddTestContainer New SimpleExtensionsErrorTest
+    oRunner.AddTestContainer New SimpleExtensionsFileTest
 
 	oRunner.Display()
 %>

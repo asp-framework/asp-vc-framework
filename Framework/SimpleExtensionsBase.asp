@@ -134,6 +134,7 @@ Class SimpleExtensionsBase
             Else
                 codeCache = Mid(content, codeEnd, codeStart - codeEnd - 2)
             End If
+            codeCache = Replace(codeCache, """", """""")
             codeCache = Replace(codeCache, vbCrLf, """ & vbCrLf & """)
             codeCache = "Response.Write(""" & codeCache & """)"
             code = code & codeCache & vbCrLf : codeCache = Null

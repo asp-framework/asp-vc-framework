@@ -268,7 +268,11 @@ Class SimpleExtensionsBase
             Next
             On Error Resume Next
             getConfigs = Eval(evalString)
-            If Err.Number = 424 Then Err.Clear : getConfigs = Empty
+            ' 配置项不存在的错误处理
+            If Err.Number = 424 Then
+                getConfigs = Empty
+                Err.Clear
+            End If
         End If
     End Property
 

@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsController.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.4
+ ' @version 2013.11.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -33,8 +33,21 @@ Class SimpleExtensionsController
      ''
     Public Function run()
         setControllerPath()
+        checkError()
         SE.include(controllerPath)
         runAction()
+    End Function
+
+    '''
+     ' 错误验证
+     ''
+    Private Function checkError()
+        ' 判断应用是否存在
+        If Not SE.module("file").dirExists(getAppDir) Then _
+            Call SE.module("Error").throwError(2, "应用【" & SE.module("Router").getAppName & "】不存在。")
+        ' 判断控制器是否存在
+        If Not SE.module("File").fileExists(controllerPath) Then _
+            Call SE.module("Error").throwError(2, "控制器【" & Me.getControllerName & "】不存在。")
     End Function
 
     '''

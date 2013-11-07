@@ -44,10 +44,17 @@ Class SimpleExtensionsController
     Private Function checkError()
         ' 判断应用是否存在
         If Not SE.module("file").dirExists(getAppDir) Then _
-            Call SE.module("Error").throwError(2, "应用【" & SE.module("Router").getAppName & "】不存在。")
+            Call SE.module("Error").throwError( _
+                2, _
+                "应用【" & SE.module("Router").getAppName & "】不存在。" _
+            )
+
         ' 判断控制器是否存在
         If Not SE.module("File").fileExists(controllerPath) Then _
-            Call SE.module("Error").throwError(2, "控制器【" & Me.getControllerName & "】不存在。")
+            Call SE.module("Error").throwError( _
+                2, _
+                "控制器【" & Me.getControllerName & "】不存在。" _
+            )
     End Function
 
     '''
@@ -65,7 +72,15 @@ Class SimpleExtensionsController
     Private Function runAction()
         Dim controller
         Set controller = Eval("New " & getControllerName & "Controller")
+        On Error Resume Next
         Execute("controller." & SE.module("Router").getActionName & "Action()")
+        If Err.Number = 438 Then
+            Call SE.module("Error").throwError( _
+                2, _
+                "动作【" & SE.module("Router").getActionName & "】不存在。" _
+            )
+            Err.Clear
+        End If
     End Function
 
 '###########################'

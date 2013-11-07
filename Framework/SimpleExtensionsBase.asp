@@ -40,7 +40,10 @@ Class SimpleExtensionsBase
             .Open
             .LoadFromFile(Server.MapPath(filePath))
             If Err.Number <> 0 Then
-                Call Me.module("Error").throwError(2, "导入文件【" & filePath & "】失败")
+                Call Me.module("Error").throwError( _
+                    2, _
+                    "导入文件【" & filePath & "】失败" _
+                )
                 Err.Clear
             End If
             loadFile = .ReadText

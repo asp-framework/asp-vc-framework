@@ -21,6 +21,7 @@ Class SimpleExtensionsBaseTest
             "getIncludeResultTest", _
             "loadConfigsTest", _
             "getSEDirTest", _
+            "isDevelopmentTest", _
             "moduleTest" _
         )
 	End Function
@@ -108,7 +109,17 @@ Class SimpleExtensionsBaseTest
         oTestResult.AssertEquals _
             "../Framework", _
             vActual, _
-            "导入模块异常"
+            "获取框架根目录异常"
+    End Sub
+
+    ' 判断是否开发环境测试
+    Public Sub isDevelopmentTest(oTestResult)
+        vActual = SimpleExtensionsBaseClass.isDevelopment
+
+        oTestResult.AssertEquals _
+            True, _
+            vActual, _
+            "判断是否开发环境异常"
     End Sub
 
     ' 导入模块测试

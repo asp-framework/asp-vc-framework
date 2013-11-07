@@ -307,11 +307,12 @@ Class SimpleExtensionsBase
      ''
     Public Property Get isDevelopment()
         isDevelopment = getConfigs("System/development/Value")
+
         If IsEmpty(isDevelopment) Then
             isDevelopment = False
-        ElseIf StrComp(isDevelopment, "True", 1) Then
+        ElseIf StrComp(isDevelopment, "True", 1) = 0 Then
             isDevelopment = True
-        ElseIf StrComp(isDevelopment, "False", 1) Then
+        ElseIf StrComp(isDevelopment, "False", 1) = 0 Then
             isDevelopment = False
         End If
     End Property

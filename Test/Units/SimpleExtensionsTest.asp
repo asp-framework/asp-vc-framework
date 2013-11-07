@@ -18,6 +18,7 @@ Class SimpleExtensionsTest
 		TestCaseNames = Array( _
             "getConfigsTest", _
             "getSEDirTest", _
+            "isDevelopmentTest", _
             "loadFileTest", _
             "getIncludeCodeTest", _
             "getIncludeResultTest", _
@@ -74,6 +75,16 @@ Class SimpleExtensionsTest
             "../Framework", _
             vActual, _
             "获取框架根目录异常"
+    End Sub
+
+    ' 判断是否开发环境测试
+    Public Sub isDevelopmentTest(oTestResult)
+        vActual = SE.isDevelopment
+
+        oTestResult.AssertEquals _
+            True, _
+            vActual, _
+            "判断是否开发环境异常"
     End Sub
 
     ' 读取文件测试

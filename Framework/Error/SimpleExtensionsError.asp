@@ -39,7 +39,8 @@ Class SimpleExtensionsError
      ''
     Public Function throwError(ByVal throwErrorNumber, ByVal message)
         errorNumber = throwErrorNumber
-        Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
+        ' If SE.isDevelopment Then _
+            Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
         Response.End()
     End Function
 

@@ -75,6 +75,15 @@ Class SimpleExtensions
         getSEDir = getSimpleExtensionsBaseClass.getSEDir
     End Property
 
+    '''
+     ' 判断是否开发环境
+     '
+     ' @return boolean <是否开发环境>
+     ''
+    Public Property Get isDevelopment()
+        isDevelopment = getSimpleExtensionsBaseClass.isDevelopment
+    End Property
+
 '###########################'
 '###########################'
 

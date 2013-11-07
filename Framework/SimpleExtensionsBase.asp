@@ -301,6 +301,22 @@ Class SimpleExtensionsBase
     End Property
 
     '''
+     ' 判断是否开发环境
+     '
+     ' @return boolean <是否开发环境>
+     ''
+    Public Property Get isDevelopment()
+        isDevelopment = getConfigs("System/development/Value")
+        If IsEmpty(isDevelopment) Then
+            isDevelopment = False
+        ElseIf StrComp(isDevelopment, "True", 1) Then
+            isDevelopment = True
+        ElseIf StrComp(isDevelopment, "False", 1) Then
+            isDevelopment = False
+        End If
+    End Property
+
+    '''
      ' 调用模块
      '
      ' @param string moduleName <模块名称>

@@ -28,11 +28,27 @@ Class SimpleExtensionsController
 '###########################'
 '###########################'
 
+    Private Sub Class_Initialize
+        initConfigs()
+    End Sub
+
+    '''
+     ' 初始化配置项
+     ''
+    Private Sub initConfigs()
+        appDir = SE.getConfigs("System/appsDir/Value") & "/" & SE.module("Router").getAppName
+        controllersDir = getAppDir & "/Controllers"
+        controllerName = SE.module("Router").getControllerName
+        viewsDir = getAppDir & "/Views/" & getControllerName
+        controllerPath = _
+            getControllersDir _
+            & "/" & SE.module("Router").getControllerName & "Controller" & ".asp"
+    End Sub
+
     '''
      ' 运行控制器
      ''
     Public Function run()
-        setControllerPath()
         checkError()
         SE.include(controllerPath)
         runAction()
@@ -55,15 +71,6 @@ Class SimpleExtensionsController
                 2, _
                 "控制器【" & Me.getControllerName & "】不存在。" _
             )
-    End Function
-
-    '''
-     ' 设置控制器路径
-     ''
-    Private Function setControllerPath()
-        controllerPath = _
-            getControllersDir _
-            & "/" & SE.module("Router").getControllerName & "Controller" & ".asp"
     End Function
 
     '''
@@ -99,6 +106,15 @@ Class SimpleExtensionsController
     End Property
 
     '''
+     ' 获取当前应用目录
+     '
+     ' @return string <当前应用目录>
+     ''
+    Public Property Get getAppDir()
+        getAppDir = appDir
+    End Property
+
+    '''
      ' 获取视图路径
      '
      ' @param string viewName <视图名称>
@@ -110,34 +126,21 @@ Class SimpleExtensionsController
     End Property
 
     '''
-     ' 获取当前应用的控制器目录
-     '
-     ' @return string <当前应用的控制器目录>
-     ''
-    Public Property Get getControllersDir()
-        If IsEmpty(controllersDir) Then controllersDir = getAppDir & "/Controllers"
-        getControllersDir = controllersDir
-    End Property
-
-    '''
      ' 获取当前控制器的视图目录
      '
      ' @return string <当前控制器的视图目录>
      ''
     Public Property Get getViewsDir()
-        If IsEmpty(viewsDir) Then viewsDir = getAppDir & "/Views/" & getControllerName
         getViewsDir = viewsDir
     End Property
 
     '''
-     ' 获取当前应用目录
+     ' 获取当前应用的控制器目录
      '
-     ' @return string <当前应用目录>
+     ' @return string <当前应用的控制器目录>
      ''
-    Public Property Get getAppDir()
-        If IsEmpty(appDir) Then _
-            appDir = SE.getConfigs("System/appsDir/Value") & "/" & SE.module("Router").getAppName
-        getAppDir = appDir
+    Public Property Get getControllersDir()
+        getControllersDir = controllersDir
     End Property
 
     '''
@@ -146,8 +149,6 @@ Class SimpleExtensionsController
      ' @return string <当前控制器名称>
      ''
     Public Property Get getControllerName()
-        If IsEmpty(controllerName) Then _
-            controllerName = SE.module("Router").getControllerName
         getControllerName = controllerName
     End Property
 

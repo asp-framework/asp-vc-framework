@@ -140,7 +140,7 @@ Class SimpleExtensionsBase
             codeCache = Replace(codeCache, """", """""")
             codeCache = Replace(codeCache, vbCrLf, """ & vbCrLf & """)
             codeCache = "Response.Write(""" & codeCache & """)"
-            code = code & codeCache & vbCrLf : codeCache = Null
+            code = code & (codeCache & vbCrLf) : codeCache = Null
 
             ' 跳出解析
             If codeStart = 2 Then Exit Do
@@ -154,7 +154,7 @@ Class SimpleExtensionsBase
                 Case "=" : codeCache = "Response.Write(" & Mid(codeCache, 2) & ")"
             End Select
 
-            code = code & codeCache & vbCrLf : codeCache = Null
+            code = code & (codeCache & vbCrLf) : codeCache = Null
             codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
         Loop
     End Function

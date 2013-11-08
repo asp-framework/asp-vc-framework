@@ -20,6 +20,9 @@ Class SimpleExtensionsError
     ' @var class <错误定义类>
     Private errorDefineClass
 
+    ' @var string <错误消息>
+    Private errorMessage
+
 '###########################'
 '###########################'
 
@@ -39,6 +42,7 @@ Class SimpleExtensionsError
      ''
     Public Function throwError(ByVal throwErrorNumber, ByVal message)
         errorNumber = throwErrorNumber
+        errorMessage = message
         If SE.isDevelopment Then
             Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
         Else
@@ -66,6 +70,15 @@ Class SimpleExtensionsError
      ''
     Public Property Get getErrorDefine(ByVal errorNumber)
         getErrorDefine = errorDefineClass.getErrorDefine(errorNumber)
+    End Property
+
+    '''
+     ' 获取错误消息
+     '
+     ' @return string <错误消息>
+     ''
+    Public Property Get getErrorMessage()
+        getErrorMessage = errorMessage
     End Property
 
 End Class

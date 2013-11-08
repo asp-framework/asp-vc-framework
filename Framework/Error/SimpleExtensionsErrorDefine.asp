@@ -20,6 +20,7 @@ Class SimpleExtensionsErrorDefine
         errorDefine(0) = "系统正常"
         errorDefine(1) = "用户自定义错误"
         errorDefine(2) = "系统错误"
+        errorDefine(3) = "用户错误"
     End Sub
 
     '''

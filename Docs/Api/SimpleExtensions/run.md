@@ -9,7 +9,7 @@ run
 ### 参数
 > `configFilePath`  
 >> **类型：**`string`  
->> **说明：**配置文件路径  
+>> **说明：**配置文件路径。  
 >> **范例：**`"Configs/config.xml"`
 
 ## 返回值

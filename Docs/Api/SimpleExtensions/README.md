@@ -13,4 +13,6 @@
 
 [isDevelopment](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/SimpleExtensions/isDevelopment.md) &mdash; 判断是否开发环境
 
+[module](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/SimpleExtensions/module.md) &mdash; 调用模块
+
 [run](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/SimpleExtensions/run.md) &mdash; 运行框架

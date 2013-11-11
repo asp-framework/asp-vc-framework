@@ -13,7 +13,7 @@ run
 >> **范例：**`"Configs/config.xml"`
 
 ## 返回值
-> 没有返回值
+> 没有返回值。
 
 ## 范例
 >     <% SE.run("Configs/config.xml") %>

@@ -4,7 +4,7 @@ getConfigs
 
 ## 说明
 >     dictionary|string|empty getConfigs(ByVal configPath)
-> 获取配置项
+> 获取配置项。
 
 ## 参数
 > `configPath`
@@ -13,8 +13,7 @@ getConfigs
 >> **范例：**`"system/seDir/Value"`
 
 ## 返回值
-> **类型：**
-    `dictionary` | `string` | `empty`  
+> **类型：**`dictionary` | `string` | `empty`  
 > **说明：**  
 >> 当`configPath`参数为`null`时,返回`dictionary`;  
 >> 当`configPath`参数为 **正确** 的配置项路径时,返回`string`;  

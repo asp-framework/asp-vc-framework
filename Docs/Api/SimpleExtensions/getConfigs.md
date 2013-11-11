@@ -2,24 +2,28 @@ getConfigs
 ==========
 `getConfigs` &mdash; 获取配置项
 
-## 说明
+说明
+----
 >     dictionary|string|empty getConfigs(ByVal configPath)
 > 获取配置项。
 
-## 参数
+参数
+----
 > `configPath`
 >> **类型：**`string` | `null`  
 >> **说明：**配置项路径。  
 >> **范例：**`"system/seDir/Value"`
 
-## 返回值
+返回值
+------
 > **类型：**`dictionary` | `string` | `empty`  
 > **说明：**  
 >> 当`configPath`参数为`null`时,返回`dictionary`;  
 >> 当`configPath`参数为 **正确** 的配置项路径时,返回`string`;  
 >> 当`configPath`参数为 **错误** 的配置项路径时,返回`empty`。
 
-## 范例
+范例
+----
 >
     <!-- 配置文件 -->
     <?xml version="1.0" encoding="UTF-8"?>

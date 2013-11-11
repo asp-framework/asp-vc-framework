@@ -3,7 +3,6 @@
 
 文件目录
 --------
-
 ```
 Demo/                                           实例目录
     Apps/                                       应用目录
@@ -20,21 +19,20 @@ Demo/                                           实例目录
     index.asp                                   入口文件
 Framework/                                      核心框架目录
     Controller/                                 控制器模块
-        SimpleExtensionsController.asp
-    Render/                                     视图渲染模块
-        SimpleExtensionsRender.asp
+    DB/                                         数据库模块
+    Debugging/                                  调试模块
+    Error/                                      错误异常模块
+    File/                                       文件模块
+    I18N/                                       国际化模块
     Router/                                     路由器模块
-        SimpleExtensionsRouter.asp
     String/                                     字符串处理模块
-        SimpleExtensionsString.asp
-        SimpleExtensionsStringMD5.asp
+    View/                                       视图渲染模块
     SimpleExtensions.asp                        SE框架类
     SimpleExtensionsBase.asp                    SE框架基类
 ```
 
 入口文件
 --------
-
 `Demo/index.asp`
 
 站点入口文件。导入 `SimpleExtensions` 类文件，然后调用 `run()` 函数启动框架。  
@@ -62,7 +60,6 @@ Framework/                                      核心框架目录
 
 配置文件
 --------
-
 `Demo/Comfigs/config.xml`
 
 配置文件为XML文件，配置项都包含在 `SEConfigs` 标签内。  
@@ -91,7 +88,6 @@ Framework/                                      核心框架目录
 
 控制器
 ------
-
 `Demo/Apps/HelloWorld/Controllers/IndexController.asp`
 
 控制器类以大驼峰方式命名，命名规则为 `控制器名` + `Controller` 后缀。  
@@ -128,7 +124,6 @@ End Class
 
 布局
 ----
-
 `Demo/Apps/HelloWorld/Views/Layouts/layout.asp`
 
 布局文件中使用 `<% '<!-- #content -->' %>` 标签即可调用对应的视图内容。
@@ -149,7 +144,6 @@ End Class
 
 视图
 ----
-
 `Demo/Apps/HelloWorld/Views/Index/index.asp`
 
 ```html5

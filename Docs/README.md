@@ -6,6 +6,6 @@ SE文档
 
 ```
 Api/                                接口目录
-    SimpleExtensions.md             核心接口
+    SimpleExtensions                核心接口
 QuickStart.md                       快速入门
 ```

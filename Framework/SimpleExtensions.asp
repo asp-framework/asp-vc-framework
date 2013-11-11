@@ -88,17 +88,6 @@ Class SimpleExtensions
 '###########################'
 
     '''
-     ' 读取文件
-     '
-     ' @param string filePath <文件路径>
-     '
-     ' @return string <文件内容>
-     ''
-    Public Function loadFile(ByVal filePath)
-        loadFile = getSimpleExtensionsBaseClass.loadFile(filePath)
-    End Function
-
-    '''
      ' 包含并执行文件
      '
      ' @param string filePath <文件路径>

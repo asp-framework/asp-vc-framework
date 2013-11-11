@@ -19,7 +19,6 @@ Class SimpleExtensionsTest
             "getConfigsTest", _
             "getSEDirTest", _
             "isDevelopmentTest", _
-            "loadFileTest", _
             "getIncludeCodeTest", _
             "getIncludeResultTest", _
             "moduleTest" _
@@ -86,16 +85,6 @@ Class SimpleExtensionsTest
             vActual, _
             "判断是否开发环境异常"
     End Sub
-
-    ' 读取文件测试
-	Public Sub loadFileTest(oTestResult)
-        vActual = SE.loadFile("./ProjectTest/IncludeTest/loadFileTest.asp")
-
-		oTestResult.AssertEquals _
-            "读取文件测试", _
-            vActual, _
-            "读取文件信息异常"
-	End Sub
 
     ' 包含并运行文件测试
     Public Sub getIncludeCodeTest(oTestResult)

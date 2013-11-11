@@ -19,6 +19,7 @@ getConfigs
 >> 当`configPath`参数为`null`时,返回`dictionary`;  
 >> 当`configPath`参数为**正确**的配置项路径时,返回`string`;  
 >> 当`configPath`参数为**错误**的配置项路径时,返回`empty`;
+
 ##### 范例
 >
     <!-- 配置文件 -->

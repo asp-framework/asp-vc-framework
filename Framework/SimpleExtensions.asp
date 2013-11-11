@@ -54,9 +54,9 @@ Class SimpleExtensions
     '''
      ' 获取配置项
      '
-     ' @param string configPath <配置路径,例:"system/seDir/Value">
+     ' @param string|null configPath <配置路径,例:"system/seDir/Value">
      '
-     ' @return dictionary|string <所有配置数据|配置项字符串>
+     ' @return dictionary|string|empty <所有配置数据|配置项字符串>
      ''
     Public Property Get getConfigs(ByVal configPath)
         If IsNull(configPath) Then

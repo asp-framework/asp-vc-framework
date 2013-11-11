@@ -64,9 +64,8 @@ getConfigs
     result = SE.getConfigs("a")
     Response.Write(TypeName(result)
     %>
->>
-> 
-    以上内容输出:
+>   以上内容输出:
+>
         ../Framework
         Attributes
         ../Framework

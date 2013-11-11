@@ -1,11 +1,11 @@
 getIncludeCode
 ==============
-`getIncludeCode` &mdash; 包含文件获取可执行代码(不执行内容)
+`getIncludeCode` &mdash; 包含文件并获取可执行代码(不执行内容)
 
 说明
 ----
 >     string getIncludeCode(ByVal filePath)
-> 包含文件获取可执行代码(不执行内容)
+> 包含文件并获取可执行代码(不执行内容)
 
 参数
 ----

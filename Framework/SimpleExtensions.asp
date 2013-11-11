@@ -97,7 +97,7 @@ Class SimpleExtensions
     End Function
 
     '''
-     ' 包含文件获取可执行代码(不执行内容)
+     ' 包含文件并获取可执行代码(不执行内容)
      '
      ' @param string filePath <文件路径>
      '
@@ -108,7 +108,7 @@ Class SimpleExtensions
     End Function
 
     '''
-     ' 包含文件获取执行后的内容(不输出内容)
+     ' 包含文件并获取执行后的内容(不输出内容)
      '
      ' @param string filePath <文件路径>
      '

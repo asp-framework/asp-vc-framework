@@ -24,14 +24,14 @@ getIncludeCode
 >
     目录文件
 >
-    dir/
+    Dir/
         file.asp
     index.asp
 >>
 >
     <%
     '''
-     ' dir/file.asp 文件
+     ' Dir/file.asp 文件
      ''
     Response.Write("成功执行。")
     %>
@@ -42,7 +42,7 @@ getIncludeCode
      ' index.asp 文件
      ''
     Dim codeString
-    codeString = SE.getIncludeCode("dir/file.asp")
+    codeString = SE.getIncludeCode("Dir/file.asp")
     Execute(codeString)
     %>
 > 运行`index.asp`将得到以下内容：  

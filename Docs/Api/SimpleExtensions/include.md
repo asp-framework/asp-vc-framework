@@ -23,14 +23,14 @@ include
 >
     目录文件
 >
-    dir/
+    Dir/
         file.asp
     index.asp
 > **范例一**：
 >
     <%
     '''
-     ' dir/file.asp 文件
+     ' Dir/file.asp 文件
      ''
     Response.Write("成功执行。")
     %>
@@ -40,7 +40,7 @@ include
     '''
      ' index.asp 文件
      ''
-    SE.include("dir/file.asp")
+    SE.include("Dir/file.asp")
     %>
 > 运行`index.asp`将得到以下内容：  
 >
@@ -49,7 +49,7 @@ include
 >
     <%
     '''
-     ' dir/file.asp 文件
+     ' Dir/file.asp 文件
      ''
     SE.include("../index.asp")
     %>
@@ -61,6 +61,6 @@ include
      ''
     Response.Write("成功执行。")
     %>
-> 运行`dir/file.asp`将得到以下内容：  
+> 运行`Dir/file.asp`将得到以下内容：  
 >
     成功执行。

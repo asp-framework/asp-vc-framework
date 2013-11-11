@@ -14,7 +14,7 @@ getConfigs
 
 ## 返回值
 > **类型：**
-    dictionary|string|empty  
+    `dictionary` | `string` | `empty`  
 > **说明：**  
 >> 当`configPath`参数为`null`时,返回`dictionary`;  
 >> 当`configPath`参数为 **正确** 的配置项路径时,返回`string`;  

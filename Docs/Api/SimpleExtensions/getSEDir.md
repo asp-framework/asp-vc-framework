@@ -4,7 +4,7 @@ getSEDir
 
 说明
 ----
->     string getSEDir()
+>     string getSEDir(void)
 > 获取框架根目录。
 
 参数

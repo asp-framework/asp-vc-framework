@@ -1,8 +1,8 @@
 核心接口
 ====================
 
-`getConfigs` &mdash; 获取配置项
+[getConfigs](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/SimpleExtensions/getConfigs.md) &mdash; 获取配置项
 
-`getSEDir` &mdash; 获取框架根目录
+[getSEDir](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/SimpleExtensions/getSEDir.md) &mdash; 获取框架根目录
 
-`run` &mdash; 运行框架
+[run](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/SimpleExtensions/run.md) &mdash; 运行框架

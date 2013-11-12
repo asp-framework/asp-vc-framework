@@ -7,5 +7,8 @@
 
 <% '<!-- #content -->' %>
 
+<br />
+
+<% '<!-- #contentEndToDo -->' %>
 </body>
 </html>

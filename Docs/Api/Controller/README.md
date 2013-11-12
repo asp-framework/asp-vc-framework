@@ -3,6 +3,8 @@
 
 [getAppDir](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getAppDir.md) &mdash; 获取当前应用目录
 
+[getControllersDir](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getControllersDir.md) &mdash; 获取当前应用的控制器目录
+
 [getLayoutPath](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getLayoutPath.md) &mdash; 获取布局路径
 
 [getViewsDir](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getViewsDir.md) &mdash; 获取当前控制器的视图目录

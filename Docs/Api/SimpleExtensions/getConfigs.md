@@ -33,6 +33,7 @@ getConfigs
             <seDir attributes="Attributes">../Framework</seDir>
             <appsDir>Apps</appsDir>
         </System>
+        ...
     </SEConfigs>
 >>
 >

@@ -1,11 +1,11 @@
 getViewPath
 ===========
-`getViewPath` &mdash; 获取视图路径
+`getViewPath` &mdash; 获取当前控制器视图路径
 
 说明
 ----
 >     string getViewPath(ByVal viewName)
-> 获取视图路径
+> 获取当前控制器视图路径
 
 参数
 ----

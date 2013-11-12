@@ -115,7 +115,7 @@ Class SimpleExtensionsController
     End Property
 
     '''
-     ' 获取视图路径
+     ' 获取当前控制器视图路径
      '
      ' @param string viewName <视图名称>
      '

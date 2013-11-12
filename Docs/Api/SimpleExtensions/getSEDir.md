@@ -19,7 +19,23 @@ getSEDir
 范例
 ----
 >
+    <!-- 配置文件 -->
+    <?xml version="1.0" encoding="UTF-8"?>
+    <SEConfigs>
+        <System>
+            <development>True</development>
+            <seDir>../Framework</seDir>
+            <appsDir>Apps</appsDir>
+        </System>
+        ...
+    </SEConfigs>
+>>
+>
     <% 
     Dim seDir
-    seDir = SE.getSEDir 
+    seDir = SE.getSEDir
+    Response.Write(seDir)
     %>
+> 以上内容输出：
+>
+    ../Framework

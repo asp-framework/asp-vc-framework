@@ -38,7 +38,7 @@ getAppDir
 >
     <%
     Dim appDir
-    appDir = getAppDir
+    appDir = SE.module("Controller").getAppDir
     Response.Write(appDir)
     %>
 > 以上内容输出：

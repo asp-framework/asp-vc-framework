@@ -1,23 +1,22 @@
-getLayoutPath
-=============
-`getLayoutPath` &mdash; 获取布局路径
+getViewPath
+===========
+`getViewPath` &mdash; 获取视图路径
 
 说明
 ----
->     string getLayoutPath(ByVal layoutName)
-> 获取布局路径
+>     string getViewPath(ByVal viewName)
+> 获取视图路径
 
 参数
 ----
-> `layoutName`
->> **类型：**`string`   
->> **说明：**布局名称。  
->> **范例：**`"layout"`
+> `viewName`
+>> **类型：**`string`  
+>> **说明：**视图名称。
 
 返回值
 ------
 > **类型：**`string`  
-> **说明：**布局路径。(路径格式为相对路径，相对路径起始于 **应用目录** 的设置。)
+> **说明：**视图路径。
 
 范例
 ----
@@ -40,10 +39,10 @@ getLayoutPath
 >>
 >
     <%
-    Dim layoutPath
-    layoutPath = SE.module("Controller").getLayoutPath("layout")
-    Response.Write(layoutPath)
+    Dim viewPath
+    viewPath = SE.module("Controller").getViewPath("index")
+    Response.Write(viewPath)
     %>
->   以上内容输出:
+> 以上内容输出：
 >
-    Apps/HelloWorld/Views/Layouts/layout.asp
+    Apps/HelloWorld/Views/Index/index.asp

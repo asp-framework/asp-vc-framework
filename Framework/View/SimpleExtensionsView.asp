@@ -64,9 +64,7 @@ Class SimpleExtensionsView
 
         Dim tagStart, tagEnd
         tagStart = InStr(1, contentCode, CONTENTEND_TAG_LEFT) + 5
-        If tagStart = 5 Then Exit Function
         tagEnd = InStr(tagStart, contentCode, CONTENTEND_TAG_RIGHT) + 4
-
         If InStr(1, Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4)), CONTENTEND_TAG, 1) = 1 Then
             contentEndToDoCode = Mid(contentCode, tagEnd)
             contentCode = Mid(contentCode, 1, tagStart - 6)
@@ -92,9 +90,7 @@ Class SimpleExtensionsView
 
         Dim tagStart, tagEnd
         tagStart = InStr(1, layoutCode, CONTENT_TAG_LEFT) + 5
-        If tagStart = 5 Then Exit Function
         tagEnd = InStr(tagStart, layoutCode, CONTENT_TAG_RIGHT) + 4
-
         If InStr(1, Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4)), CONTENT_TAG, 1) = 1 Then _
             layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentCode & Mid(layoutCode, tagEnd)
     End Function
@@ -110,9 +106,7 @@ Class SimpleExtensionsView
 
         Dim tagStart, tagEnd
         tagStart = InStr(1, layoutCode, CONTENTENDTODO_TAG_LEFT) + 5
-        If tagStart = 5 Then Exit Function
         tagEnd = InStr(tagStart, layoutCode, CONTENTENDTODO_TAG_RIGHT) + 4
-
         If InStr(1, Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4)), CONTENTENDTODO_TAG, 1) = 1 Then _
             layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentEndToDoCode & Mid(layoutCode, tagEnd)
     End Function

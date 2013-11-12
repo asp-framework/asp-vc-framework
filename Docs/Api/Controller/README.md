@@ -5,4 +5,6 @@
 
 [getLayoutPath](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getLayoutPath.md) &mdash; 获取布局路径
 
+[getViewsDir](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getViewsDir.md) &mdash; 获取当前控制器的视图目录
+
 [getViewPath](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getViewPath.md) &mdash; 获取当前控制器视图路径

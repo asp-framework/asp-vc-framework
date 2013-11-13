@@ -12,6 +12,8 @@
 
 > [getDBConnection](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBConnection.md) &mdash; 获取数据库连接
 
+> [getDBConnectionStatus]() &mdash; 获取数据库连接状态
+
 > [getDBName](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBName.md) &mdash; 获取数据库名称
 
 > [getDBPassword](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBPassword.md) &mdash; 获取数据库密码

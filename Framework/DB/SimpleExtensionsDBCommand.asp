@@ -48,9 +48,9 @@ Class SimpleExtensionsDBCommand
     '''
      ' 绑定参数
      '
-     ' @param string name <绑定的参数>
-     ' @param mixed value <绑定的值>
-     ' @param string dataType <绑定值的类型>
+     ' @param string name <绑定的参数名>
+     ' @param mixed value <绑定的参数值>
+     ' @param string dataType <绑定参数的类型>
      '
      ' @return boolean <是否绑定成功>
      ''

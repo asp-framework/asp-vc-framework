@@ -10,6 +10,8 @@
 
 > [executeSql](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/executeSql.md) &mdash; 执行SQL操作
 
+> [getDBName](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBName.md) &mdash; 获取数据库名称
+
 > [getDBSource](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBSource.md) &mdash; 获取数据库源
 
 > [getDBType](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBType.md) &mdash; 获取数据库类型

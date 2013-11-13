@@ -103,14 +103,14 @@ Class SimpleExtensionsDBCommand
      ' @return recordset <数据集>
      ''
     Public Function executeCommand()
-        replaceBindParamerters()
+        parseBindParamerters()
         Set executeCommand = SE.module("DB").executeSql(commandString)
     End Function
 
     '''
-     ' 替换绑定参数
+     ' 解析绑定参数
      ''
-    Private Function replaceBindParamerters()
+    Private Function parseBindParamerters()
         Dim keysArray, nowKey
         keysArray = bindParameterList.Keys
         For Each nowKey In keysArray

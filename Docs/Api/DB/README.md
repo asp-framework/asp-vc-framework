@@ -10,4 +10,6 @@
 
 > [executeSql](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/executeSql.md) &mdash; 执行SQL操作
 
+> [getDBType](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBType.md) &mdash; 获取数据库类型
+
 > [open](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/open.md) &mdash; 打开数据库连接

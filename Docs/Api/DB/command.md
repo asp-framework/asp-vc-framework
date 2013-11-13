@@ -21,5 +21,5 @@ command
 >
     <%
     Dim command
-    Set command = SE.module("DB").command()
+    Set command = SE.module("DB").command
     %>

@@ -137,7 +137,7 @@ Class SimpleExtensionsDB
     '''
      ' 获取数据库源
      '
-     ' @return string <数据库源>
+     ' @return string|empty <数据库源>
      ''
     Public Property Get getDBSource()
         getDBSource = dbSource
@@ -146,7 +146,7 @@ Class SimpleExtensionsDB
     '''
      ' 获取数据库名称
      '
-     ' @return string <数据库名称>
+     ' @return string|empty <数据库名称>
      ''
     Public Property Get getDBName()
         getDBName = dbName
@@ -155,7 +155,7 @@ Class SimpleExtensionsDB
     '''
      ' 获取数据库用户名
      '
-     ' @return string <数据库用户名>
+     ' @return string|empty <数据库用户名>
      ''
     Public Property Get getDBUserName()
         getDBUserName = dbUserName
@@ -164,7 +164,7 @@ Class SimpleExtensionsDB
     '''
      ' 获取数据库密码
      '
-     ' @return string <数据库密码>
+     ' @return string|empty <数据库密码>
      ''
     Public Property Get getDBPassword()
         getDBPassword = dbPassword

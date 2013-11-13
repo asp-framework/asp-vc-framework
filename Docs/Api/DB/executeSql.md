@@ -4,7 +4,7 @@ executeSql
 
 说明
 ----
->     dictionary executeSql(ByVal sqlString)
+>     recordset executeSql(ByVal sqlString)
 > 执行SQL操作
 
 参数

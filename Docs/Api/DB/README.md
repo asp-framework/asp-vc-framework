@@ -16,4 +16,6 @@
 
 > [getDBType](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBType.md) &mdash; 获取数据库类型
 
+> [getDBUserName](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBUserName.md) &mdash; 获取数据库用户名
+
 > [open](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/open.md) &mdash; 打开数据库连接

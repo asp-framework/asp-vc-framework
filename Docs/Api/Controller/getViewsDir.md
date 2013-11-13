@@ -5,7 +5,7 @@ getViewsDir
 说明
 ----
 >     string getViewsDir(void)
-> 获取当前控制器的视图目录
+> 获取当前控制器的视图目录。
 
 参数
 ----

@@ -5,7 +5,7 @@ getControllersDir
 说明
 ----
 >     string getControllersDir(void)
-> 获取当前应用的控制器目录
+> 获取当前应用的控制器目录。
 
 参数
 ----

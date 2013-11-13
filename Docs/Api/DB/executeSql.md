@@ -5,7 +5,7 @@ executeSql
 说明
 ----
 >     recordset executeSql(ByVal sqlString)
-> 执行SQL操作
+> 执行SQL操作。
 
 参数
 ----

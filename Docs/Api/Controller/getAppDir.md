@@ -5,7 +5,7 @@ getAppDir
 说明
 ----
 >     string getAppDir(void)
-> 获取当前应用目录
+> 获取当前应用目录。
 
 参数
 ----

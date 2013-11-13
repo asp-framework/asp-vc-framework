@@ -5,7 +5,7 @@ isDevelopment
 说明
 ----
 >     boolean isDevelopment(void)
-> 判断是否开发环境
+> 判断是否开发环境。
 
 参数
 ----

@@ -5,7 +5,7 @@ module
 说明
 ----
 >     class module(ByVal moduleName)
-> 调用模块
+> 调用模块。
 
 参数
 ----

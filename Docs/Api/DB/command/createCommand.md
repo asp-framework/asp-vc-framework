@@ -5,7 +5,7 @@ createCommand
 说明
 ----
 >     void createCommand(ByVal sqlString)
-> 创建命令
+> 创建命令。
 
 参数
 ----

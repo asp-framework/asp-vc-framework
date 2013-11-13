@@ -5,7 +5,7 @@ bindParameter
 说明
 ----
 >     boolean bindParameter(ByVal name, ByVal value, ByVal dataType)
-> 绑定参数
+> 绑定参数。
 
 参数
 ----
@@ -20,13 +20,13 @@ bindParameter
 > `dataType`
 >> **类型：**`string`  
 >> **说明：**绑定参数的类型。  
->>> 字符串：`"dbString"`  
->>> 整形：`"dbInteger"`
+>>> 字符串：`"dbString"`；  
+>>> 整形：`"dbInteger"`。
 
 返回值
 ------
 > **类型：**`boolean`  
-> **说明：**是否绑定成功
+> **说明：**是否绑定成功。
 
 范例
 ----

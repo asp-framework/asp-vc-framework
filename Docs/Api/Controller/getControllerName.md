@@ -5,7 +5,7 @@ getControllerName
 说明
 ----
 >     string getControllerName(void)
-> 获取当前控制器名称
+> 获取当前控制器名称。
 
 参数
 ----

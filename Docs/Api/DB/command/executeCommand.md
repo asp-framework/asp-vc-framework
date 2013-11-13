@@ -5,7 +5,7 @@ executeCommand
 说明
 ----
 >     recordset executeCommand(void)
-> 执行命令
+> 执行命令。
 
 参数
 ----

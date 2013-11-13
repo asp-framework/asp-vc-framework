@@ -10,6 +10,8 @@
 
 > [executeSql](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/executeSql.md) &mdash; 执行SQL操作
 
+> [getDBConnection](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBConnection.md) &mdash; 获取数据库连接
+
 > [getDBName](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBName.md) &mdash; 获取数据库名称
 
 > [getDBPassword](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBPassword.md) &mdash; 获取数据库密码

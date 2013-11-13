@@ -12,6 +12,8 @@
 
 > [getDBName](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBName.md) &mdash; 获取数据库名称
 
+> [getDBPassword](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBPassword.md) &mdash; 获取数据库密码
+
 > [getDBSource](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBSource.md) &mdash; 获取数据库源
 
 > [getDBType](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/DB/getDBType.md) &mdash; 获取数据库类型

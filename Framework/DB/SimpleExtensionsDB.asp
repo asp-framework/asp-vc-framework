@@ -82,7 +82,7 @@ Class SimpleExtensionsDB
     End Function
 
     '''
-     ' 打开数据库
+     ' 打开数据库连接
      ''
     Public Function open()
         dbParseClassByType.checkConfigs()
@@ -96,7 +96,7 @@ Class SimpleExtensionsDB
     End Function
 
     '''
-     ' 关闭数据库
+     ' 关闭数据库连接
      ''
     Public Function close()
        dbConnectionStatus = dbParseClassByType.close()

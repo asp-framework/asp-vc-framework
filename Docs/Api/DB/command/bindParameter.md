@@ -5,7 +5,7 @@ bindParameter
 说明
 ----
 >     boolean bindParameter(ByVal name, ByVal value, ByVal dataType)
-> 绑定参数。
+> 绑定参数。(创建命令时使用`":参数名"`调用绑定参数。)
 
 参数
 ----

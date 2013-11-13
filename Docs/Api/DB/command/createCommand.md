@@ -11,7 +11,7 @@ createCommand
 ----
 > `sqlString`
 >> **类型：**`string`  
->> **说明：**SQL命令字符串。  
+>> **说明：**SQL命令字符串。(使用`":参数名"`调用绑定参数。)  
 >> **范例：**
 >>
     SELECT userName

@@ -176,7 +176,7 @@ Class SimpleExtensionsDebugging
     Private Sub printDatabaseInfo(ByVal divSetNo)
         Dim tbl
         tbl = makeTable(dbg_DB_Data)
-        tbl = replace(replace(replace(divSets(divSetNo),"#sectname#", "DATABASE"), "#title#", "DATABASE INFO"), "#data#", tbl)
+        tbl = replace(replace(replace(divSets(divSetNo),"#sectname#", "DATABASE"), "#title#", "数据库信息"), "#data#", tbl)
         Response.Write replace(tbl, "|", vbCrlf)
     End Sub
 

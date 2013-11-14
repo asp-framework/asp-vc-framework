@@ -109,13 +109,13 @@ Class SimpleExtensionsDebugging
 
     '******************************************************************************************************************
     ''@SDESCRIPTION: Adds the Database-connection object to the debug-instance. To display Database-information
-    ''@PARAM:   - oSQLDB [object]: connection-object
+    ''@PARAM:   - dbConnection [object]: connection-object
     '******************************************************************************************************************
-    Public Sub setDatabaseInfo(ByVal oSQLDB)
-        dbg_DB_Data = addRow(dbg_DB_Data, "ADO Ver", oSQLDB.Version)
-        dbg_DB_Data = addRow(dbg_DB_Data, "OLEDB Ver", oSQLDB.Properties("OLE DB Version"))
-        dbg_DB_Data = addRow(dbg_DB_Data, "DBMS", oSQLDB.Properties("DBMS Name") & " Ver: " & oSQLDB.Properties("DBMS Version"))
-        dbg_DB_Data = addRow(dbg_DB_Data, "Provider", oSQLDB.Properties("Provider Name") & " Ver: " & oSQLDB.Properties("Provider Version"))
+    Public Sub setDatabaseInfo(ByVal dbConnection)
+        dbg_DB_Data = addRow(dbg_DB_Data, "ADO Ver", dbConnection.Version)
+        dbg_DB_Data = addRow(dbg_DB_Data, "OLEDB Ver", dbConnection.Properties("OLE DB Version"))
+        dbg_DB_Data = addRow(dbg_DB_Data, "DBMS", dbConnection.Properties("DBMS Name") & " Ver: " & dbConnection.Properties("DBMS Version"))
+        dbg_DB_Data = addRow(dbg_DB_Data, "Provider", dbConnection.Properties("Provider Name") & " Ver: " & dbConnection.Properties("Provider Version"))
     End Sub
 
     '******************************************************************************************************************

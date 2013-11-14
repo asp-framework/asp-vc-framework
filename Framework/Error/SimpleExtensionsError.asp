@@ -23,12 +23,23 @@ Class SimpleExtensionsError
     ' @var string <错误消息>
     Private errorMessage
 
+    ' @var string <重定向URL>
+    Private redirectURL
+
 '###########################'
 '###########################'
 
     Private Sub Class_Initialize
         ' 初始化错误定义类
         Set errorDefineClass = New SimpleExtensionsErrorDefine
+        initConfigs()
+    End Sub
+
+    '''
+     ' 初始化配置项
+     ''
+    Private Sub initConfigs()
+        redirectURL = SE.getConfigs("Error/redirectURL/Value")
     End Sub
 
 '###########################'
@@ -46,7 +57,7 @@ Class SimpleExtensionsError
         If SE.isDevelopment Then
             Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
         Else
-            ' 生产环境事件
+            If Not IsEmpty(redirectURL) Then Response.Redirect(redirectURL)
         End If
         Response.End()
     End Function
@@ -79,6 +90,24 @@ Class SimpleExtensionsError
      ''
     Public Property Get getErrorMessage()
         getErrorMessage = errorMessage
+    End Property
+
+    '''
+     ' 设置重定向URL
+     '
+     ' @param string urlString <URL字符串>
+     ''
+    Public Function setRedirectURL(ByVal urlString)
+        redirectURL = urlString
+    End Function
+
+    '''
+     ' 获取重定向URL
+     '
+     ' @return string|null <重定向URL字符串> 
+     ''
+    Public Property Get getRedirectURL()
+        getRedirectURL = redirectURL
     End Property
 
 End Class

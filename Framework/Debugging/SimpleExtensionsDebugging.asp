@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsDebugging.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.8
+ ' @version 2013.11.14
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -12,18 +12,18 @@ Class SimpleExtensionsDebugging
 
     Private dbg_Enabled
     Private dbg_Show
-    Private dbg_RequestTime
-    Private dbg_FinishTime
+    Private dbg_RequestDate
+    Private dbg_RequestTimer
+    Private dbg_FinishTimer
     Private dbg_Data
     Private dbg_DB_Data
-    Private dbg_AllVars
     Private dbg_Show_default
     Private divSets(2)
 
     'Construktor => set the default values
     Private Sub Class_Initialize()
-        dbg_RequestTime = Now()
-        dbg_AllVars = False
+        dbg_RequestDate = Now()
+        dbg_RequestTimer = Timer()
         Set dbg_Data = Server.CreateObject("Scripting.Dictionary")
         divSets(0) = "<tr><td style=""cursor:pointer;"" onclick=""javascript:if (document.getElementById('data#sectname#').style.display=='none'){document.getElementById('data#sectname#').style.display='block';}else{document.getElementById('data#sectname#').style.display='none';}""><div id=""sect#sectname#"" style=""font-weight:bold;cursor:pointer;background:#7EA5D7;color:white;padding-left:4px;padding-right:4px;padding-bottom:2px;"">|#title#|  <div id=data#sectname# style=""cursor:text;display:none;background:#FFF;padding-left:8px;"" onclick=""window.event.cancelBubble = true;"">|#data#|  </div>|</div>|"
         divSets(1) = "<tr><td><div id=""sect#sectname#"" style=""font-weight:bold;cursor:pointer;background:#7EA5D7;color:white;padding-left:4px;padding-right:4px;padding-bottom:2px;"" onclick=""javascript:if (document.getElementById('data#sectname#').style.display=='none'){document.getElementById('data#sectname#').style.display='block';}else{document.getElementById('data#sectname#').style.display='none';}"">|#title#|  <div id=data#sectname# style=""cursor:text;display:block;background:#FFF;padding-left:8px;"" onclick=""window.event.cancelBubble = true;"">|#data#|  </div>|</div>|"
@@ -31,29 +31,32 @@ Class SimpleExtensionsDebugging
         dbg_Show_default = "0,0,0,0,0,0,0,0,0,0,0"
     End Sub
 
-    Public Property Let enabled(ByVal bNewValue) ''[bool] Sets "enabled" to true or false
-        dbg_Enabled = bNewValue
-    End Property
+    '''
+     ' 启用调试
+     ''
+    Public Function enabled()
+        dbg_Enabled = True
+    End Function
 
-    Public Property Get enabled ''[bool] Gets the "enabled" value
-        enabled = dbg_Enabled
-    End Property
+    '''
+     ' 关闭调试
+     ''
+    Public Function disable()
+        dbg_Enabled = False
+    End Function
 
-    Public Property Let show(ByVal bNewValue) ''[string] Sets the debugging panel. Where each digit in the string represents a debug information pane in order (11 of them). 1=open, 0=closed
-        dbg_Show = bNewValue
-    End Property
-
-    Public Property Get show ''[string] Gets the debugging panel.
-        show = dbg_Show
-    End Property
-
-    Public Property Let allVars(ByVal bNewValue) ''[bool] Sets wheather all variables will be displayed or not. true/false
-        dbg_AllVars = bNewValue
-    End Property
-
-    Public Property Get allVars ''[bool] Gets if all variables will be displayed.
-        AlallVarslVars = dbg_AllVars
-    End Property
+    '''
+     ' 设置面板状态
+     ' 
+     ' @param string panelsStatusString <面板状态字符串，
+     ' 11个面板按顺序以逗号分割
+     ' 0：关闭
+     ' 1：开启
+     ' 例："1,0,0,0,0,0,0,0,0,0,0">
+     ''
+    Public Function setPanelsStatus(ByVal panelsStatusString)
+        dbg_Show = panelsStatusString
+    End Function
 
     '******************************************************************************************************************
     ''@SDESCRIPTION: Adds a variable to the debug-informations.
@@ -78,13 +81,13 @@ Class SimpleExtensionsDebugging
     '******************************************************************************************************************
     Public Sub draw()
         If dbg_Enabled Then
-            dbg_FinishTime = Now()
+            dbg_FinishTimer = Timer()
 
             Dim divSet, x
-            divSet = split(dbg_Show_default,",")
-            dbg_Show = split(dbg_Show,",")
+            divSet = Split(dbg_Show_default,",")
+            dbg_Show = Split(dbg_Show,",")
 
-            For x = 0 to ubound(dbg_Show)
+            For x = 0 To UBound(dbg_Show)
                 divSet(x) = dbg_Show(x)
             Next
 
@@ -108,7 +111,7 @@ Class SimpleExtensionsDebugging
     ''@SDESCRIPTION: Adds the Database-connection object to the debug-instance. To display Database-information
     ''@PARAM:   - oSQLDB [object]: connection-object
     '******************************************************************************************************************
-    Public Sub grabDatabaseInfo(ByVal oSQLDB)
+    Public Sub setDatabaseInfo(ByVal oSQLDB)
         dbg_DB_Data = addRow(dbg_DB_Data, "ADO Ver", oSQLDB.Version)
         dbg_DB_Data = addRow(dbg_DB_Data, "OLEDB Ver", oSQLDB.Properties("OLE DB Version"))
         dbg_DB_Data = addRow(dbg_DB_Data, "DBMS", oSQLDB.Properties("DBMS Name") & " Ver: " & oSQLDB.Properties("DBMS Version"))
@@ -157,8 +160,8 @@ Class SimpleExtensionsDebugging
     '******************************************************************************************************************
     Private Sub printSummaryInfo(ByVal divSetNo)
         Dim tmp, tbl
-        tbl = addRow(tbl, "请求时间", dbg_RequestTime)
-        tbl = addRow(tbl, "耗时", DateDiff("s", dbg_RequestTime, dbg_FinishTime) & " seconds")
+        tbl = addRow(tbl, "请求时间", dbg_RequestDate)
+        tbl = addRow(tbl, "耗时", FormatNumber((dbg_FinishTimer - dbg_RequestTimer), 10) & " 秒")
         tbl = addRow(tbl, "请求类型", Request.ServerVariables("REQUEST_METHOD"))
         tbl = addRow(tbl, "服务器状态", Response.Status)
         tbl = addRow(tbl, "脚本引擎", ScriptEngine & " " & ScriptEngineMajorVersion & "." & ScriptEngineMinorVersion & "." & ScriptEngineBuildVersion)
@@ -190,9 +193,7 @@ Class SimpleExtensionsDebugging
             ElseIf IsArray(collection(vItem)) Then
                 tbl = addRow(tbl, vItem, "{Array}")
             Else
-                If dbg_AllVars Then
-                    tbl = addRow(tbl, "<nobr>" & vItem & "</nobr>", Server.HTMLEncode(collection(vItem)))
-                ElseIf (name = "服务器变量" And vItem <> "ALL_HTTP" And vItem <> "ALL_RAW") Or name <> "服务器变量" Then
+                If (name = "服务器变量" And vItem <> "ALL_HTTP" And vItem <> "ALL_RAW") Or name <> "服务器变量" Then
                     If collection(vItem) <> "" Then
                         tbl = addRow(tbl, vItem, Server.HTMLEncode(collection(vItem))) ' & " {" & TypeName(collection(vItem)) & "}")
                     Else

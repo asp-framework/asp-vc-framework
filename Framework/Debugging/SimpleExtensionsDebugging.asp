@@ -79,7 +79,7 @@ Class SimpleExtensionsDebugging
     '******************************************************************************************************************
     ''@SDESCRIPTION: Draws the Debug-panel
     '******************************************************************************************************************
-    Public Sub draw()
+    Public Sub renderPanel()
         If dbg_Enabled Then
             dbg_FinishTimer = Timer()
 

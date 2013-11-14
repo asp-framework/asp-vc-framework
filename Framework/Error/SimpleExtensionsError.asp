@@ -59,7 +59,6 @@ Class SimpleExtensionsError
         Else
             If Not IsEmpty(redirectURL) Then Response.Redirect(redirectURL)
         End If
-        Response.End()
     End Function
 
     '''

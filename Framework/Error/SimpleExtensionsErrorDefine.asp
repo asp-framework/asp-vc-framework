@@ -10,7 +10,7 @@
 <%
 Class SimpleExtensionsErrorDefine
 
-    ' @var array <错误定义数组>
+    ' @var array <异常错误定义数组>
     Private errorDefine(3)
 
 '###########################'
@@ -24,9 +24,9 @@ Class SimpleExtensionsErrorDefine
     End Sub
 
     '''
-     ' 获取错误编号的定义
+     ' 获取异常错误编号的定义
      '
-     ' @return string <错误编号的定义>
+     ' @return string <异常错误编号的定义>
      ''
     Public Property Get getErrorDefine(ByVal errorDefineNumber)
         getErrorDefine = errorDefine(errorDefineNumber)

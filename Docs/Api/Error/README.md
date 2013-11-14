@@ -1,6 +1,8 @@
 异常错误模块接口
 ================
 
+> [getError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getError.md) &mdash; 获取当前异常错误编号
+
 > [throwError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/throwError.md) &mdash; 抛出异常错误
 
 异常错误定义

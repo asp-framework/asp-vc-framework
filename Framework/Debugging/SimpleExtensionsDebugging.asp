@@ -50,8 +50,8 @@ Class SimpleExtensionsDebugging
      ' 
      ' @param string panelsStatusString <面板状态字符串，
      ' 11个面板按顺序以逗号分割
-     ' 0：关闭
-     ' 1：开启
+     ' 0：隐藏
+     ' 1：显示
      ' 例："1,0,0,0,0,0,0,0,0,0,0">
      ''
     Public Function setPanelsStatus(ByVal panelsStatusString)

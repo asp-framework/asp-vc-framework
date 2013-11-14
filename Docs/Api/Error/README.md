@@ -5,6 +5,8 @@
 
 > [getErrorDefine](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getErrorDefine.md) &mdash; 获取异常错误编号定义
 
+> [getErrorMessage](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getErrorMessage.md) &mdash; 获取异常错误消息
+
 > [throwError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/throwError.md) &mdash; 抛出异常错误
 
 异常错误定义

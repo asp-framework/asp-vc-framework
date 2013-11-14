@@ -3,6 +3,8 @@
 
 > [getError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getError.md) &mdash; 获取当前异常错误编号
 
+> [getErrorDefine](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getErrorDefine.md) &mdash; 获取异常错误编号定义
+
 > [throwError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/throwError.md) &mdash; 抛出异常错误
 
 异常错误定义

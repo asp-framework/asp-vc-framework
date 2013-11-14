@@ -7,6 +7,8 @@
 
 > [getErrorMessage](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getErrorMessage.md) &mdash; 获取异常错误消息
 
+> [setRedirectURL](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/setRedirectURL.md) &mdash; 设置重定向URL
+
 > [throwError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/throwError.md) &mdash; 抛出异常错误
 
 异常错误定义

@@ -18,3 +18,5 @@
 > [SimpleExtensins](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/SimpleExtensions) &mdash; 核心接口
 
 > [String](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/String) &mdash; 字符串模块接口
+
+> [View](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/View) &mdash; 视图模块接口

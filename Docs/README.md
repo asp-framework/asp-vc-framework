@@ -15,5 +15,6 @@ Api/                                接口目录
     Router/                         路由器模块接口
     SimpleExtensions/               核心接口
     String/                         字符串模块接口
+    View/                           视图模块接口
 QuickStart.md                       快速入门
 ```

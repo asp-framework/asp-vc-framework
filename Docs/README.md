@@ -11,6 +11,7 @@ Api/                                接口目录
     Debugging/                      调试模块接口
     Error/                          异常错误模块接口
     File/                           文件模块接口
+    I18N/                           国际化模块接口
     SimpleExtensions/               核心接口
 QuickStart.md                       快速入门
 ```

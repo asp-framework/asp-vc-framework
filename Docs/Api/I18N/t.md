@@ -58,7 +58,7 @@ t
     content = SE.module("I18N").t("Body/content/Value")
     Response.Write(content)
     %>
-> 以上内容输出；
+> 以上内容输出：
 >
     SE
     你好～！

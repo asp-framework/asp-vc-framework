@@ -13,4 +13,6 @@
 
 > [I18N](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/I18N) &mdash; 国际化模块接口
 
+> [Router](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Router) &mdash; 路由器模块接口
+
 > [SimpleExtensins](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/SimpleExtensions) &mdash; 核心接口

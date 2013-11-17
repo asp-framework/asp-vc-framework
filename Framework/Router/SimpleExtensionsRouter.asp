@@ -11,12 +11,16 @@
 Class SimpleExtensionsRouter
 
     ' @var string <应用名称>
+    ' 获取函数: getAppName
     Private appName
 
     ' @var string <控制器名称>
+    ' 设置函数: setControllerName
+    ' 获取函数: getControllerName
     Private controllerName
 
     ' @var string <动作名称>
+    ' 获取函数: getActionName
     Private actionName
 
 '###########################'
@@ -87,6 +91,15 @@ Class SimpleExtensionsRouter
     Public Property Get getAppName()
         getAppName = appName
     End Property
+
+    '''
+     ' 设置控制器名称
+     '
+     ' @param string theControllerName <控制器名称>
+     ''
+    Public Function setControllerName(ByVal theControllerName)
+        controllerName = theControllerName
+    End Function
 
     '''
      ' 获取控制器名称

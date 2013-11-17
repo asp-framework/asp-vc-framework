@@ -18,10 +18,6 @@ Class SimpleExtensionsController
     ' 获取函数: getControllersDir
     Private controllersDir
 
-    ' @var string <当前控制器视图目录>
-    ' 获取函数: getViewsDir
-    Private viewsDir
-
     ' @var string <当前控制器名称>
     ' 获取函数: getControllerName
     Private controllerName
@@ -42,8 +38,6 @@ Class SimpleExtensionsController
     Private Sub initConfigs()
         appDir = SE.getConfigs("System/appsDir/Value") & "/" & SE.module("Router").getAppName
         controllersDir = getAppDir & "/Controllers"
-        controllerName = SE.module("Router").getControllerName
-        viewsDir = getAppDir & "/Views/" & getControllerName
     End Sub
 
     '''
@@ -84,7 +78,11 @@ Class SimpleExtensionsController
      ' @param string actionName <动作名称>
      ''
     Public Function runAction(ByVal controllerName, ByVal actionName)
+        Dim permutationCache
+        permutationCache = SE.module("Router").getControllerName
+        SE.module("Router").setControllerName(controllerName)
         Call runFunction(controllerName, actionName & "Action", Null)
+        SE.module("Router").setControllerName(permutationCache)
     End Function
 
     '''
@@ -165,7 +163,16 @@ Class SimpleExtensionsController
      ' @return string <当前控制器的视图目录>
      ''
     Public Property Get getViewsDir()
-        getViewsDir = viewsDir
+        getViewsDir = getAppDir & "/Views/" & Me.getControllerName
+    End Property
+
+    '''
+     ' 获取当前控制器名称
+     '
+     ' @return string <当前控制器名称>
+     ''
+    Public Property Get getControllerName()
+        getControllerName = SE.module("Router").getControllerName
     End Property
 
     '''
@@ -175,15 +182,6 @@ Class SimpleExtensionsController
      ''
     Public Property Get getControllersDir()
         getControllersDir = controllersDir
-    End Property
-
-    '''
-     ' 获取当前控制器名称
-     '
-     ' @return string <当前控制器名称>
-     ''
-    Public Property Get getControllerName()
-        getControllerName = controllerName
     End Property
 
 End Class

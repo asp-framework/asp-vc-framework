@@ -25,6 +25,9 @@ Class SimpleExtensionsController
     ' @var string <当前控制器名称>
     Private controllerName
 
+    ' @var dictionary controllersQueue <控制器队列>
+    Private controllersQueue
+
 '###########################'
 '###########################'
 
@@ -50,8 +53,7 @@ Class SimpleExtensionsController
      ''
     Public Function run()
         checkError()
-        SE.include(controllerPath)
-        runAction()
+        Call runAction(Me.getControllerName, SE.module("Router").getActionName)
     End Function
 
     '''
@@ -75,19 +77,43 @@ Class SimpleExtensionsController
 
     '''
      ' 运行动作
+     ' 
+     ' @param string controllerName <控制器名称>
+     ' @param string actionName <动作名称>
      ''
-    Private Function runAction()
-        Dim controller
-        Set controller = Eval("New " & getControllerName & "Controller")
+    Public Function runAction(ByVal controllerName, ByVal actionName)
+        Call runFunction(controllerName, actionName & "Action", Null)
+    End Function
+
+    '''
+     ' 运行方法
+     ' 
+     ' @param string controllerName <控制器名称>
+     ' @param string functionName <方法名称>
+     ' @param array|null parameters <方法需要的参数>
+     ''
+    Public Function runFunction(ByVal controllerName, ByVal functionName, ByVal parameters)
+        If VarType(controllersQueue) <> 9 Then _
+            Set controllersQueue = Server.CreateObject("Scripting.Dictionary")
+
+        ' 向队列添加控制器
+        If Not controllersQueue.Exists(controllerName) Then
+            SE.include(getControllersDir & "/" & controllerName & "Controller.asp")
+            Call controllersQueue.Add(controllerName, Eval("New " & controllerName & "Controller"))
+        End If
+
+        ' 方法需要的参数
+        Dim functionParameters
+        If Not IsNull(parameters) Then functionParameters = Join(parameters, ", ")
+
         On Error Resume Next
-        Execute("controller." & SE.module("Router").getActionName & "Action()")
-        If Err.Number = 438 Then
+        Execute("Call controllersQueue.Item(""" & controllerName & """)." & _
+            functionName & "(" & functionParameters & ")")
+        If Err.Number = 438 Then _
             Call SE.module("Error").throwError( _
                 2, _
-                "动作【" & SE.module("Router").getActionName & "】不存在。" _
+                "方法【" & functionName & "】不存在。" _
             )
-            Err.Clear
-        End If
         On Error GoTo 0
     End Function
 

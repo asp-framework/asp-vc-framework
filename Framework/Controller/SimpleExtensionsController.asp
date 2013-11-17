@@ -106,7 +106,13 @@ Class SimpleExtensionsController
 
         ' 方法需要的参数
         Dim functionParameters
-        If Not IsNull(parameters) Then functionParameters = Join(parameters, ", ")
+        If IsArray(parameters) Then
+            functionParameters = "parameters(0)"
+            Dim parametersCounter
+            For parametersCounter = 1 To UBound(parameters)
+                functionParameters = functionParameters & ", parameters(" & CStr(parametersCounter) & ")"
+            Next
+        End If
 
         On Error Resume Next
         Execute("Call controllersQueue.Item(""" & controllerName & """)." & _

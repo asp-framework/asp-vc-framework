@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsController.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.7
+ ' @version 2013.11.17
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -11,18 +11,19 @@
 Class SimpleExtensionsController
 
     ' @var string <当前应用目录>
+    ' 获取函数: getAppDir
     Private appDir
 
     ' @var string <当前应用控制器目录>
+    ' 获取函数: getControllersDir
     Private controllersDir
 
     ' @var string <当前控制器视图目录>
+    ' 获取函数: getViewsDir
     Private viewsDir
 
-    ' @var string <控制器路径>
-    Private controllerPath
-
     ' @var string <当前控制器名称>
+    ' 获取函数: getControllerName
     Private controllerName
 
     ' @var dictionary controllersQueue <控制器队列>
@@ -43,9 +44,6 @@ Class SimpleExtensionsController
         controllersDir = getAppDir & "/Controllers"
         controllerName = SE.module("Router").getControllerName
         viewsDir = getAppDir & "/Views/" & getControllerName
-        controllerPath = _
-            getControllersDir _
-            & "/" & SE.module("Router").getControllerName & "Controller" & ".asp"
     End Sub
 
     '''
@@ -68,6 +66,10 @@ Class SimpleExtensionsController
             )
 
         ' 判断控制器是否存在
+        Dim controllerPath
+        controllerPath = _
+            getControllersDir _
+            & "/" & SE.module("Router").getControllerName & "Controller" & ".asp"
         If Not SE.module("File").fileExists(controllerPath) Then _
             Call SE.module("Error").throwError( _
                 2, _
@@ -77,7 +79,7 @@ Class SimpleExtensionsController
 
     '''
      ' 运行动作
-     ' 
+     '
      ' @param string controllerName <控制器名称>
      ' @param string actionName <动作名称>
      ''
@@ -87,7 +89,7 @@ Class SimpleExtensionsController
 
     '''
      ' 运行方法
-     ' 
+     '
      ' @param string controllerName <控制器名称>
      ' @param string functionName <方法名称>
      ' @param array|null parameters <方法需要的参数>

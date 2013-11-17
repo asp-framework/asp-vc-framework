@@ -44,7 +44,6 @@ Class SimpleExtensionsBase
                     2, _
                     "导入文件【" & filePath & "】失败" _
                 )
-                Err.Clear
             End If
             On Error GoTo 0
             loadFile = .ReadText
@@ -346,8 +345,7 @@ Class SimpleExtensionsBase
         On Error Resume Next
         Me.include(modulePath)
         ' 类重命名时的处理
-        If Err.Number = 1041 Then Err.Clear
-        On Error GoTo 0
+        If Err.Number = 1041 Then On Error GoTo 0
         Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
     End Function
 

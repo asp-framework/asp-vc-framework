@@ -14,3 +14,5 @@
 > [getViewsDir](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/getViewsDir.md) &mdash; 获取当前控制器的视图目录
 
 > [runAction](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/runAction.md) &mdash; 运行动作
+
+> [runFunction](http://git.oschina.net/gaoxiang/SE-For-ASP/blob/master/Docs/Api/Controller/runFunction.md) &mdash; 运行方法

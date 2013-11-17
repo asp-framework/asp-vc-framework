@@ -4,7 +4,7 @@ include
 
 说明
 ----
->     void include(ByVal filePath)
+>     void include(string filePath)
 > 包含并执行文件。
 
 参数

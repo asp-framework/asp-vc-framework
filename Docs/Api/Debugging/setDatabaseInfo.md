@@ -4,7 +4,7 @@ setDatabaseInfo
 
 说明
 ----
->     void setDatabaseInfo(ByVal dbConnection)
+>     void setDatabaseInfo(object dbConnection)
 > 设置数据库信息。(设置的信息将会在 **数据库信息** 面版中显示。)
 
 参数

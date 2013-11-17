@@ -4,7 +4,7 @@ t
 
 说明
 ----
->     dictionary|string t(ByVal keyPath)
+>     dictionary|string t(string|null keyPath)
 > 翻译指定信息到当前语言。
 
 参数

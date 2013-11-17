@@ -4,7 +4,7 @@ module
 
 说明
 ----
->     class module(ByVal moduleName)
+>     class module(string moduleName)
 > 调用模块。
 
 参数

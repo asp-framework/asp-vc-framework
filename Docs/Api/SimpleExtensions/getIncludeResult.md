@@ -4,7 +4,7 @@ getIncludeResult
 
 说明
 ----
->     string getIncludeResult(ByVal filePath)
+>     string getIncludeResult(string filePath)
 > 包含文件并获取执行后的内容。(不输出内容。)
 
 参数

@@ -4,7 +4,7 @@ getLayoutPath
 
 说明
 ----
->     string getLayoutPath(ByVal layoutName)
+>     string getLayoutPath(string layoutName)
 > 获取布局路径。
 
 参数

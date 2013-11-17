@@ -4,7 +4,7 @@ setPanelsStatus
 
 说明
 ----
->     void setPanelsStatus(ByVal panelsStatusString)
+>     void setPanelsStatus(string panelsStatusString)
 > 设置面板状态。
 
 参数

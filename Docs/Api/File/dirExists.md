@@ -4,7 +4,7 @@ dirExists
 
 说明
 ----
->     boolean dirExists(ByVal directory)
+>     boolean dirExists(string directory)
 > 判断目录是否存在。
 
 参数

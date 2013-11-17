@@ -4,7 +4,7 @@ run
 
 说明  
 ----
->     void run(ByVal configFilePath)
+>     void run(string configFilePath)
 > 启动框架。(使用此方法必须设置配置文件变量)
 
 参数

@@ -4,7 +4,7 @@ createCommand
 
 说明
 ----
->     void createCommand(ByVal sqlString)
+>     void createCommand(string sqlString)
 > 创建命令。
 
 参数

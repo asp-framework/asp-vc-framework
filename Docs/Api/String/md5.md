@@ -4,7 +4,7 @@ md5
 
 说明
 ----
->     string md5(ByVal stringToMD5)
+>     string md5(string stringToMD5)
 > MD5加密。
 
 参数

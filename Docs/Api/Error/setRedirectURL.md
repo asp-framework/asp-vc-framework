@@ -4,7 +4,7 @@ setRedirectURL
 
 说明
 ----
->     string setRedirectURL(ByVal urlString)
+>     string setRedirectURL(string urlString)
 > 设置重定向URL。
 
 参数

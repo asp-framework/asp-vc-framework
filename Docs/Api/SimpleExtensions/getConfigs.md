@@ -4,7 +4,7 @@ getConfigs
 
 说明
 ----
->     dictionary|string|empty getConfigs(ByVal configPath)
+>     dictionary|string|empty getConfigs(string|null configPath)
 > 获取配置项。
 
 参数

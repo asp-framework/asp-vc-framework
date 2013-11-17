@@ -4,7 +4,7 @@ fileExists
 
 说明
 ----
->     boolean fileExists(ByVal filePath)
+>     boolean fileExists(string filePath)
 > 判断文件是否存在。
 
 参数

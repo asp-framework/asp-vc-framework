@@ -4,7 +4,7 @@ setLocalLanguage
 
 说明
 ----
->     void setLocalLanguage(ByVal language)
+>     void setLocalLanguage(string language)
 > 设置当前语言。
 
 参数

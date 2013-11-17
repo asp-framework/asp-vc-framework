@@ -4,7 +4,7 @@ render
 
 说明
 ----
->     void render(ByVal viewName, ByVal layoutName, ByRef parameters)
+>     void render(string viewName, string|null layoutName, dictionary|null parameters)
 > 渲染视图。
 
 参数

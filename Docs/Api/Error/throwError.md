@@ -4,7 +4,7 @@ throwError
 
 说明
 ----
->     void throwError(ByVal throwErrorNumber, ByVal message)
+>     void throwError(integer throwErrorNumber, string message)
 > 抛出异常错误。
 
 参数

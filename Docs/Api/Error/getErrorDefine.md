@@ -4,7 +4,7 @@ getErrorDefine
 
 说明
 ----
->     string getErrorDefine(ByVal errorNumber)
+>     string getErrorDefine(integer errorNumber)
 > 获取异常错误编号定义。
 
 参数

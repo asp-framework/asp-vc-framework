@@ -4,7 +4,7 @@ setVariable
 
 说明
 ----
->     void setVariable(ByVal variableName, ByVal variable)
+>     void setVariable(string variableName, mix variable)
 > 设置参数。(设置的参数会在 **变量** 面板中显示。)
 
 参数

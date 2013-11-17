@@ -34,7 +34,7 @@ runAction
 >>
 >
     <%
-    SE.module("Controller").runAction("Index", "index")
+    Call SE.module("Controller").runAction("Index", "index")
     %>
 > 以上内容输出：
 >

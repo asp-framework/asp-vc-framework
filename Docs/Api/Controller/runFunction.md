@@ -41,8 +41,8 @@ runFunction
 >>
 >
     <%
-    SE.module("Controller").runFunction("Index", "index", Null)
-    SE.module("Controller").runFunction("Index", "test", Array("运行方法。"))
+    Call SE.module("Controller").runFunction("Index", "index", Null)
+    Call SE.module("Controller").runFunction("Index", "test", Array("运行方法。"))
     %>
 > 以上内容输出：
 >

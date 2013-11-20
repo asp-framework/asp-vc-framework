@@ -98,6 +98,42 @@ Class SimpleExtensionsDBCommand
     End Function
 
     '''
+     ' 移除绑定参数
+     ' 
+     ' @param string <绑定的参数名称>
+     ' 
+     ' @return boolean <是否移除成功>
+     ''
+    Public Function removeBindParameter(ByVal name)
+        removeBindParameter = False
+
+        If VarType(name) <> 8 Then
+            Call SE.module("Error").throwError( _
+                2, _
+                "方法【removeBindParameter】参数类型错误。" _
+            )
+            Exit Function
+        End If
+
+        bindParameterList.Remove(name)
+
+        If Not bindParameterList.Exists(name) Then removeBindParameter = True
+    End Function
+
+    '''
+     ' 移除所有绑定参数
+     ' 
+     ' @return boolean <是否移除成功>
+     ''
+    Public Function removeAllBindParameter()
+        removeAllBindParameter = False
+
+        bindParameterList.RemoveAll()
+
+        If bindParameterList.Count = 0 Then removeAllBindParameter =True
+    End Function
+
+    '''
      ' 执行命令
      '
      ' @return recordset <数据集>

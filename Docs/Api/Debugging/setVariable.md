@@ -4,7 +4,7 @@ setVariable
 
 说明
 ----
->     void setVariable(string variableName, mix variable)
+>     void setVariable(string variableName, mixed variable)
 > 设置参数。(设置的参数会在 **变量** 面板中显示。)
 
 参数
@@ -14,7 +14,7 @@ setVariable
 >> **说明：**参数名称。
 >
 > `variable`
->> **类型：**`mix`  
+>> **类型：**`mixed`  
 >> **说明：**参数。
 
 返回值

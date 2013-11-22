@@ -113,52 +113,6 @@ Class SimpleExtensionsBase
     End Function
 
     '''
-     ' 处理包含的内容
-     '
-     ' @param code string <存放包含文件转译后的可运行代码>
-     ' @param result string <存放包含文件执行后的内容>
-     ' @param content string <文件内容>
-     ''
-    Private Function processIncludeContent(ByRef code, ByRef result, ByRef content)
-        Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
-        ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
-
-        ' codeCache: 代码处理时的临时缓存
-        ' codeEnd: 标签内容结束位置
-        ' codeStart: 标签内容开始位置
-        Dim codeCache, codeEnd, codeStart
-
-        codeEnd = 1 : codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
-        Do While True
-            ' 输出非代码内容
-            If codeStart = 2 Then
-                codeCache = Mid(content, codeEnd)
-            Else
-                codeCache = Mid(content, codeEnd, codeStart - codeEnd - 2)
-            End If
-            codeCache = Replace(codeCache, """", """""")
-            codeCache = Replace(codeCache, vbCrLf, """ & vbCrLf & """)
-            codeCache = "Response.Write(""" & codeCache & """)"
-            code = code & (codeCache & vbCrLf) : codeCache = Null
-
-            ' 跳出解析
-            If codeStart = 2 Then Exit Do
-
-            codeEnd = InStr(codeStart, content, ASP_TAG_RIGHT) + 2
-            codeCache = Trim(Mid(content, codeStart, codeEnd - codeStart - 2))
-
-            ' 判断特殊标签
-            Select Case Left(codeCache, 1)
-                Case "@" : codeCache = Null
-                Case "=" : codeCache = "Response.Write(" & Mid(codeCache, 2) & ")"
-            End Select
-
-            code = code & (codeCache & vbCrLf) : codeCache = Null
-            codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
-        Loop
-    End Function
-
-    '''
      ' ASP #include 标签处理
      '
      ' @param string filePath <文件路径>
@@ -202,6 +156,55 @@ Class SimpleExtensionsBase
         Loop
 
         aspIncludeTagProcess = content
+    End Function
+
+    '''
+     ' 处理包含的内容
+     '
+     ' @param code string <存放包含文件转译后的可运行代码>
+     ' @param result string <存放包含文件执行后的内容>
+     ' @param content string <文件内容>
+     ''
+    Private Function processIncludeContent(ByRef code, ByRef result, ByRef content)
+        Dim ASP_TAG_LEFT, ASP_TAG_RIGHT
+        ASP_TAG_LEFT = "<" & "%" : ASP_TAG_RIGHT = "%" & ">"
+
+        ' codeCache: 代码处理时的临时缓存
+        ' codeEnd: 标签内容结束位置
+        ' codeStart: 标签内容开始位置
+        Dim codeCache, codeEnd, codeStart
+
+        codeEnd = 1 : codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
+        Do While True
+            ' 输出非代码内容
+            If codeStart = 2 Then
+                codeCache = Mid(content, codeEnd)
+            Else
+                codeCache = Mid(content, codeEnd, codeStart - codeEnd - 2)
+            End If
+            codeCache = Replace(codeCache, vbCrLf, Space(0))
+            codeCache = Replace(codeCache, """", """""")
+            codeCache = "Response.Write(""" & codeCache & """)"
+            code = code & (codeCache & vbCrLf) : codeCache = Null
+
+            ' 跳出解析
+            If codeStart = 2 Then Exit Do
+
+            codeEnd = InStr(codeStart, content, ASP_TAG_RIGHT) + 2
+            codeCache = Trim(Mid(content, codeStart, codeEnd - codeStart - 2))
+
+            ' 判断特殊标签
+            Select Case Left(codeCache, 1)
+                Case "@"
+                    codeCache = Null
+                Case "="
+                    codeCache = Mid(codeCache, 2)
+                    codeCache = "Response.Write(" & codeCache & ")"
+            End Select
+
+            code = code & (codeCache & vbCrLf) : codeCache = Null
+            codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
+        Loop
     End Function
 
     '''

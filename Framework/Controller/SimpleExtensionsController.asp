@@ -22,7 +22,7 @@ Class SimpleExtensionsController
     ' 获取函数: getControllerName
     Private controllerName
 
-    ' @var dictionary controllersQueue <控制器队列>
+    ' @var dictionary <控制器队列>
     Private controllersQueue
 
 '###########################'

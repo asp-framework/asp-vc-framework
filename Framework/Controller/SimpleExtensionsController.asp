@@ -78,11 +78,7 @@ Class SimpleExtensionsController
      ' @param string actionName <动作名称>
      ''
     Public Function runAction(ByVal controllerName, ByVal actionName)
-        Dim permutationCache
-        permutationCache = SE.module("Router").getControllerName
-        SE.module("Router").setControllerName(controllerName)
         Call runFunction(controllerName, actionName & "Action", Null)
-        SE.module("Router").setControllerName(permutationCache)
     End Function
 
     '''
@@ -93,6 +89,11 @@ Class SimpleExtensionsController
      ' @param array|null parameters <方法需要的参数>
      ''
     Public Function runFunction(ByVal controllerName, ByVal functionName, ByVal parameters)
+        ' 设置方法所在控制器为当前控制器
+        Dim permutationCache
+        permutationCache = SE.module("Router").getControllerName
+        SE.module("Router").setControllerName(controllerName)
+
         If VarType(controllersQueue) <> 9 Then _
             Set controllersQueue = Server.CreateObject("Scripting.Dictionary")
 
@@ -121,6 +122,9 @@ Class SimpleExtensionsController
                 "方法【" & functionName & "】不存在。" _
             )
         On Error GoTo 0
+
+        ' 还原当前控制器
+        SE.module("Router").setControllerName(permutationCache)
     End Function
 
 '###########################'

@@ -13,7 +13,7 @@
 <%
 Class SimpleExtensions
 
-    ' @var class simpleExtensionsBaseClass <SE框架基类>
+    ' @var class <SE框架基类>
     Private simpleExtensionsBaseClass
 
 '###########################'

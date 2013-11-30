@@ -10,11 +10,11 @@
 <%
 Class SimpleExtensionsBase
 
-    ' @var dictionary configs <配置项>
+    ' @var dictionary <配置项>
     ' 获取函数: getConfigs
     Private configs
 
-    ' @var dictionary modulesQueue <模块队列>
+    ' @var dictionary <模块队列>
     ' 设置函数: addModule
     ' 获取函数: getModule
     Private modulesQueue

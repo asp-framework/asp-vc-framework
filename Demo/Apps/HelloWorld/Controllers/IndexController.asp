@@ -15,9 +15,10 @@ Class IndexController
 
 SE.module("Debugging").enabled()
 SE.module("Debugging").renderPanel()
-Response.Write(Request.ServerVariables("REQUEST_METHOD"))
+
+Response.Write(SE.module("Request").getUrlWith("Path", "a=b&h=c&k"))
 Response.Write("<br />")
-SE.module("Request")
+
         Call SE.module("View").render( _
             "index", _
             "layout", _

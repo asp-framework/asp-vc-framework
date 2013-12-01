@@ -16,7 +16,7 @@ Class IndexController
 SE.module("Debugging").enabled()
 SE.module("Debugging").renderPanel()
 
-Response.Write(SE.module("Request").getUrlWith("Path", "a=b&h=c&k"))
+Response.Write(SE.module("Request").getUrlWith("DirWith", "-k"))
 Response.Write("<br />")
 
         Call SE.module("View").render( _

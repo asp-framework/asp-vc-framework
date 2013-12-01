@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRequest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.30
+ ' @version 2013.12.1
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -33,7 +33,7 @@ Class SimpleExtensionsRequest
         host = Request.ServerVariables("HTTP_HOST")
         path = Request.ServerVariables("PATH_INFO")
         If Len(Request.ServerVariables("QUERY_STRING")) > 0 Then _
-            queryString = "?" & Request.ServerVariables("QUERY_STRING")
+            queryString = Request.ServerVariables("QUERY_STRING")
 
         Set urlTypes = Server.CreateObject("Scripting.Dictionary")
         Call urlTypes.Add("Dir", 0)
@@ -56,8 +56,8 @@ Class SimpleExtensionsRequest
         Select Case urlTypeValue
             Case 0 : getUrl = Left(path, InStrRev(path, "/"))
             Case 1 : getUrl = path
-            Case 2 : getUrl = Left(path, InStrRev(path, "/")) & queryString
-            Case 3 : getUrl = path & queryString
+            Case 2 : getUrl = Left(path, InStrRev(path, "/")) & "?" & queryString
+            Case 3 : getUrl = path & "?" & queryString
         End Select
     End Function
 
@@ -116,26 +116,22 @@ Class SimpleExtensionsRequest
         cacheArray = Split(commandQueryString, "&")
 
         ' 不带 QueryString 的路径
-        If urlTypeValue = 0 Or urlTypeValue = 1 Then
+        If urlTypeValue = 0 Or urlTypeValue = 1 Or IsEmpty(queryString) Then
             For Each cacheArrayValue In cacheArray
-                If StrComp(Left(cacheArrayValue, 1), "-") Then
-                    If InStr(cacheArrayValue, "=") Then
-                        executeCommandQueryString = _
-                            executeCommandQueryString & _
-                            "&" & cacheArrayValue
-                    Else
-                        executeCommandQueryString = _
-                            executeCommandQueryString & _
-                            "&" & cacheArrayValue & "=" & _
-                            Request.QueryString(cacheArrayValue)
-                    End If
-                End If
+                executeCommandQueryString = _
+                    executeCommandQueryString & _
+                    noQueryStringValueProcess(cacheArrayValue)
             Next
-        End If
 
         ' 带 QueryString 的路径
-        If urlTypeValue = 2 Or urlTypeValue = 3 Then
-
+        ElseIf (urlTypeValue = 2 Or urlTypeValue = 3) Then
+            executeCommandQueryString = "&" & queryString
+            For Each cacheArrayValue In cacheArray
+                executeCommandQueryString = hasQueryStringValueProcess( _
+                    executeCommandQueryString, _
+                    cacheArrayValue _
+                )
+            Next
         End If
 
         executeCommandQueryString = Replace( _
@@ -145,6 +141,66 @@ Class SimpleExtensionsRequest
             1, _
             1 _
         )
+    End Function
+
+
+    '''
+     ' 不带 QueryString 的路径 参数处理
+     '
+     ' @param string value <需要处理的值>
+     '
+     ' @return string <处理后的QueryString项>
+     ''
+    Private Function noQueryStringValueProcess(ByVal value)
+        If InStr(value, "-") = 1 Then Exit Function
+
+        Dim queryString
+        If InStr(value, "=") Then
+            queryString = "&" & value
+
+        ElseIf Len(Request.QueryString(value)) > 0 Then _
+            queryString = _
+                "&" & value & "=" & _
+                Request.QueryString(value)
+        End If
+
+        noQueryStringValueProcess = queryString
+    End Function
+
+    '''
+     ' 带 QueryString 的路径 参数处理
+     '
+     ' @param string queryString <处理的询问字符串>
+     ' @param string value <需要处理的值>
+     '
+     ' @return string <处理后的询问字符串>
+     ''
+    Private Function hasQueryStringValueProcess(ByVal queryString, Byval value)
+        Dim startPos, endPos
+
+        startPos = InStr(queryString, "&" & value)
+        If startPos Then _
+            endPos = InStr(startPos+1, queryString, "&")-1
+
+        If InStr(value, "-") = 1 Then
+            startPos = InStr(queryString, "&" & Mid(value, 2))
+            If startPos Then
+                endPos = InStr(startPos+1, queryString, "&")-1
+                If endPos > 0 Then
+                    queryString = _
+                        Left(queryString, startPos-1) & _
+                        Mid(queryString, endPos+1)
+                Else
+                    queryString = Left(queryString, startPos-1)
+                End If
+            End If
+        ElseIf InStr(value, "=") Then
+
+        Else
+
+        End If
+
+        hasQueryStringValueProcess = queryString
     End Function
 
 End Class

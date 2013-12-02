@@ -13,12 +13,6 @@ Class IndexController
         Call parameters.Add("title", "SE")
         Call parameters.Add("content", "Hello World")
 
-SE.module("Debugging").enabled()
-SE.module("Debugging").renderPanel()
-
-Response.Write(SE.module("Request").getUrlWith("DirWith", "-k"))
-Response.Write("<br />")
-
         Call SE.module("View").render( _
             "index", _
             "layout", _

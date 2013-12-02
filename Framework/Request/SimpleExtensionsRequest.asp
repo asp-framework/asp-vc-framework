@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRequest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.12.1
+ ' @version 2013.12.2
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -127,7 +127,7 @@ Class SimpleExtensionsRequest
         ElseIf (urlTypeValue = 2 Or urlTypeValue = 3) Then
             executeCommandQueryString = "&" & queryString
             For Each cacheArrayValue In cacheArray
-                executeCommandQueryString = hasQueryStringValueProcess( _
+                Call hasQueryStringValueProcess( _
                     executeCommandQueryString, _
                     cacheArrayValue _
                 )
@@ -136,10 +136,7 @@ Class SimpleExtensionsRequest
 
         executeCommandQueryString = Replace( _
             executeCommandQueryString, _
-            "&", _
-            "?", _
-            1, _
-            1 _
+            "&", "?", 1, 1 _
         )
     End Function
 
@@ -172,35 +169,41 @@ Class SimpleExtensionsRequest
      '
      ' @param string queryString <处理的询问字符串>
      ' @param string value <需要处理的值>
-     '
-     ' @return string <处理后的询问字符串>
      ''
-    Private Function hasQueryStringValueProcess(ByVal queryString, Byval value)
-        Dim startPos, endPos
+    Private Function hasQueryStringValueProcess(ByRef queryString, Byval value)
+        Dim startPos, endPos, tagPos
 
-        startPos = InStr(queryString, "&" & value)
-        If startPos Then _
-            endPos = InStr(startPos+1, queryString, "&")-1
-
+        ' 删除
         If InStr(value, "-") = 1 Then
             startPos = InStr(queryString, "&" & Mid(value, 2))
-            If startPos Then
-                endPos = InStr(startPos+1, queryString, "&")-1
-                If endPos > 0 Then
-                    queryString = _
-                        Left(queryString, startPos-1) & _
-                        Mid(queryString, endPos+1)
-                Else
-                    queryString = Left(queryString, startPos-1)
-                End If
-            End If
-        ElseIf InStr(value, "=") Then
 
-        Else
+            If startPos = 0 Then Exit Function
 
+            endPos = InStr(startPos+1, queryString, "&")-1
+            queryString = Left(queryString, startPos-1)
+            ' 赋加当前处理参数之后的参数
+            If endPos > 0 Then _
+                queryString = queryString & Mid(queryString, endPos+1)
+
+            Exit Function
         End If
 
-        hasQueryStringValueProcess = queryString
+        ' 修改
+        If InStr(value, "=") Then
+            tagPos = InStr(value, "=")
+            startPos = InStr(queryString, "&" & Left(value, tagPos))
+
+            If startPos = 0 Then
+                queryString = queryString & "&" & value
+                Exit Function
+            End If
+
+            endPos = InStr(startPos+1, queryString, "&")-1
+            queryString = Left(queryString, startPos-1) & "&" & value
+            ' 赋加当前处理参数之后的参数
+            If endPos > 0 Then _
+                queryString = queryString & Mid(queryString, endPos+1)
+        End If
     End Function
 
 End Class

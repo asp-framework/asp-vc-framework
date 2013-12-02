@@ -32,8 +32,9 @@ Class SimpleExtensionsDBCommand
      ''
     Private Sub initDataTypeList()
         Set dataTypeList = Server.CreateObject("Scripting.Dictionary")
-        Call dataTypeList.Add("dbString", 0)
-        Call dataTypeList.Add("dbInteger", 1)
+        Call dataTypeList.Add("dbValue", 1)
+        Call dataTypeList.Add("dbString", 2)
+        Call dataTypeList.Add("dbInteger", 3)
     End Sub
 
     '''
@@ -82,13 +83,16 @@ Class SimpleExtensionsDBCommand
         End If
         dataType = dataTypeList.Item(dataType)
         Select Case dataType
+            ' dbValue
+            Case 1
+                value = value
             ' dbString
-            Case 0
+            Case 2
                 value = Replace(value, "'", "''")
                 value = "'" & value & "'"
                 value = CStr(value)
             ' dbInteger
-            Case 1
+            Case 3
                 If IsNumeric(value) Then
                     value = CInt(value)
                 Else

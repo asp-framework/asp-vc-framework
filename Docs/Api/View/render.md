@@ -19,7 +19,7 @@ render
 >
 > `parameters`
 >> **类型：**`dictionary` | `null`  
->> **说明：**参数
+>> **说明：**参数。
 
 返回值
 ------

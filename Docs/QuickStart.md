@@ -24,6 +24,7 @@ Framework/                                      核心框架目录
     Error/                                      错误异常模块
     File/                                       文件模块
     I18N/                                       国际化模块
+    Request/                                    请求模块
     Router/                                     路由器模块
     String/                                     字符串处理模块
     View/                                       视图渲染模块
@@ -126,7 +127,8 @@ End Class
 ----
 `Demo/Apps/HelloWorld/Views/Layouts/layout.asp`
 
-布局文件中使用 `<% '<!-- #content -->' %>` 标签即可调用对应的视图内容。
+布局文件中使用 `<% '<!-- #content -->' %>` 标签即可调用对应的视图内容。  
+`<% '<!-- #contentEndToDo -->' %>` 标签将调用视图中 `<% '<!-- #contentEnd -->' %>` 标签之后的内容。
 
 ```html5
 <!DOCTYPE html>
@@ -136,7 +138,12 @@ End Class
 </head>
 <body>
 
-<% '<!-- #content -->' %>
+    <% '<!-- #content -->' %>
+
+    <br />
+
+    <% '<!-- #contentEndToDo -->' %>
+
 
 </body>
 </html>
@@ -146,6 +153,18 @@ End Class
 ----
 `Demo/Apps/HelloWorld/Views/Index/index.asp`
 
+`content` 为控制器中传入的变量。
+
 ```html5
 <%= content %>
+
+<% '<!-- #contentEnd -->' %>
+<% Response.Write("End Code") %>
+```
+
+执行输出
+--------
+```html5
+Hello World 
+End Code
 ```

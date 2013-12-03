@@ -5,10 +5,11 @@
 </head>
 <body>
 
-<% '<!-- #content -->' %>
+    <% '<!-- #content -->' %>
 
-<br />
+    <br />
 
-<% '<!-- #contentEndToDo -->' %>
+    <% '<!-- #contentEndToDo -->' %>
+
 </body>
 </html>

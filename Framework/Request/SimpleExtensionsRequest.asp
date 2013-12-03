@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRequest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.12.2
+ ' @version 2013.12.3
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -36,8 +36,7 @@ Class SimpleExtensionsRequest
         host = Request.ServerVariables("HTTP_HOST")
         path = Request.ServerVariables("PATH_INFO")
         dir = Left(path, InStrRev(path, "/"))
-        If Len(Request.ServerVariables("QUERY_STRING")) > 0 Then _
-            queryString = Request.ServerVariables("QUERY_STRING")
+        queryString = processQueryString(Request.ServerVariables("QUERY_STRING"))
 
         Set urlTypes = Server.CreateObject("Scripting.Dictionary")
         Call urlTypes.Add("Dir", 0)
@@ -45,6 +44,26 @@ Class SimpleExtensionsRequest
         Call urlTypes.Add("DirWith", 2)
         Call urlTypes.Add("PathWith", 3)
     End Sub
+
+    '''
+     ' 处理 queryString
+     '
+     ' @param string queryString <询问字符串>
+     ' 
+     ' @return string|empty <处理后的询问字符串>
+     ''
+    Private Function processQueryString(ByVal queryString)
+        processQueryString = Empty
+        If Len(queryString) <= 0 Then Exit Function
+
+        Dim queryStringItem, queryStringArray
+        queryStringArray = Split(queryString, "&")
+        For Each queryStringItem In queryStringArray
+            If Len(queryStringItem) > 0 Then _
+                processQueryString = processQueryString & queryStringItem & "&"
+        Next
+        processQueryString = Left(processQueryString, Len(processQueryString)-1)
+    End Function
 
     '''
      ' 获取URL。

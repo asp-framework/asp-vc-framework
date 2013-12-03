@@ -4,7 +4,8 @@ getUrl
 
 说明
 ----
->     string getUrl(string|integer urlType)
+>     string|null getUrl(string|integer urlType)
+> 获取URL。
 
 参数
 ----
@@ -41,7 +42,7 @@ getUrl
 >
     url1 = SE.module("Request").getUrl("PathWith")
     url2 = SE.module("Request").getUrl(3)
-    Response.Write(url1 & "<br />" & url2 "<br />")
+    Response.Write(url1 & "<br />" & url2)
     %>
 > 以上内容输出：
 >

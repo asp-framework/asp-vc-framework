@@ -62,7 +62,7 @@ Class SimpleExtensionsRequest
     End Function
 
     '''
-     ' 获取URL,并赋上参数。
+     ' 获取URL，并赋上参数。
      '
      ' @param string|integer urlType <获取的URL类型>
      ' @param string|null commandQueryString <询问命令字符串>

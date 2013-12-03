@@ -12,6 +12,7 @@ Api/                                接口目录
     Error/                          异常错误模块接口
     File/                           文件模块接口
     I18N/                           国际化模块接口
+    Request/                        请求模块接口
     Router/                         路由器模块接口
     SimpleExtensions/               核心接口
     String/                         字符串模块接口

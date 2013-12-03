@@ -16,6 +16,9 @@ Class SimpleExtensionsRequest
     ' @var string <路径>
     Private path
 
+    ' @var string <目录>
+    Private dir
+
     ' @var string <HTTP请求信息字符串>
     Private queryString
 
@@ -32,6 +35,7 @@ Class SimpleExtensionsRequest
     Private Sub init()
         host = Request.ServerVariables("HTTP_HOST")
         path = Request.ServerVariables("PATH_INFO")
+        dir = Left(path, InStrRev(path, "/"))
         If Len(Request.ServerVariables("QUERY_STRING")) > 0 Then _
             queryString = Request.ServerVariables("QUERY_STRING")
 
@@ -54,10 +58,18 @@ Class SimpleExtensionsRequest
         Dim urlTypeValue : urlTypeValue = getUrlTypeValue(urlType)
 
         Select Case urlTypeValue
-            Case 0 : getUrl = Left(path, InStrRev(path, "/"))
-            Case 1 : getUrl = path
-            Case 2 : getUrl = Left(path, InStrRev(path, "/")) & "?" & queryString
-            Case 3 : getUrl = path & "?" & queryString
+            Case 0
+                getUrl = dir
+            Case 1
+                getUrl = path
+            Case 2
+                getUrl = dir
+                If Not IsEmpty(queryString) Then _
+                    getUrl = getUrl & "?" & queryString
+            Case 3
+                getUrl = path
+                If Not IsEmpty(queryString) Then _
+                    getUrl = getUrl & "?" & queryString
         End Select
     End Function
 
@@ -75,7 +87,7 @@ Class SimpleExtensionsRequest
 
         ' 目录式 + QueryString
         If urlTypeValue = 0 Or urlTypeValue = 2 Then _
-            getUrlWith = Left(path, InStrRev(path, "/")) & _
+            getUrlWith = dir & _
                 executeCommandQueryString(urlTypeValue, commandQueryString)
 
         ' 路径式 + QueryString

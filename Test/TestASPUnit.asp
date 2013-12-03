@@ -15,6 +15,8 @@ Option Explicit
 %>
 <!-- #include file = "Include/ASPUnitRunner.asp" -->
 
+<!-- #include file = "../Framework/SimpleExtensions.asp" -->
+
 <!-- 导入测试文件 -->
 <!-- #include file = "Units/SimpleExtensionsBaseTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsTest.asp" -->

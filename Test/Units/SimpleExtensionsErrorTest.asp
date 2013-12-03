@@ -19,7 +19,7 @@ Class SimpleExtensionsErrorTest
     End Function
 
     Public Sub SetUp()
-        ' Response.Write("SetUp<br>")
+        SE.getSimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
     End Sub
 
     Public Sub TearDown()

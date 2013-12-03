@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsFileTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.7
+ ' @version 2013.12.3
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -20,7 +20,7 @@ Class SimpleExtensionsFileTest
     End Function
 
     Public Sub SetUp()
-        ' Response.Write("SetUp<br>")
+        SE.getSimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
     End Sub
 
     Public Sub TearDown()

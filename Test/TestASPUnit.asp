@@ -16,8 +16,7 @@ Option Explicit
 <!-- #include file = "Include/ASPUnitRunner.asp" -->
 
 <!-- #include file = "../Framework/SimpleExtensions.asp" -->
-
-<!-- 导入测试文件 -->
+<% ' 导入测试文件 %>
 <!-- #include file = "Units/SimpleExtensionsBaseTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsRouterTest.asp" -->
@@ -26,6 +25,8 @@ Option Explicit
 <!-- #include file = "Units/SimpleExtensionsDBTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsErrorTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsFileTest.asp" -->
+<!-- #include file = "Units/SimpleExtensionsRequestTest.asp" -->
+<% ' /导入测试文件 %>
 
 <%
 	Dim oRunner
@@ -40,6 +41,7 @@ Option Explicit
     oRunner.AddTestContainer New SimpleExtensionsDBTest
     oRunner.AddTestContainer New SimpleExtensionsErrorTest
     oRunner.AddTestContainer New SimpleExtensionsFileTest
+    oRunner.AddTestContainer New SimpleExtensionsRequestTest
 
 	oRunner.Display()
 %>

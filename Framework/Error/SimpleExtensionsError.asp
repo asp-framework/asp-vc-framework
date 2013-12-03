@@ -2,14 +2,14 @@
 '''
  ' SimpleExtensionsError.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.14
+ ' @version 2013.12.3
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
 
-<!-- 导入支持文件 -->
+<% ' 导入支持文件 %>
     <!-- #include file = "SimpleExtensionsErrorDefine.asp" -->
-<!-- /导入支持文件 -->
+<% ' /导入支持文件 %>
 
 <%
 Class SimpleExtensionsError

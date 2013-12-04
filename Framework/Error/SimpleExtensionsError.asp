@@ -56,6 +56,7 @@ Class SimpleExtensionsError
         errorMessage = message
         If SE.isDevelopment Then
             Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
+            Response.End()
         Else
             If Not IsEmpty(redirectURL) Then Response.Redirect(redirectURL)
         End If

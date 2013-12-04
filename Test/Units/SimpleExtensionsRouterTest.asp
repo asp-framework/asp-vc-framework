@@ -7,8 +7,6 @@
  ''
 %>
 
-<!-- #include file = "../../Framework/Router/SimpleExtensionsRouter.asp" -->
-
 <%
 Class SimpleExtensionsRouterTest
 

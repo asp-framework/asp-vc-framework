@@ -99,7 +99,10 @@ Class SimpleExtensionsController
 
         ' 向队列添加控制器
         If Not controllersQueue.Exists(controllerName) Then
+            Response.Buffer = True
+            Response.Flush()
             SE.include(getControllersDir & "/" & controllerName & "Controller.asp")
+            Response.Clear()
             Call controllersQueue.Add(controllerName, Eval("New " & controllerName & "Controller"))
         End If
 

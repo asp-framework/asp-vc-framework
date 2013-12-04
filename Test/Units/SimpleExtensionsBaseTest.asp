@@ -50,11 +50,10 @@ Class SimpleExtensionsBaseTest
         vActual = SimpleExtensionsBaseClass.getIncludeCode("./ProjectTest/IncludeTest/IncludeTest/includeTest1.asp")
 
 		oTestResult.AssertEquals _
-            "Response.Write(""开始文件导入测试<br/>"")" & vbCrLf _
+            "Response.Write(""开始文件导入测试<br/>"" & vbCrLf)" & vbCrLf _
             & "Dim output : output = ""成功输出内容""" & vbCrLf _
-            & "Response.Write("""")" & vbCrLf _
-            & "Response.Write(""output:""&output)" & vbCrLf _
-            & "Response.Write("""")" & vbCrLf, _
+            & "Response.Write(vbCrLf)" & vbCrLf _
+            & "Response.Write(""output:""&output)" & vbCrLf, _
             vActual, _
             "包含文件异常"
     End Sub
@@ -62,9 +61,8 @@ Class SimpleExtensionsBaseTest
     ' 包含文件获取执行后的内容测试
     Public Sub getIncludeResultTest(oTestResult)
         vActual = SimpleExtensionsBaseClass.getIncludeResult("./ProjectTest/IncludeTest/IncludeTest/includeTest1.asp")
-
         oTestResult.AssertEquals _
-            "开始文件导入测试<br/>" & "output:成功输出内容", _
+            "开始文件导入测试<br/>" & vbCrLf & vbCrLf & "output:成功输出内容", _
             vActual, _
             "载入配置文件异常"
     End Sub

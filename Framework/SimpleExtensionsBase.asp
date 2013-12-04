@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBase.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.30
+ ' @version 2013.12.4
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -142,14 +142,17 @@ Class SimpleExtensionsBase
                 contentCache = Trim(Mid(contentCache, 9))
                 filePath = Replace(filePath, "\", "/")
                 If InStr(1,contentCache, "file", 1) = 1 Then
-                    filePath = Mid(filePath,1,InstrRev(filePath,"/")) & Replace(Trim(Mid(Trim(Mid(contentCache, 5)), 2)), """", "")
+                    Dim fileName
+                    fileName = Replace(Trim(Mid(Trim(Mid(contentCache, 5)), 2)), """", "")
+                    filePath = Mid(filePath,1,InstrRev(filePath,"/")) & fileName
                 ElseIf InStr(contentCache, "virtual", 1) = 1 Then
                     filePath = Replace(Trim(Mid(Trim(Mid(contentCache, 8)), 2)), """", "")
                 End If
                 contentCache = Empty
 
                 ' 替换标签为文件内容
-                content = Mid(content, 1, codeStart - 5) & aspIncludeTagProcess(filePath) & Mid(content, codeEnd)
+                content = Mid(content, 1, codeStart - 5) & _
+                    aspIncludeTagProcess(filePath) & Mid(content, codeEnd)
 
                 codeEnd = 1
             End If
@@ -174,24 +177,28 @@ Class SimpleExtensionsBase
         ' codeStart: 标签内容开始位置
         Dim codeCache, codeEnd, codeStart
 
-        codeEnd = 1 : codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
+        codeEnd = 1 : codeStart = InStr(codeEnd, content, ASP_TAG_LEFT)+2
         Do While True
             ' 输出非代码内容
             If codeStart = 2 Then
                 codeCache = Mid(content, codeEnd)
             Else
-                codeCache = Mid(content, codeEnd, codeStart - codeEnd - 2)
+                codeCache = Mid(content, codeEnd, codeStart-codeEnd-2)
             End If
-            codeCache = Replace(codeCache, vbCrLf, Space(0))
-            codeCache = Replace(codeCache, """", """""")
-            codeCache = "Response.Write(""" & codeCache & """)"
-            code = code & (codeCache & vbCrLf) : codeCache = Null
+            If Len(codeCache) Then
+                codeCache = Replace(codeCache, """", """""")
+                codeCache = Replace(codeCache, vbCrLf, """ & vbCrLf & """)
+                codeCache = "Response.Write(""" & codeCache & """)"
+                codeCache = Replace(codeCache, """"" & ", Space(0))
+                codeCache = Replace(codeCache, " & """"", Space(0))
+                code = code & (codeCache & vbCrLf) : codeCache = Null
+            End If
 
             ' 跳出解析
             If codeStart = 2 Then Exit Do
 
-            codeEnd = InStr(codeStart, content, ASP_TAG_RIGHT) + 2
-            codeCache = Trim(Mid(content, codeStart, codeEnd - codeStart - 2))
+            codeEnd = InStr(codeStart, content, ASP_TAG_RIGHT)+2
+            codeCache = Trim(Mid(content, codeStart, codeEnd-codeStart-2))
 
             ' 判断特殊标签
             Select Case Left(codeCache, 1)
@@ -203,7 +210,7 @@ Class SimpleExtensionsBase
             End Select
 
             code = code & (codeCache & vbCrLf) : codeCache = Null
-            codeStart = InStr(codeEnd, content, ASP_TAG_LEFT) + 2
+            codeStart = InStr(codeEnd, content, ASP_TAG_LEFT)+2
         Loop
     End Function
 
@@ -240,12 +247,18 @@ Class SimpleExtensionsBase
             Select Case nowNode.nodeType
                 ' 元素节点
                 Case 1
-                    Call nowConfigs.Add(nowNode.NodeName, Server.CreateObject("Scripting.Dictionary"))
+                    Call nowConfigs.Add( _
+                        nowNode.NodeName, Server.CreateObject("Scripting.Dictionary") _
+                    )
 
                     ' 节点属性
-                    Call nowConfigs.Item(nowNode.NodeName).Add("Attributes", Server.CreateObject("Scripting.Dictionary"))
+                    Call nowConfigs.Item(nowNode.NodeName).Add( _
+                        "Attributes", Server.CreateObject("Scripting.Dictionary") _
+                    )
                     For Each attributes In nowNode.Attributes
-                        Call nowConfigs.Item(nowNode.NodeName).Item("Attributes").Add(attributes.NodeName, attributes.NodeValue)
+                        Call nowConfigs.Item(nowNode.NodeName).Item("Attributes").Add( _
+                            attributes.NodeName, attributes.NodeValue _
+                        )
                     Next
 
                     Call processConfigs(nowNode, nowConfigs.Item(nowNode.NodeName))
@@ -282,7 +295,8 @@ Class SimpleExtensionsBase
             pathArray = Split(configPath, "/")
             evalString = "configs"
             For Each nowPath In pathArray
-                If Len(nowPath) > 0 Then evalString = evalString & ".Item(""" & nowPath & """)"
+                If Len(nowPath) > 0 Then _
+                    evalString = evalString & ".Item(""" & nowPath & """)"
             Next
             On Error Resume Next
             getConfigs = Eval(evalString)
@@ -339,17 +353,24 @@ Class SimpleExtensionsBase
      ' @param string moduleName <模块名称>
      ''
     Private Function addModule(ByVal moduleName)
-        If VarType(modulesQueue) <> 9 Then Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
+        If VarType(modulesQueue) <> 9 Then _
+            Set modulesQueue = Server.CreateObject("Scripting.Dictionary")
 
         If modulesQueue.Exists(moduleName) Then Exit Function
 
         Dim modulePath
-        modulePath = Me.getSEDir & "/" & moduleName & "/" & "SimpleExtensions" & moduleName & ".asp"
+        modulePath = Me.getSEDir & "/" & moduleName & "/" & _
+            "SimpleExtensions" & moduleName & ".asp"
         On Error Resume Next
+        Response.Buffer = True
+        Response.Flush()
         Me.include(modulePath)
+        Response.Clear()
         ' 类重命名时的处理
         If Err.Number = 1041 Then On Error GoTo 0
-        Call modulesQueue.Add(moduleName, Eval("New " & "SimpleExtensions" & moduleName))
+        Call modulesQueue.Add( _
+            moduleName, Eval("New " & "SimpleExtensions" & moduleName) _
+        )
     End Function
 
     '''

@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRender.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.12
+ ' @version 2013.12.4
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -30,7 +30,9 @@ Class SimpleExtensionsView
      ' @param dictionary|null &parameters <参数>
      ''
     Public Function render(ByVal viewName, ByVal layoutName, ByRef parameters)
-        contentCode = SE.getIncludeCode(SE.module("Controller").getViewPath(viewName))
+        contentCode = SE.getIncludeCode( _
+            SE.module("Controller").getViewPath(viewName) _
+        )
         separateContentCode()
 
         ' 定义传入变量
@@ -48,7 +50,9 @@ Class SimpleExtensionsView
         End If
 
         ' 渲染布局
-        layoutCode = SE.getIncludeCode(SE.module("Controller").getLayoutPath(layoutName))
+        layoutCode = SE.getIncludeCode( _
+            SE.module("Controller").getLayoutPath(layoutName) _
+        )
         replaceSETag()
         Execute(layoutCode)
     End Function
@@ -67,8 +71,10 @@ Class SimpleExtensionsView
         If tagStart = 5 Then Exit Function
         tagEnd = InStr(tagStart, contentCode, CONTENTEND_TAG_RIGHT) + 4
 
-        If InStr(1, Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4)), CONTENTEND_TAG, 1) = 1 Then
-            contentEndToDoCode = Mid(contentCode, tagEnd)
+        Dim searchedContentEndTag
+        searchedContentEndTag = Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4))
+        If InStr(1, searchedContentEndTag, CONTENTEND_TAG, 1) = 1 Then
+            contentEndToDoCode = Mid(contentCode, tagEnd+2)
             contentCode = Mid(contentCode, 1, tagStart - 6)
         End If
     End Function
@@ -95,8 +101,11 @@ Class SimpleExtensionsView
         If tagStart = 5 Then Exit Function
         tagEnd = InStr(tagStart, layoutCode, CONTENT_TAG_RIGHT) + 4
 
-        If InStr(1, Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4)), CONTENT_TAG, 1) = 1 Then _
-            layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentCode & Mid(layoutCode, tagEnd)
+        Dim searchedContentTag
+        searchedContentTag = Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4))
+        If InStr(1, searchedContentTag, CONTENT_TAG, 1) = 1 Then _
+            layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentCode & _
+                Mid(layoutCode, tagEnd)
     End Function
 
     '''
@@ -113,8 +122,11 @@ Class SimpleExtensionsView
         If tagStart = 5 Then Exit Function
         tagEnd = InStr(tagStart, layoutCode, CONTENTENDTODO_TAG_RIGHT) + 4
 
-        If InStr(1, Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4)), CONTENTENDTODO_TAG, 1) = 1 Then _
-            layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentEndToDoCode & Mid(layoutCode, tagEnd)
+        Dim searchedContentendToDoTag
+        searchedContentendToDoTag = Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4))
+        If InStr(1, searchedContentendToDoTag, CONTENTENDTODO_TAG, 1) = 1 Then _
+            layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentEndToDoCode & _
+                Mid(layoutCode, tagEnd)
     End Function
 
 End Class

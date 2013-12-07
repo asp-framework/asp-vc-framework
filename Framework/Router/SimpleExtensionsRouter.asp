@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRouter.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.11.4
+ ' @version 2013.12.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -76,6 +76,18 @@ Class SimpleExtensionsRouter
      ''
     Private Function loadDefaultConfigs()
         If IsEmpty(appName) Then appName = Se.getConfigs("Router/appName/Value")
+
+        ' 运行当前应用的配置文件
+        Dim configFilePath
+        configFilePath = SE.getConfigs("System/appsDir/Value") & _
+            "/" & appName & "/Configs/config.xml"
+        Dim fs
+        Set fs = Server.CreateObject("Scripting.FileSystemObject")
+        If fs.FileExists(Server.MapPath(configFilePath)) Then _
+            SE.getSimpleExtensionsBaseClass.loadConfigs(configFilePath)
+        Set fs = Nothing
+
+
         If IsEmpty(controllerName) Then controllerName = Se.getConfigs("Router/controllerName/Value")
         If IsEmpty(actionName) Then actionName = Se.getConfigs("Router/actionName/Value")
     End Function

@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsBase.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.12.4
+ ' @version 2013.12.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -223,7 +223,8 @@ Class SimpleExtensionsBase
         seConfigsDoc.Load(Server.MapPath(configFilePath))
         Set seConfigsDoc = seConfigsDoc.GetElementsByTagName("SEConfigs")(0)
 
-        Set configs = Server.CreateObject("Scripting.Dictionary")
+        If VarType(configs) <> 9 Then _
+            Set configs = Server.CreateObject("Scripting.Dictionary")
         Call processConfigs(seConfigsDoc, configs)
 
         Set seConfigsDoc = Nothing
@@ -242,28 +243,42 @@ Class SimpleExtensionsBase
 
         Dim nowNode, attributes
         For Each nowNode In xmlDoc.ChildNodes
-            Select Case nowNode.nodeType
-                ' 元素节点
-                Case 1
+            ' 元素节点
+            If nowNode.nodeType = 1 Then
+                If Not nowConfigs.Exists(nowNode.NodeName) Then _
                     Call nowConfigs.Add( _
-                        nowNode.NodeName, Server.CreateObject("Scripting.Dictionary") _
+                        nowNode.NodeName, _
+                        Server.CreateObject("Scripting.Dictionary") _
                     )
 
-                    ' 节点属性
+                ' 节点属性
+                If Not nowConfigs.Item(nowNode.NodeName).Exists("Attributes") Then _
                     Call nowConfigs.Item(nowNode.NodeName).Add( _
-                        "Attributes", Server.CreateObject("Scripting.Dictionary") _
+                        "Attributes", _
+                        Server.CreateObject("Scripting.Dictionary") _
                     )
-                    For Each attributes In nowNode.Attributes
+                For Each attributes In nowNode.Attributes
+                    If nowConfigs.Item(nowNode.NodeName).Item("Attributes") _
+                    .Exists(attributes.NodeName) Then
+                        nowConfigs.Item(nowNode.NodeName).Item("Attributes") _
+                            .Item(attributes.NodeName) = attributes.NodeValue
+                    Else
                         Call nowConfigs.Item(nowNode.NodeName).Item("Attributes").Add( _
                             attributes.NodeName, attributes.NodeValue _
                         )
-                    Next
+                    End If
+                Next
 
-                    Call processConfigs(nowNode, nowConfigs.Item(nowNode.NodeName))
-                ' 文本
-                Case 3
+                Call processConfigs(nowNode, nowConfigs.Item(nowNode.NodeName))
+
+            ' 文本
+            ElseIf nowNode.nodeType = 3 Then
+                If nowConfigs.Exists("Value") Then
+                    nowConfigs.Item("Value") = nowNode.Text
+                Else
                     Call nowConfigs.Add("Value", nowNode.Text)
-            End Select
+                End If
+            End If
         Next
     End Function
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SEConfigs>
+    <System>
+        <development>True</development>
+    </System>
+    <Router>
+        <controllerName>Index</controllerName>
+        <actionName>index</actionName>
+    </Router>
+    <I18N>
+        <language>zh-cn</language>
+    </I18N>
+    <DB>
+        <type>access</type>
+        <source>../Test/ProjectTest/Data/DataBase/# Data.asp</source>
+    </DB>
+    <Error>
+        <redirectURL>./</redirectURL>
+    </Error>
+</SEConfigs>

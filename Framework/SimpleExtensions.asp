@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensions.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.10.31
+ ' @version 2013.12.7
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -25,7 +25,8 @@ Class SimpleExtensions
      ' @return class <SE基类>
      ''
     Public Property Get getSimpleExtensionsBaseClass()
-        If VarType(simpleExtensionsBaseClass) <> 9 Then Set simpleExtensionsBaseClass = New SimpleExtensionsBase
+        If VarType(simpleExtensionsBaseClass) <> 9 Then _
+            Set simpleExtensionsBaseClass = New SimpleExtensionsBase
         Set getSimpleExtensionsBaseClass = simpleExtensionsBaseClass
     End Property
 

@@ -84,6 +84,13 @@ Framework/                                      核心框架目录
     <I18N>
         <language>zh-cn</language>
     </I18N>
+    <DB>
+        <type>access</type>
+        <source>../Test/ProjectTest/Data/DataBase/# Data.asp</source>
+    </DB>
+    <Error>
+        <redirectURL>./</redirectURL>
+    </Error>
 </SEConfigs>
 ```
 
@@ -99,7 +106,7 @@ Framework/                                      核心框架目录
 ```html5
 <%
 '''
- ' 首页
+ ' 首页控制器
  ''
 %>
 
@@ -110,7 +117,7 @@ Class IndexController
         Dim parameters
         Set parameters = Server.CreateObject("Scripting.Dictionary")
         Call parameters.Add("title", "SE")
-        Call parameters.Add("content", "Hello World")
+        Call parameters.Add("helloWorldText", "Hello, World!")
 
         Call SE.module("View").render( _
             "index", _
@@ -131,19 +138,38 @@ End Class
 `<% '<!-- #contentEndToDo -->' %>` 标签将调用视图中 `<% '<!-- #contentEnd -->' %>` 标签之后的内容。
 
 ```html5
+<% Response.Buffer = True %>
 <!DOCTYPE html>
 <html>
 <head>
-<title><%= title %></title>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
 </head>
+<% Response.Flush() %>
 <body>
+
+    <!-- 导航条 -->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./">SE&nbsp;For&nbsp;ASP</a>
+            </div>
+            <div class="collapse navbar-collapse">
+
+            </div>
+        </div>
+    </nav>
+    <!-- /导航条 -->
 
     <% '<!-- #content -->' %>
 
-    <br />
-
+    <% Response.Flush() %>
+    <!-- Js -->
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <% '<!-- #contentEndToDo -->' %>
-
+    <!-- /Js -->
 
 </body>
 </html>
@@ -156,15 +182,15 @@ End Class
 `content` 为控制器中传入的变量。
 
 ```html5
-<%= content %>
+<div class="jumbotron">
+    <div class="container">
+        <h1><%= helloWorldText %></h1>
+        <p>SE&nbsp;For&nbsp;ASP&nbsp;是一个以Vbscript语言为基础的ASP&nbsp;VB开发框架。</p>
+    </div>
+</div>
 
 <% '<!-- #contentEnd -->' %>
-<% Response.Write("End Code") %>
-```
-
-执行输出
---------
-```html5
-Hello World 
-End Code
+<script>
+    // Js脚本 
+</script>
 ```

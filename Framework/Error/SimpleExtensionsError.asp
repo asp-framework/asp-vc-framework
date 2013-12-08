@@ -58,7 +58,8 @@ Class SimpleExtensionsError
             Execute(SE.getIncludeCode(SE.getSEDir & "/" & "Error/Error.html"))
             Response.End()
         Else
-            If Not IsEmpty(redirectURL) Then Response.Redirect(redirectURL)
+            If Not IsEmpty(redirectURL) Then _
+                Response.Write("<script>location.href = """ & redirectURL & """</script>")
         End If
     End Function
 

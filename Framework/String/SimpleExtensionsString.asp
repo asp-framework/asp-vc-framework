@@ -30,9 +30,9 @@ Class SimpleExtensionsString
     End Function
 
     '''
-     ' HTML过滤
+     ' HTML 过滤
      '
-     ' @param string htmlString <HTML标记字符串>
+     ' @param string htmlString <HTML 标记字符串>
      '
      ' @return string <纯文本>
      ''

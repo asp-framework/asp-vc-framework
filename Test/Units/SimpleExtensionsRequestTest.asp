@@ -12,6 +12,10 @@ Class SimpleExtensionsRequestTest
 
     Private vActual
 
+    Private pathInfo
+
+    Private dirInfo
+
     Public Function TestCaseNames()
         TestCaseNames = Array( _
             "getUrlTest", _
@@ -21,6 +25,8 @@ Class SimpleExtensionsRequestTest
 
     Public Sub SetUp()
         SE.getSimpleExtensionsBaseClass.loadConfigs("./ProjectTest/Configs/config.xml")
+        pathInfo = Request.ServerVariables("PATH_INFO")
+        dirInfo = Left(pathInfo, InStrRev(pathInfo, "/"))
     End Sub
 
     Public Sub TearDown()
@@ -31,45 +37,45 @@ Class SimpleExtensionsRequestTest
     Public Sub getUrlTest(oTestResult)
         vActual = SE.module("Request").getUrl("Dir")
         oTestResult.AssertEquals _
-            "/Test/", _
+            dirInfo, _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrl(0)
         oTestResult.AssertEquals _
-            "/Test/", _
+            dirInfo, _
             vActual, _
             "获取URL异常"
 
         vActual = SE.module("Request").getUrl("Path")
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp", _
+            pathInfo, _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrl(1)
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp", _
+            pathInfo, _
             vActual, _
             "获取URL异常"
 
         vActual = SE.module("Request").getUrl("DirWith")
         oTestResult.AssertEquals _
-            "/Test/?UnitRunner=results", _
+            dirInfo & "?UnitRunner=results", _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrl(2)
         oTestResult.AssertEquals _
-            "/Test/?UnitRunner=results", _
+            dirInfo & "?UnitRunner=results", _
             vActual, _
             "获取URL异常"
 
         vActual = SE.module("Request").getUrl("PathWith")
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp?UnitRunner=results", _
+            pathInfo & "?UnitRunner=results", _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrl(3)
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp?UnitRunner=results", _
+            pathInfo & "?UnitRunner=results", _
             vActual, _
             "获取URL异常"
     End Sub
@@ -77,45 +83,45 @@ Class SimpleExtensionsRequestTest
     Public Sub getUrlWithTest(oTestResult)
         vActual = SE.module("Request").getUrlWith("Dir", "a=b")
         oTestResult.AssertEquals _
-            "/Test/?a=b", _
+            dirInfo & "?a=b", _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrlWith(0, "a=b")
         oTestResult.AssertEquals _
-            "/Test/?a=b", _
+            dirInfo & "?a=b", _
             vActual, _
             "获取URL异常"
 
         vActual = SE.module("Request").getUrlWith("Path", "a=b")
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp?a=b", _
+            pathInfo & "?a=b", _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrlWith(1, "a=b")
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp?a=b", _
+            pathInfo & "?a=b", _
             vActual, _
             "获取URL异常"
 
         vActual = SE.module("Request").getUrlWith("DirWith", "-UnitRunner&a=b")
         oTestResult.AssertEquals _
-            "/Test/?a=b", _
+            dirInfo & "?a=b", _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrlWith(2, "-UnitRunner&a=b")
         oTestResult.AssertEquals _
-            "/Test/?a=b", _
+            dirInfo & "?a=b", _
             vActual, _
             "获取URL异常"
 
         vActual = SE.module("Request").getUrlWith("PathWith", "-UnitRunner&a=b")
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp?a=b", _
+            pathInfo & "?a=b", _
             vActual, _
             "获取URL异常"
         vActual = SE.module("Request").getUrlWith(3, "-UnitRunner&a=b")
         oTestResult.AssertEquals _
-            "/Test/TestASPUnit.asp?a=b", _
+            pathInfo & "?a=b", _
             vActual, _
             "获取URL异常"
     End Sub

@@ -26,6 +26,7 @@ Option Explicit
 <!-- #include file = "Units/SimpleExtensionsErrorTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsFileTest.asp" -->
 <!-- #include file = "Units/SimpleExtensionsRequestTest.asp" -->
+<!-- #include file = "Units/SimpleExtensionsStringTest.asp" -->
 <% ' /导入测试文件 %>
 
 <%
@@ -42,6 +43,7 @@ Option Explicit
     oRunner.AddTestContainer New SimpleExtensionsErrorTest
     oRunner.AddTestContainer New SimpleExtensionsFileTest
     oRunner.AddTestContainer New SimpleExtensionsRequestTest
+    oRunner.AddTestContainer New SimpleExtensionsStringTest
 
 	oRunner.Display()
 %>

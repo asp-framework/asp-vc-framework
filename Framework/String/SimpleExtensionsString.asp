@@ -59,7 +59,7 @@ Class SimpleExtensionsString
             If tagStartPos = 0 Then Exit Do
         Loop
 
-        htmlFilter = Server.HTMLEncode(resultString)
+        htmlFilter = resultString
     End Function
 
 End Class

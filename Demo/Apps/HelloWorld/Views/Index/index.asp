@@ -1,3 +1,8 @@
+<style>
+    /* 样式 */
+</style>
+<% '<!-- #contentStart -->' %>
+
 <div class="jumbotron">
     <div class="container">
         <h1><%= helloWorldText %></h1>

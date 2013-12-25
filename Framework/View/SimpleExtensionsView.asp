@@ -16,7 +16,12 @@ Class SimpleExtensionsView
     ' @var string <内容可执行代码>
     Private contentCode
 
+    ' @var string <内容开始前要执行的代码>
+    ' (视图文件 '<!-- #contentStart -->' 标签 前的代码)
+    Private contentStartToDoCode
+
     ' @var string <内容结束后要执行的代码>
+    ' (视图文件 '<!-- #contentEnd -->'标签 后的代码)
     Private contentEndToDoCode
 
 '###########################'
@@ -33,7 +38,7 @@ Class SimpleExtensionsView
         contentCode = SE.getIncludeCode( _
             SE.module("Controller").getViewPath(viewName) _
         )
-        separateContentCode()
+        parseSETag()
 
         ' 定义传入变量
         If Not IsNull(parameters) Then
@@ -58,24 +63,56 @@ Class SimpleExtensionsView
     End Function
 
     '''
-     ' 按 '<!-- #contentEnd -->' 分离视图代码
+     ' 解析视图中的特殊标签
      ''
-    Private Function separateContentCode()
-        Dim CONTENTEND_TAG_LEFT, CONTENTEND_TAG, CONTENTEND_TAG_RIGHT
-        CONTENTEND_TAG_LEFT = "'<!--"
-        CONTENTEND_TAG = "#contentEnd"
-        CONTENTEND_TAG_RIGHT = "-->'"
+    Private Function parseSETag()
+        parseContentStartTag()
+        parseContentEndTag()
+    End Function
+
+    '''
+     ' 解析 '<!-- #contentStart -->' 标签
+     ' 此函数直接操作 contentCode, contentStartToDoCode 参数
+     ''
+    Private Function parseContentStartTag()
+        Dim CONTENT_START_TAG_LEFT, CONTENT_START_TAG, CONTENT_START_TAG_RIGHT
+        CONTENT_START_TAG_LEFT = "'<!--"
+        CONTENT_START_TAG = "#contentStart"
+        CONTENT_START_TAG_RIGHT = "-->'"
 
         Dim tagStart, tagEnd
-        tagStart = InStr(1, contentCode, CONTENTEND_TAG_LEFT) + 5
+        tagStart = InStr(1, contentCode, CONTENT_START_TAG_LEFT) + 5
         If tagStart = 5 Then Exit Function
-        tagEnd = InStr(tagStart, contentCode, CONTENTEND_TAG_RIGHT) + 4
+        tagEnd = InStr(tagStart, contentCode, CONTENT_START_TAG_RIGHT) + 4
 
         Dim searchedContentEndTag
         searchedContentEndTag = Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4))
-        If InStr(1, searchedContentEndTag, CONTENTEND_TAG, 1) = 1 Then
-            contentEndToDoCode = Mid(contentCode, tagEnd+2)
-            contentCode = Mid(contentCode, 1, tagStart - 6)
+        If InStr(1, searchedContentEndTag, CONTENT_START_TAG, 1) = 1 Then
+            contentStartToDoCode = Mid(contentCode, 1, tagStart-6)
+            contentCode = Mid(contentCode, tagEnd)
+        End If
+    End Function
+
+    '''
+     ' 解析 '<!-- #contentEnd -->' 标签
+     ' 此函数直接操作 contentCode, contentEndToDoCode 参数
+     ''
+    Private Function parseContentEndTag()
+        Dim CONTENT_END_TAG_LEFT, CONTENT_END_TAG, CONTENT_END_TAG_RIGHT
+        CONTENT_END_TAG_LEFT = "'<!--"
+        CONTENT_END_TAG = "#contentEnd"
+        CONTENT_END_TAG_RIGHT = "-->'"
+
+        Dim tagStart, tagEnd
+        tagStart = InStr(1, contentCode, CONTENT_END_TAG_LEFT) + 5
+        If tagStart = 5 Then Exit Function
+        tagEnd = InStr(tagStart, contentCode, CONTENT_END_TAG_RIGHT) + 4
+
+        Dim searchedContentEndTag
+        searchedContentEndTag = Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4))
+        If InStr(1, searchedContentEndTag, CONTENT_END_TAG, 1) = 1 Then
+            contentEndToDoCode = Mid(contentCode, tagEnd)
+            contentCode = Mid(contentCode, 1, tagStart-6)
         End If
     End Function
 
@@ -83,8 +120,30 @@ Class SimpleExtensionsView
      ' 替换布局中的特殊标签
      ''
     Private Function replaceSETag()
+        replaceContentStartTag()
         replaceContentTag()
         replaceContentEndToDoTag()
+    End Function
+
+    '''
+     ' 替换布局中的 '<!-- #contentStartToDo -->' 标签
+     ''
+    Private Function replaceContentStartTag()
+        Dim CONTENT_START_TODO_TAG_LEFT, CONTENT_START_TODO_TAG, CONTENT_START_TODO_TAG_RIGHT
+        CONTENT_START_TODO_TAG_LEFT = "'<!--"
+        CONTENT_START_TODO_TAG = "#contentStartToDo"
+        CONTENT_START_TODO_TAG_RIGHT = "-->'"
+
+        Dim tagStart, tagEnd
+        tagStart = InStr(1, layoutCode, CONTENT_START_TODO_TAG_LEFT) + 5
+        If tagStart = 5 Then Exit Function
+        tagEnd = InStr(tagStart, layoutCode, CONTENT_START_TODO_TAG_RIGHT) + 4
+
+        Dim searchedContentendToDoTag
+        searchedContentendToDoTag = Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4))
+        If InStr(1, searchedContentendToDoTag, CONTENT_START_TODO_TAG, 1) = 1 Then _
+            layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentStartToDoCode & _
+                Mid(layoutCode, tagEnd)
     End Function
 
     '''
@@ -112,19 +171,19 @@ Class SimpleExtensionsView
      ' 替换布局中的 '<!-- #contentEndToDo -->' 标签
      ''
     Private Function replaceContentEndToDoTag()
-        Dim CONTENTENDTODO_TAG_LEFT, CONTENTENDTODO_TAG, CONTENTENDTODO_TAG_RIGHT
-        CONTENTENDTODO_TAG_LEFT = "'<!--"
-        CONTENTENDTODO_TAG = "#contentEndToDO"
-        CONTENTENDTODO_TAG_RIGHT = "-->'"
+        Dim CONTENT_END_TODO_TAG_LEFT, CONTENT_END_TODO_TAG, CONTENT_END_TODO_TAG_RIGHT
+        CONTENT_END_TODO_TAG_LEFT = "'<!--"
+        CONTENT_END_TODO_TAG = "#contentEndToDO"
+        CONTENT_END_TODO_TAG_RIGHT = "-->'"
 
         Dim tagStart, tagEnd
-        tagStart = InStr(1, layoutCode, CONTENTENDTODO_TAG_LEFT) + 5
+        tagStart = InStr(1, layoutCode, CONTENT_END_TODO_TAG_LEFT) + 5
         If tagStart = 5 Then Exit Function
-        tagEnd = InStr(tagStart, layoutCode, CONTENTENDTODO_TAG_RIGHT) + 4
+        tagEnd = InStr(tagStart, layoutCode, CONTENT_END_TODO_TAG_RIGHT) + 4
 
         Dim searchedContentendToDoTag
         searchedContentendToDoTag = Trim(Mid(layoutCode, tagStart, tagEnd - tagStart - 4))
-        If InStr(1, searchedContentendToDoTag, CONTENTENDTODO_TAG, 1) = 1 Then _
+        If InStr(1, searchedContentendToDoTag, CONTENT_END_TODO_TAG, 1) = 1 Then _
             layoutCode = Mid(layoutCode, 1, tagStart - 6) & contentEndToDoCode & _
                 Mid(layoutCode, tagEnd)
     End Function

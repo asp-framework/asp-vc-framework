@@ -189,8 +189,9 @@ Class SimpleExtensionsBase
                 codeCache = Replace(codeCache, """", """""")
                 codeCache = Replace(codeCache, vbCrLf, """ & vbCrLf & """)
                 codeCache = "Response.Write(""" & codeCache & """)"
-                codeCache = Replace(codeCache, """"" & ", Space(0))
-                codeCache = Replace(codeCache, " & """"", Space(0))
+                codeCache = Replace(codeCache, "("""" & ", "(")
+                codeCache = Replace(codeCache, "& """" &", "&")
+                codeCache = Replace(codeCache, " & """")", ")")
                 code = code & (codeCache & vbCrLf) : codeCache = Null
             End If
 

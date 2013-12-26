@@ -37,7 +37,7 @@ Framework/                                      核心框架目录
 `Demo/index.asp`
 
 站点入口文件。导入 `SimpleExtensions` 类文件，然后调用 `run()` 函数启动框架。  
-**( `run()` 函数需要传入配置文件路径以配置启动框架。 )**
+**( `run()` 函数需要传入配置文件路径以配置启动框架。本框架只支持 `UTF-8` 文件格式。 )**
 
 ```html5
 <%@
@@ -144,6 +144,7 @@ End Class
 <html>
 <head>
     <title><%= title %></title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css" />
     <% '<!-- #contentStartToDo -->' %>

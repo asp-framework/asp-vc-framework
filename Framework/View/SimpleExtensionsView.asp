@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsRender.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.12.4
+ ' @version 2013.12.26
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>

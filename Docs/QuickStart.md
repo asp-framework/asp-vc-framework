@@ -135,6 +135,7 @@ End Class
 `Demo/Apps/HelloWorld/Views/Layouts/layout.asp`
 
 布局文件中使用 `<% '<!-- #content -->' %>` 标签即可调用对应的视图内容。  
+`<% '<!-- #contentStartToDo -->' %>` 标签将调用视图中 `<% '<!-- #contentStart -->' %>` 标签之后的内容。  
 `<% '<!-- #contentEndToDo -->' %>` 标签将调用视图中 `<% '<!-- #contentEnd -->' %>` 标签之后的内容。
 
 ```html5

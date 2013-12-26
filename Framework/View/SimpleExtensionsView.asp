@@ -89,6 +89,13 @@ Class SimpleExtensionsView
         searchedContentEndTag = Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4))
         If InStr(1, searchedContentEndTag, CONTENT_START_TAG, 1) = 1 Then
             contentStartToDoCode = Mid(contentCode, 1, tagStart-6)
+
+            ' 清除结尾的换行
+            If InStrRev(contentStartToDoCode, vbCrLf) = Len(contentStartToDoCode)-1 Then _
+                contentStartToDoCode = Left(contentStartToDoCode, Len(contentStartToDoCode)-2)
+            If InStrRev(contentStartToDoCode, " & vbCrLf)") = Len(contentStartToDoCode)-9 Then _
+                contentStartToDoCode = Left(contentStartToDoCode, Len(contentStartToDoCode)-10) & ")"
+
             contentCode = Mid(contentCode, tagEnd)
         End If
     End Function
@@ -112,6 +119,13 @@ Class SimpleExtensionsView
         searchedContentEndTag = Trim(Mid(contentCode, tagStart, tagEnd - tagStart - 4))
         If InStr(1, searchedContentEndTag, CONTENT_END_TAG, 1) = 1 Then
             contentEndToDoCode = Mid(contentCode, tagEnd)
+
+            ' 清除开头的换行
+            If InStrRev(contentEndToDoCode, vbCrLf) = Len(contentEndToDoCode)-1 Then _
+                contentEndToDoCode = Left(contentEndToDoCode, Len(contentEndToDoCode)-2)
+            If InStrRev(contentEndToDoCode, "(vbCrLf & ") = 17 Then _
+                contentEndToDoCode = "Response.Write(" & Mid(contentEndToDoCode, 27)
+
             contentCode = Mid(contentCode, 1, tagStart-6)
         End If
     End Function

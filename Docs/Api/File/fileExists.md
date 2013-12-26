@@ -24,7 +24,7 @@ fileExists
     <%
     Dim filePath
     filePath = "./path/to/fileName"
-    If fileExists(filePath) Then
+    If SE.module("File").fileExists(filePath) Then
         Response.Write("文件存在。")
     Else
         Response.Write("文件不存在。")

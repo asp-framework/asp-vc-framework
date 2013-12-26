@@ -24,7 +24,7 @@ dirExists
     <%
     Dim directory
     directory = "./path/to/dir"
-    If dirExists(directory) Then
+    If SE.module("File").dirExists(directory) Then
         Response.Write("目录存在。")
     Else
         Response.Write("目录不存在。")

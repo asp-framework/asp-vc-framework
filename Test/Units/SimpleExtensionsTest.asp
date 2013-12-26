@@ -2,7 +2,7 @@
 '''
  ' SimpleExtensionsTest.asp 文件
  ' @author 高翔 <263027768@qq.com>
- ' @version 2013.12.10
+ ' @version 2013.12.26
  ' @copyright Copyright (c) 2013-2014 SE
  ''
 %>
@@ -89,9 +89,9 @@ Class SimpleExtensionsTest
         vActual = SE.getIncludeCode("./ProjectTest/includeTest/IncludeTest/includeTest1.asp")
 
 		oTestResult.AssertEquals _
-            "Response.Write(""开始文件导入测试<br/>"" & vbCrLf & """")" & vbCrLf _
+            "Response.Write(""开始文件导入测试<br/>"" & vbCrLf)" & vbCrLf _
             & "Dim output : output = ""成功输出内容""" & vbCrLf _
-            & "Response.Write("""" & vbCrLf & """")" & vbCrLf _
+            & "Response.Write(vbCrLf)" & vbCrLf _
             & "Response.Write(""output:""&output)" & vbCrLf, _
             vActual,_
             "包含文件异常"

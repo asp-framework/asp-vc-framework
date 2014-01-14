@@ -20,6 +20,7 @@ bindParameter
 > `dataType`
 >> **类型：**`string`  
 >> **说明：**绑定参数的类型。  
+>>> 参数：`"dbValue"`；  
 >>> 字符串：`"dbString"`；  
 >>> 整形：`"dbInteger"`。
 
@@ -32,6 +33,10 @@ bindParameter
 ----
 >
     <%
+    Dim dbValue
+    dbValue = "参数"
+>
+    Call SE.module("DB").command.bindParameter(":userName", dbValue, "dbValue")
     Call SE.module("DB").command.bindParameter(":userName", "Admin", "dbString")
     Call SE.module("DB").command.bindParameter(":id", 1, "dbInteger")
     %>

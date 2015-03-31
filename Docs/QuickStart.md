@@ -202,3 +202,11 @@ End Class
     // Js脚本 
 </script>
 ```
+
+路由
+---
+`http://localhost/?App=Site&C=Index&A=index`
+
+`App` 应用
+`C` 控制器
+`A` 动作

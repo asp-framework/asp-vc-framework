@@ -1,17 +1,17 @@
 异常错误模块接口
 ================
 
-> [getError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getError.md) &mdash; 获取当前异常错误编号
+> [getError](https://coding.net/u/emerge/p/asp-vc-framework/git/blob/master/Docs/Api/Error/getError.md) &mdash; 获取当前异常错误编号
 
-> [getErrorDefine](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getErrorDefine.md) &mdash; 获取异常错误编号定义
+> [getErrorDefine](https://coding.net/u/emerge/p/asp-vc-framework/git/blob/master/Docs/Api/Error/getErrorDefine.md) &mdash; 获取异常错误编号定义
 
-> [getErrorMessage](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getErrorMessage.md) &mdash; 获取异常错误消息
+> [getErrorMessage](https://coding.net/u/emerge/p/asp-vc-framework/git/blob/master/Docs/Api/Error/getErrorMessage.md) &mdash; 获取异常错误消息
 
-> [getRedirectURL](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/getRedirectURL.md) &mdash; 获取重定向URL
+> [getRedirectURL](https://coding.net/u/emerge/p/asp-vc-framework/git/blob/master/Docs/Api/Error/getRedirectURL.md) &mdash; 获取重定向URL
 
-> [setRedirectURL](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/setRedirectURL.md) &mdash; 设置重定向URL
+> [setRedirectURL](https://coding.net/u/emerge/p/asp-vc-framework/git/blob/master/Docs/Api/Error/setRedirectURL.md) &mdash; 设置重定向URL
 
-> [throwError](http://git.oschina.net/gaoxiang/SE-For-ASP/tree/master/Docs/Api/Error/throwError.md) &mdash; 抛出异常错误
+> [throwError](https://coding.net/u/emerge/p/asp-vc-framework/git/blob/master/Docs/Api/Error/throwError.md) &mdash; 抛出异常错误
 
 异常错误定义
 ------------

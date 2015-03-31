@@ -117,7 +117,7 @@ Class SimpleExtensionsController
         End If
 
         On Error Resume Next
-        Execute("Call controllersQueue.Item(""" & controllerName & """)." & _
+        Execute("runFunction = controllersQueue.Item(""" & controllerName & """)." & _
             functionName & "(" & functionParameters & ")")
         If Err.Number = 438 Then _
             Call SE.module("Error").throwError( _

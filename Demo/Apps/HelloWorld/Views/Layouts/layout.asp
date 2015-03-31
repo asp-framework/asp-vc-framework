@@ -20,7 +20,7 @@
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="./">SE&nbsp;For&nbsp;ASP</a>
+                <a class="navbar-brand" href="./">ASP-VC-Framework</a>
             </div>
             <div class="collapse navbar-collapse">
 

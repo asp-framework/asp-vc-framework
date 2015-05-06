@@ -13,4 +13,4 @@ ASP-VC-Framework
 资源
 ----
 
-    文档: (asp-vc-framework-docs)[http://asp-vc-framework.readthedocs.org/zh_CN/0.1.0/]
+    文档: [asp-vc-framework-docs](http://asp-vc-framework.readthedocs.org/zh_CN/0.1.0/)

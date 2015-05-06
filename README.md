@@ -7,6 +7,10 @@ ASP-VC-Framework
 ----
 
     Demo/                   实例目录
-    Docs/                   文档目录
     Framework/              核心框架目录
     Test/                   框架测试目录
+
+资源
+----
+
+    文档: (asp-vc-framework-docs)[http://asp-vc-framework.readthedocs.org/zh_CN/0.1.0/]

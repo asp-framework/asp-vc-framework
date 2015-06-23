@@ -188,6 +188,7 @@ Class SimpleExtensionsBase
             If Len(codeCache) Then
                 codeCache = Replace(codeCache, """", """""")
                 codeCache = Replace(codeCache, vbCrLf, """ & vbCrLf & """)
+                codeCache = Replace(codeCache, vbLf, """ & vbCrLf & """)
                 codeCache = "Response.Write(""" & codeCache & """)"
                 codeCache = Replace(codeCache, "("""" & ", "(")
                 codeCache = Replace(codeCache, "& """" &", "&")

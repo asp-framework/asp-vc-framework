@@ -123,6 +123,7 @@ Class SimpleExtensionsBase
         Dim ASP_INCLUDE_TAG_LEFT, ASP_INCLUDE_TAG_RIGHT
         ASP_INCLUDE_TAG_LEFT = "<!--" : ASP_INCLUDE_TAG_RIGHT = "-->"
 
+        Dim includeFilePath
         ' content: 文件内容
         ' contentCache: 文件内容处理时的临时缓存
         ' codeEnd: 标签内容结束位置
@@ -131,6 +132,8 @@ Class SimpleExtensionsBase
         codeEnd = 1
         content = Me.loadFile(filePath)
         Do While True
+            includeFilePath = filePath
+
             codeStart = InStr(codeEnd, content, ASP_INCLUDE_TAG_LEFT) + 4
             codeEnd = InStr(codeStart, content, ASP_INCLUDE_TAG_RIGHT) + 3
 
@@ -140,19 +143,19 @@ Class SimpleExtensionsBase
             contentCache = Trim(Mid(content, codeStart, codeEnd - codeStart - 3))
             If InStr(1, contentCache, "#include", 1) = 1 Then
                 contentCache = Trim(Mid(contentCache, 9))
-                filePath = Replace(filePath, "\", "/")
+                includeFilePath = Replace(includeFilePath, "\", "/")
                 If InStr(1,contentCache, "file", 1) = 1 Then
                     Dim fileName
                     fileName = Replace(Trim(Mid(Trim(Mid(contentCache, 5)), 2)), """", "")
-                    filePath = Mid(filePath,1,InstrRev(filePath,"/")) & fileName
+                    includeFilePath = Mid(includeFilePath,1,InstrRev(includeFilePath,"/")) & fileName
                 ElseIf InStr(contentCache, "virtual", 1) = 1 Then
-                    filePath = Replace(Trim(Mid(Trim(Mid(contentCache, 8)), 2)), """", "")
+                    includeFilePath = Replace(Trim(Mid(Trim(Mid(contentCache, 8)), 2)), """", "")
                 End If
                 contentCache = Empty
 
                 ' 替换标签为文件内容
                 content = Mid(content, 1, codeStart - 5) & _
-                    aspIncludeTagProcess(filePath) & Mid(content, codeEnd)
+                    aspIncludeTagProcess(includeFilePath) & Mid(content, codeEnd)
 
                 codeEnd = 1
             End If
